@@ -50,22 +50,22 @@
         {
           "id": "1.2",
           "name": "Produto Entrada (R$997)",
-          "status": "in_progress"
+          "status": "done"
         },
         {
           "id": "1.3",
           "name": "Mentoria (R$4.500)",
-          "status": "pending"
+          "status": "done"
         },
         {
           "id": "1.4",
           "name": "Agência (R$25k+)",
-          "status": "pending"
+          "status": "done"
         },
         {
           "id": "1.5",
           "name": "Value Ladder Completa",
-          "status": "pending"
+          "status": "done"
         }
       ]
     },
@@ -174,31 +174,31 @@
       "price": 0,
       "priceDisplay": "Grátis",
       "tagline": "1 Conteúdo → 1 App por Semana",
-      "status": "pending"
+      "status": "defined"
     },
     {
       "level": 2,
       "name": "Framework",
       "price": 997,
       "priceDisplay": "R$ 997",
-      "tagline": "O Sistema Content-to-App",
-      "status": "pending"
+      "tagline": "De Conteúdo a Produto em 3 Passos",
+      "status": "defined"
     },
     {
       "level": 3,
       "name": "Mentoria",
       "price": 4500,
       "priceDisplay": "R$ 4.500",
-      "tagline": "Crie seu app comigo em 6 semanas",
-      "status": "pending"
+      "tagline": "Crie 3 Apps em 6 Semanas",
+      "status": "defined"
     },
     {
       "level": 4,
       "name": "Agência",
       "price": 25000,
-      "priceDisplay": "R$ 25k+",
-      "tagline": "Eu transformo seu conteúdo em app",
-      "status": "pending"
+      "priceDisplay": "R$ 25k-80k",
+      "tagline": "Eu Transformo Seu Conteúdo em Apps",
+      "status": "defined"
     }
   ]
 }
