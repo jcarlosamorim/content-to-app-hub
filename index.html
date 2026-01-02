@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content-to-App Hub</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f0f0f',
+                        darker: '#080808',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white min-h-screen" x-data="hub()" x-init="init()">
+
+    <!-- Header -->
+    <header class="border-b border-gray-800 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold gradient-text">Content-to-App</h1>
+                <p class="text-gray-500 text-sm" x-text="project.tagline"></p>
+            </div>
+            <div class="text-right">
+                <div class="text-3xl font-bold" x-text="progressPercent + '%'"></div>
+                <div class="text-gray-500 text-sm" x-text="completedStories + '/' + totalStories + ' stories'"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="h-1 bg-gray-800">
+        <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500"
+             :style="'width: ' + progressPercent + '%'"></div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-6 py-8">
+
+        <!-- Epics Grid -->
+        <section class="mb-12">
+            <h2 class="text-lg font-semibold text-gray-400 mb-4">ÉPICAS</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <template x-for="epic in epics" :key="epic.id">
+                    <div class="bg-darker border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition-all cursor-pointer"
+                         :class="selectedEpic?.id === epic.id ? 'border-purple-500 ring-1 ring-purple-500' : ''"
+                         @click="selectEpic(epic)">
+
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl" x-text="epic.emoji"></span>
+                                <span class="font-semibold" x-text="'Epic ' + epic.id"></span>
+                            </div>
+                            <span class="text-sm px-2 py-1 rounded-full"
+                                  :class="getEpicStatusClass(epic)"
+                                  x-text="getEpicStatusText(epic)"></span>
+                        </div>
+
+                        <h3 class="font-bold text-lg mb-1" x-text="epic.name"></h3>
+                        <p class="text-gray-500 text-sm mb-4" x-text="epic.description"></p>
+
+                        <!-- Progress -->
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all"
+                                     :style="'width: ' + getEpicProgress(epic) + '%'"></div>
+                            </div>
+                            <span class="text-sm text-gray-400"
+                                  x-text="getCompletedCount(epic) + '/' + epic.stories.length"></span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </section>
+
+        <!-- Selected Epic Stories -->
+        <section x-show="selectedEpic" x-cloak class="mb-12">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-400">
+                    <span x-text="selectedEpic?.emoji"></span>
+                    STORIES - <span x-text="selectedEpic?.name"></span>
+                </h2>
+                <button @click="selectedEpic = null" class="text-gray-500 hover:text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="space-y-2">
+                <template x-for="story in selectedEpic?.stories" :key="story.id">
+                    <div class="bg-darker border border-gray-800 rounded-lg p-4 flex items-center gap-4 hover:border-gray-700 transition-all">
+
+                        <!-- Checkbox -->
+                        <button @click="toggleStory(story)"
+                                class="w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all"
+                                :class="story.status === 'done' ? 'bg-green-500 border-green-500' :
+                                        story.status === 'in_progress' ? 'bg-yellow-500 border-yellow-500' :
+                                        'border-gray-600 hover:border-gray-400'">
+                            <svg x-show="story.status === 'done'" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <div x-show="story.status === 'in_progress'" class="w-2 h-2 bg-white rounded-full"></div>
+                        </button>
+
+                        <!-- Story Info -->
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2">
+                                <span class="text-gray-500 text-sm" x-text="story.id"></span>
+                                <span class="font-medium"
+                                      :class="story.status === 'done' ? 'text-gray-500 line-through' : 'text-white'"
+                                      x-text="story.name"></span>
+                            </div>
+                        </div>
+
+                        <!-- Status Badge -->
+                        <span class="text-xs px-2 py-1 rounded-full"
+                              :class="story.status === 'done' ? 'bg-green-500/20 text-green-400' :
+                                      story.status === 'in_progress' ? 'bg-yellow-500/20 text-yellow-400' :
+                                      'bg-gray-500/20 text-gray-400'"
+                              x-text="story.status === 'done' ? 'Feito' :
+                                      story.status === 'in_progress' ? 'Em progresso' : 'Pendente'"></span>
+                    </div>
+                </template>
+            </div>
+        </section>
+
+        <!-- Value Ladder -->
+        <section class="mb-12">
+            <h2 class="text-lg font-semibold text-gray-400 mb-4">VALUE LADDER</h2>
+            <div class="bg-darker border border-gray-800 rounded-xl p-6">
+                <div class="flex flex-col md:flex-row items-stretch gap-4">
+                    <template x-for="(item, index) in valueLadder" :key="item.level">
+                        <div class="flex-1 relative">
+                            <div class="bg-gray-900 border border-gray-800 rounded-lg p-4 h-full"
+                                 :class="item.status === 'done' ? 'border-green-500' : ''">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold mb-1" x-text="item.priceDisplay"></div>
+                                    <div class="font-semibold text-purple-400" x-text="item.name"></div>
+                                    <div class="text-gray-500 text-sm mt-2" x-text="item.tagline"></div>
+                                </div>
+                            </div>
+                            <!-- Arrow -->
+                            <div x-show="index < valueLadder.length - 1"
+                                 class="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                                <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section>
+            <h2 class="text-lg font-semibold text-gray-400 mb-4">PRÓXIMA AÇÃO</h2>
+            <div class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-xl p-6">
+                <template x-if="nextStory">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-purple-400 font-mono" x-text="nextStory.id"></span>
+                            <span class="text-xl font-bold" x-text="nextStory.name"></span>
+                        </div>
+                        <p class="text-gray-400 mb-4" x-text="'Epic: ' + getEpicByStoryId(nextStory.id)?.name"></p>
+                        <button @click="startStory(nextStory)"
+                                class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold transition-all">
+                            Iniciar Agora
+                        </button>
+                    </div>
+                </template>
+                <template x-if="!nextStory">
+                    <div class="text-center py-4">
+                        <div class="text-4xl mb-2">🎉</div>
+                        <div class="text-xl font-bold">Projeto Completo!</div>
+                    </div>
+                </template>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 px-6 py-4 mt-12">
+        <div class="max-w-6xl mx-auto text-center text-gray-500 text-sm">
+            <p>Content-to-App Hub v2.0 | Última atualização: <span x-text="project.lastUpdated"></span></p>
+        </div>
+    </footer>
+
+    <script>
+        function hub() {
+            return {
+                project: {},
+                epics: [],
+                valueLadder: [],
+                selectedEpic: null,
+
+                async init() {
+                    try {
+                        const response = await fetch('data.json');
+                        const data = await response.json();
+                        this.project = data.project;
+                        this.epics = data.epics;
+                        this.valueLadder = data.valueLadder;
+                    } catch (e) {
+                        console.error('Error loading data:', e);
+                    }
+                },
+
+                get totalStories() {
+                    return this.epics.reduce((sum, epic) => sum + epic.stories.length, 0);
+                },
+
+                get completedStories() {
+                    return this.epics.reduce((sum, epic) =>
+                        sum + epic.stories.filter(s => s.status === 'done').length, 0);
+                },
+
+                get progressPercent() {
+                    if (this.totalStories === 0) return 0;
+                    return Math.round((this.completedStories / this.totalStories) * 100);
+                },
+
+                get nextStory() {
+                    for (const epic of this.epics) {
+                        const inProgress = epic.stories.find(s => s.status === 'in_progress');
+                        if (inProgress) return inProgress;
+                    }
+                    for (const epic of this.epics) {
+                        const pending = epic.stories.find(s => s.status === 'pending');
+                        if (pending) return pending;
+                    }
+                    return null;
+                },
+
+                selectEpic(epic) {
+                    this.selectedEpic = this.selectedEpic?.id === epic.id ? null : epic;
+                },
+
+                getEpicProgress(epic) {
+                    const done = epic.stories.filter(s => s.status === 'done').length;
+                    return Math.round((done / epic.stories.length) * 100);
+                },
+
+                getCompletedCount(epic) {
+                    return epic.stories.filter(s => s.status === 'done').length;
+                },
+
+                getEpicStatusClass(epic) {
+                    const progress = this.getEpicProgress(epic);
+                    if (progress === 100) return 'bg-green-500/20 text-green-400';
+                    if (progress > 0) return 'bg-yellow-500/20 text-yellow-400';
+                    return 'bg-gray-500/20 text-gray-400';
+                },
+
+                getEpicStatusText(epic) {
+                    const progress = this.getEpicProgress(epic);
+                    if (progress === 100) return 'Completo';
+                    if (progress > 0) return 'Em progresso';
+                    return 'Pendente';
+                },
+
+                getEpicByStoryId(storyId) {
+                    return this.epics.find(e => e.stories.some(s => s.id === storyId));
+                },
+
+                toggleStory(story) {
+                    const states = ['pending', 'in_progress', 'done'];
+                    const currentIndex = states.indexOf(story.status);
+                    story.status = states[(currentIndex + 1) % states.length];
+                    this.saveData();
+                },
+
+                startStory(story) {
+                    story.status = 'in_progress';
+                    const epic = this.getEpicByStoryId(story.id);
+                    if (epic) this.selectedEpic = epic;
+                    this.saveData();
+                },
+
+                saveData() {
+                    // In a real app, this would save to a server
+                    // For now, log the action
+                    console.log('Data updated:', { epics: this.epics });
+                    // You could implement localStorage here:
+                    localStorage.setItem('hub-data', JSON.stringify({
+                        epics: this.epics,
+                        valueLadder: this.valueLadder
+                    }));
+                }
+            }
+        }
+    </script>
+</body>
+</html>
