@@ -294,8 +294,94 @@
         {
           "id": "2.1",
           "name": "Case Tay Dantas",
-          "status": "pending",
-          "content": null
+          "status": "done",
+          "content": {
+            "creator": "Tay Dantas",
+            "fonte": "Vídeo YouTube sobre construção de marca para creators",
+            "app_criado": "Creator Brand OS",
+            "stack": "React + Tailwind CSS",
+            "metodologia_extraída": {
+              "nome": "Creator Brand OS",
+              "subtítulo": "Transforme sua expertise em marca escalável em 5 etapas",
+              "fases": [
+                {
+                  "fase": 1,
+                  "nome": "A Fundação",
+                  "icon": "Target",
+                  "elementos": [
+                    "Público Psicográfico (mentalidade, não demografia)",
+                    "Promessa Única (final feliz em 1 frase)",
+                    "Problema Funcional (dor prática)"
+                  ]
+                },
+                {
+                  "fase": 2,
+                  "nome": "O Ingrediente Secreto",
+                  "icon": "Zap",
+                  "elementos": [
+                    "O Fundador (obsessões, peculiaridades, crenças)",
+                    "Arquétipo da Marca (Rebelde, Sábio, Cuidador, Explorador)",
+                    "Momento de Origem (epifania/chega!)"
+                  ]
+                },
+                {
+                  "fase": 3,
+                  "nome": "Oceano Azul",
+                  "icon": "Map",
+                  "elementos": [
+                    "Mapa 2x2: Tradicional↔Inovador × Arriscado↔Confiável",
+                    "Sweet Spot: Quadrante superior direito (Inovador + Confiável)",
+                    "Identificar concorrência e espaços vazios"
+                  ]
+                },
+                {
+                  "fase": 4,
+                  "nome": "A Jornada do Herói",
+                  "icon": "BookOpen",
+                  "elementos": [
+                    "Herói = Cliente (não a marca)",
+                    "Vilão = O que impede o herói (externo ou interno)",
+                    "Guia = Sua Marca (seja Yoda, não Luke)",
+                    "Output: Manifesto automático"
+                  ]
+                },
+                {
+                  "fase": 5,
+                  "nome": "Motor de Comunidade",
+                  "icon": "Users",
+                  "elementos": [
+                    "Modelo Antigo: Alcance → Venda → Comunidade ❌",
+                    "Flywheel: Comunidade → Venda → Alcance ✅",
+                    "Isca de Comunidade (primeiras 100 pessoas)",
+                    "Produto de Entrada (financiar crescimento)"
+                  ]
+                }
+              ]
+            },
+            "output_do_app": {
+              "entregável": "Brand Book completo com",
+              "seções": [
+                "Fundação (público, problema, promessa)",
+                "DNA & Alma (arquétipo, fator fundador)",
+                "Manifesto da Marca (gerado automaticamente)",
+                "Posicionamento Estratégico (mapa visual)",
+                "Estratégia de Flywheel (isca + venda)"
+              ],
+              "funcionalidade_extra": "Imprimir/Salvar PDF"
+            },
+            "insights_do_processo": {
+              "tempo_extração": "~2 horas",
+              "dificuldade": "Média (framework bem estruturado no vídeo)",
+              "adaptações": "Adicionado mapa interativo de posicionamento clicável",
+              "aprendizado": "Frameworks de branding se traduzem bem em wizards step-by-step"
+            },
+            "métricas_potenciais": {
+              "público_alvo": "Creators querendo construir marca pessoal",
+              "problema_resolvido": "Falta de clareza estratégica de marca",
+              "tempo_usuário": "~20 minutos para completar",
+              "valor_percebido": "Alto (sai com Brand Book pronto)"
+            }
+          }
         },
         {
           "id": "2.2",
