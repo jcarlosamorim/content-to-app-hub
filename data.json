@@ -31,7 +31,7 @@
         {
           "id": "0.4",
           "name": "Deploy",
-          "status": "in_progress"
+          "status": "done"
         }
       ]
     },
@@ -45,12 +45,12 @@
         {
           "id": "1.1",
           "name": "Newsletter Strategy",
-          "status": "pending"
+          "status": "done"
         },
         {
           "id": "1.2",
           "name": "Produto Entrada (R$997)",
-          "status": "pending"
+          "status": "in_progress"
         },
         {
           "id": "1.3",
