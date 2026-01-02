@@ -7,282 +7,455 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --black: #000000;
-            --white: #ffffff;
-            --accent: #cabe96;
-            --gray: #1a1a1a;
-            --gray-light: #2a2a2a;
-            --gray-mid: #666666;
+            --bg: #f8f9fa;
+            --bg-card: #ffffff;
+            --sidebar-bg: #ffffff;
+            --text: #1a1a2e;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --border: #e5e7eb;
+            --accent: #6366f1;
+            --accent-light: #eef2ff;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --warning: #f59e0b;
+            --warning-light: #fffbeb;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--black);
-            color: var(--white);
-            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
         }
 
-        .mono { font-family: 'Space Mono', monospace; }
         [x-cloak] { display: none !important; }
 
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: var(--black); }
-        ::-webkit-scrollbar-thumb { background: var(--accent); }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
         /* Layout */
-        .app-container {
+        .app {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         /* Sidebar */
         .sidebar {
-            width: 320px;
-            min-width: 320px;
-            border-right: 2px solid var(--white);
+            width: 300px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 40;
         }
 
         .sidebar-header {
-            padding: 20px;
-            border-bottom: 2px solid var(--white);
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .tagline {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .progress-wrapper {
+            margin-top: 16px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .progress-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .progress-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #818cf8);
+            border-radius: 3px;
+            transition: width 0.4s ease;
         }
 
         .sidebar-content {
             flex: 1;
             overflow-y: auto;
+            padding: 16px 0;
         }
 
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+        /* Section */
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 24px;
+            margin-top: 8px;
         }
 
-        .main-header {
-            padding: 20px 32px;
-            border-bottom: 2px solid var(--white);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .main-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 32px;
-        }
-
-        /* Value Ladder Mini */
-        .ladder-mini {
-            padding: 16px 20px;
-            border-bottom: 2px solid var(--gray-light);
-        }
-
+        /* Value Ladder */
         .ladder-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 8px 0;
+            padding: 10px 24px;
             cursor: pointer;
-            transition: all 0.1s;
+            transition: background 0.15s;
         }
 
         .ladder-item:hover {
-            color: var(--accent);
+            background: var(--bg);
         }
 
-        .ladder-dot {
-            width: 12px;
-            height: 12px;
-            border: 2px solid var(--gray-mid);
+        .ladder-item.selected {
+            background: var(--accent-light);
         }
 
-        .ladder-dot.active {
+        .ladder-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            position: relative;
+        }
+
+        .ladder-indicator.active {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .ladder-indicator.next {
             background: var(--accent);
             border-color: var(--accent);
         }
 
-        .ladder-dot.next {
-            background: var(--white);
-            border-color: var(--white);
-        }
-
-        .ladder-line {
+        .ladder-indicator::after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 2px;
-            height: 16px;
-            background: var(--gray-light);
-            margin-left: 5px;
+            height: 20px;
+            background: var(--border);
         }
 
-        .ladder-line.active {
-            background: var(--accent);
+        .ladder-item:last-child .ladder-indicator::after {
+            display: none;
         }
 
-        /* Epic Item */
+        .ladder-indicator.active::after,
+        .ladder-indicator.next::after {
+            background: var(--success);
+        }
+
+        .ladder-info {
+            flex: 1;
+        }
+
+        .ladder-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .ladder-price {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .ladder-status {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .ladder-status.active {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .ladder-status.next {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .ladder-status.locked {
+            background: var(--bg);
+            color: var(--text-muted);
+        }
+
+        /* Epic */
         .epic-item {
-            border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 2px;
         }
 
         .epic-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
+            gap: 12px;
+            padding: 10px 24px;
             cursor: pointer;
-            transition: background 0.1s;
+            transition: background 0.15s;
         }
 
         .epic-header:hover {
-            background: var(--gray);
+            background: var(--bg);
         }
 
         .epic-header.active {
-            background: var(--gray);
-            border-left: 3px solid var(--accent);
+            background: var(--accent-light);
+        }
+
+        .epic-emoji {
+            font-size: 18px;
         }
 
         .epic-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            flex: 1;
         }
 
-        .epic-progress {
+        .epic-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .epic-desc {
             font-size: 12px;
-            color: var(--gray-mid);
+            color: var(--text-secondary);
         }
 
-        /* Story Item */
+        .epic-count {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .epic-chevron {
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+
+        .epic-chevron.expanded {
+            transform: rotate(90deg);
+        }
+
+        /* Story */
+        .story-list {
+            padding: 4px 0;
+        }
+
         .story-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 20px 12px 48px;
+            gap: 10px;
+            padding: 8px 24px 8px 56px;
             cursor: pointer;
-            transition: all 0.1s;
-            border-bottom: 1px solid var(--gray);
+            transition: background 0.15s;
         }
 
         .story-item:hover {
-            background: var(--gray);
+            background: var(--bg);
         }
 
         .story-item.active {
-            background: var(--gray);
-            border-left: 3px solid var(--accent);
+            background: var(--accent-light);
         }
 
         .story-check {
             width: 18px;
             height: 18px;
-            border: 2px solid var(--gray-mid);
+            border-radius: 50%;
+            border: 2px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 10px;
             flex-shrink: 0;
+            transition: all 0.15s;
         }
 
         .story-check.done {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: var(--black);
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
         }
 
         .story-check.in_progress {
-            background: var(--white);
-            border-color: var(--white);
-            color: var(--black);
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
         }
 
-        .story-name {
-            font-size: 14px;
+        .story-info {
+            flex: 1;
+            min-width: 0;
         }
 
         .story-id {
             font-size: 11px;
-            color: var(--gray-mid);
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
-        /* Buttons */
-        .btn {
-            background: var(--white);
-            color: var(--black);
-            padding: 10px 20px;
+        .story-name {
+            font-size: 13px;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            margin-left: 300px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 32px;
+            position: sticky;
+            top: 0;
+            z-index: 30;
+        }
+
+        .header-breadcrumb {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-title {
+            font-size: 24px;
             font-weight: 700;
-            font-size: 12px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .status-badge.done {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .status-badge.in_progress {
+            background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .status-badge.pending {
+            background: var(--bg);
+            color: var(--text-muted);
+        }
+
+        .main-body {
+            flex: 1;
+            padding: 32px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            border: 2px solid var(--white);
-            transition: all 0.1s;
+            letter-spacing: 0.5px;
         }
 
-        .btn:hover {
-            background: var(--accent);
-            border-color: var(--accent);
+        .card-body {
+            padding: 24px;
         }
 
-        .btn-accent {
-            background: var(--accent);
-            border-color: var(--accent);
+        /* Minds */
+        .minds-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
-        .btn-outline {
-            background: transparent;
-            color: var(--white);
-        }
-
-        .btn-outline:hover {
-            background: var(--white);
-            color: var(--black);
-        }
-
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 10px;
-        }
-
-        /* Tags */
-        .tag {
-            display: inline-block;
-            padding: 4px 8px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .tag-done { background: var(--accent); color: var(--black); }
-        .tag-progress { background: var(--white); color: var(--black); }
-        .tag-pending { background: var(--gray-light); color: var(--gray-mid); }
-
-        /* Progress Bar */
-        .progress-bar {
-            height: 3px;
-            background: var(--gray-light);
-            width: 100%;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--accent);
-            transition: width 0.3s;
+        .mind-tag {
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 20px;
         }
 
         /* Content Sections */
         .content-section {
-            margin-bottom: 32px;
+            margin-bottom: 24px;
         }
 
         .content-section:last-child {
@@ -290,29 +463,27 @@
         }
 
         .section-title {
-            font-size: 11px;
-            color: var(--gray-mid);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .content-block {
-            border-left: 3px solid var(--accent);
-            padding-left: 20px;
-            margin-bottom: 24px;
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 2px;
         }
 
-        .content-block h4 {
-            font-size: 12px;
-            color: var(--gray-mid);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .content-block p {
+        .content-text {
             font-size: 15px;
-            line-height: 1.6;
+            color: var(--text);
+            line-height: 1.7;
         }
 
         .content-list {
@@ -320,84 +491,259 @@
         }
 
         .content-list li {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 8px;
             font-size: 14px;
+            color: var(--text);
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-list li:last-child {
+            border-bottom: none;
         }
 
         .content-list li::before {
-            content: "—";
-            color: var(--accent);
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-light);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
         }
 
-        .content-card {
-            background: var(--gray);
+        /* Object Display */
+        .object-card {
+            background: var(--bg);
+            border-radius: var(--radius-sm);
             padding: 16px;
             margin-bottom: 12px;
         }
 
-        .content-card-row {
-            display: flex;
-            gap: 8px;
+        .object-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .object-title {
             font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .object-row {
+            display: flex;
+            padding: 6px 0;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .object-row:last-child {
+            border-bottom: none;
+        }
+
+        .object-key {
+            width: 140px;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .object-value {
+            flex: 1;
+            color: var(--text);
+        }
+
+        /* Metrics Display */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .metric-card {
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
             margin-bottom: 4px;
         }
 
-        .content-card-row .label {
-            color: var(--gray-mid);
-            min-width: 100px;
+        .metric-label {
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
-        /* Mind Tags */
-        .mind-tag {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--black);
-            padding: 4px 10px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-right: 8px;
+        /* Progress Section */
+        .unlock-progress {
+            margin-top: 24px;
+        }
+
+        .unlock-item {
+            margin-bottom: 16px;
+        }
+
+        .unlock-header {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 8px;
+        }
+
+        .unlock-label {
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .unlock-values {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .empty-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .empty-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.15s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+        }
+
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
         }
 
         /* Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 100;
+            backdrop-filter: blur(4px);
         }
 
         .modal {
-            background: var(--black);
-            border: 2px solid var(--white);
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             max-height: 90vh;
-            overflow-y: auto;
+            overflow: hidden;
+            animation: modalIn 0.2s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .modal-header {
-            padding: 16px 20px;
-            border-bottom: 2px solid var(--white);
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+
+        .modal-close:hover {
+            background: var(--border);
+            color: var(--text);
+        }
+
         .modal-body {
             padding: 24px;
+            max-height: 60vh;
+            overflow-y: auto;
         }
 
         .modal-footer {
-            padding: 16px 20px;
-            border-top: 2px solid var(--white);
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
             display: flex;
             gap: 12px;
+            justify-content: flex-end;
         }
 
         /* Form */
@@ -407,20 +753,20 @@
 
         .form-label {
             display: block;
-            font-size: 11px;
-            color: var(--gray-mid);
-            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
             margin-bottom: 8px;
         }
 
         .form-input {
             width: 100%;
-            background: var(--black);
-            border: 2px solid var(--white);
-            color: var(--white);
             padding: 12px 16px;
-            font-family: 'Space Mono', monospace;
-            font-size: 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.15s;
         }
 
         .form-input:focus {
@@ -428,307 +774,343 @@
             border-color: var(--accent);
         }
 
-        /* Empty State */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: var(--gray-mid);
+        .form-section {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .empty-state-icon {
-            font-size: 64px;
-            margin-bottom: 24px;
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .form-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 16px;
         }
 
         /* Unlock Preview */
         .unlock-preview {
-            background: var(--accent);
-            color: var(--black);
+            background: var(--success-light);
+            border-radius: var(--radius-sm);
             padding: 16px;
-            margin-top: 20px;
+            margin-top: 16px;
         }
 
-        /* Animations */
-        @keyframes celebrate {
-            0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); opacity: 1; }
+        .unlock-preview-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--success);
+            margin-bottom: 8px;
         }
 
-        .celebrate {
-            animation: celebrate 0.4s ease-out;
+        .unlock-preview-item {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        /* Celebration Modal */
+        .celebration {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .celebration-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .celebration-title {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .celebration-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .celebration-price {
+            font-size: 20px;
+            color: var(--accent);
+            margin-bottom: 24px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
-                width: 100%;
-                min-width: 100%;
-                position: fixed;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                z-index: 50;
                 transform: translateX(-100%);
-                transition: transform 0.3s;
+                transition: transform 0.3s ease;
             }
 
             .sidebar.open {
                 transform: translateX(0);
             }
 
-            .mobile-header {
-                display: flex;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .mobile-header {
-                display: none;
+            .main {
+                margin-left: 0;
             }
         }
     </style>
 </head>
 <body x-data="hub()" x-init="init()">
 
-    <div class="app-container">
+    <div class="app">
         <!-- Sidebar -->
-        <aside class="sidebar" :class="{ 'open': sidebarOpen }">
-            <!-- Sidebar Header -->
+        <aside class="sidebar">
             <div class="sidebar-header">
-                <h1 class="text-lg font-bold tracking-tight">CONTENT—TO—APP</h1>
-                <p class="text-xs text-gray-500 mono mt-1" x-text="project.tagline"></p>
-                <div class="flex items-center gap-4 mt-4">
-                    <div class="flex-1">
-                        <div class="progress-bar">
-                            <div class="progress-fill" :style="'width: ' + progressPercent + '%'"></div>
-                        </div>
+                <div class="logo">Content-to-App</div>
+                <div class="tagline" x-text="project.tagline"></div>
+
+                <div class="progress-wrapper">
+                    <div class="progress-header">
+                        <span class="progress-label">Progresso Geral</span>
+                        <span class="progress-value" x-text="progressPercent + '%'"></span>
                     </div>
-                    <span class="mono text-sm" x-text="progressPercent + '%'"></span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" :style="'width: ' + progressPercent + '%'"></div>
+                    </div>
                 </div>
             </div>
 
             <div class="sidebar-content">
-                <!-- Value Ladder Mini -->
-                <div class="ladder-mini">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs text-gray-500 font-bold tracking-wider">VALUE LADDER</span>
-                        <button @click="showMetricsModal = true" class="btn btn-small btn-outline">METRICS</button>
-                    </div>
+                <!-- Value Ladder -->
+                <div class="section-label">Value Ladder</div>
 
-                    <template x-for="(item, index) in valueLadder" :key="item.level">
-                        <div>
-                            <div class="ladder-item" @click="openLadderDetail(item)">
-                                <div class="ladder-dot" :class="{
-                                    'active': getUnlockStatus(item) === 'active',
-                                    'next': getUnlockStatus(item) === 'next'
-                                }"></div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium" x-text="item.name"></div>
-                                    <div class="text-xs mono" :class="getUnlockStatus(item) === 'active' ? 'text-[var(--accent)]' : 'text-gray-500'"
-                                         x-text="item.priceDisplay"></div>
-                                </div>
-                                <span class="text-xs" :class="{
-                                    'text-[var(--accent)]': getUnlockStatus(item) === 'active',
-                                    'text-white': getUnlockStatus(item) === 'next',
-                                    'text-gray-600': getUnlockStatus(item) === 'locked'
-                                }" x-text="getUnlockStatus(item) === 'active' ? 'ATIVO' : getUnlockStatus(item) === 'next' ? 'PRÓXIMO' : 'BLOQ'"></span>
-                            </div>
-                            <div x-show="index < valueLadder.length - 1"
-                                 class="ladder-line"
-                                 :class="{ 'active': getUnlockStatus(valueLadder[index + 1]) !== 'locked' }"></div>
+                <template x-for="(item, index) in valueLadder" :key="item.level">
+                    <div class="ladder-item"
+                         :class="{ 'selected': selectedLadderItem?.level === item.level }"
+                         @click="openLadderDetail(item)">
+                        <div class="ladder-indicator"
+                             :class="{
+                                 'active': getUnlockStatus(item) === 'active',
+                                 'next': getUnlockStatus(item) === 'next'
+                             }"></div>
+                        <div class="ladder-info">
+                            <div class="ladder-name" x-text="item.name"></div>
+                            <div class="ladder-price" x-text="item.priceDisplay"></div>
                         </div>
-                    </template>
+                        <span class="ladder-status"
+                              :class="getUnlockStatus(item)"
+                              x-text="getUnlockStatus(item) === 'active' ? 'Ativo' :
+                                      getUnlockStatus(item) === 'next' ? 'Próximo' : 'Bloqueado'"></span>
+                    </div>
+                </template>
+
+                <div style="padding: 8px 24px;">
+                    <button @click="showMetricsModal = true" class="btn btn-secondary btn-sm" style="width: 100%;">
+                        Atualizar Métricas
+                    </button>
                 </div>
 
                 <!-- Epics -->
-                <div>
-                    <template x-for="epic in epics" :key="epic.id">
-                        <div class="epic-item">
-                            <div class="epic-header"
-                                 :class="{ 'active': selectedEpic?.id === epic.id }"
-                                 @click="toggleEpic(epic)">
-                                <div class="epic-info">
-                                    <span class="text-lg" x-text="epic.emoji"></span>
-                                    <span class="font-medium text-sm" x-text="epic.name"></span>
-                                </div>
-                                <div class="epic-progress mono">
-                                    <span x-text="getCompletedCount(epic) + '/' + epic.stories.length"></span>
-                                </div>
-                            </div>
+                <div class="section-label" style="margin-top: 24px;">Épicas</div>
 
-                            <!-- Stories -->
-                            <div x-show="expandedEpics.includes(epic.id)" x-collapse>
-                                <template x-for="story in epic.stories" :key="story.id">
-                                    <div class="story-item"
-                                         :class="{ 'active': selectedStory?.id === story.id }"
-                                         @click="selectStory(epic, story)">
-                                        <div class="story-check" :class="story.status">
-                                            <span x-show="story.status === 'done'">✓</span>
-                                            <span x-show="story.status === 'in_progress'">→</span>
-                                        </div>
-                                        <div>
-                                            <div class="story-id mono" x-text="story.id"></div>
-                                            <div class="story-name" x-text="story.name"></div>
-                                        </div>
-                                    </div>
-                                </template>
+                <template x-for="epic in epics" :key="epic.id">
+                    <div class="epic-item">
+                        <div class="epic-header"
+                             :class="{ 'active': selectedEpic?.id === epic.id && !selectedStory }"
+                             @click="toggleEpic(epic)">
+                            <span class="epic-emoji" x-text="epic.emoji"></span>
+                            <div class="epic-info">
+                                <div class="epic-name" x-text="epic.name"></div>
                             </div>
+                            <span class="epic-count" x-text="getCompletedCount(epic) + '/' + epic.stories.length"></span>
+                            <svg class="epic-chevron" :class="{ 'expanded': expandedEpics.includes(epic.id) }" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
                         </div>
-                    </template>
-                </div>
+
+                        <div x-show="expandedEpics.includes(epic.id)" class="story-list">
+                            <template x-for="story in epic.stories" :key="story.id">
+                                <div class="story-item"
+                                     :class="{ 'active': selectedStory?.id === story.id }"
+                                     @click="selectStory(epic, story)">
+                                    <div class="story-check" :class="story.status">
+                                        <span x-show="story.status === 'done'">✓</span>
+                                        <span x-show="story.status === 'in_progress'">→</span>
+                                    </div>
+                                    <div class="story-info">
+                                        <div class="story-id" x-text="story.id"></div>
+                                        <div class="story-name" x-text="story.name"></div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
             </div>
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content">
-            <!-- Main Header -->
+        <main class="main">
             <div class="main-header">
-                <div>
-                    <template x-if="selectedStory">
-                        <div>
-                            <div class="text-xs text-gray-500 mb-1">
-                                <span x-text="selectedEpic?.emoji"></span>
-                                <span x-text="selectedEpic?.name"></span>
-                                <span class="mx-2">/</span>
-                                <span class="mono" x-text="selectedStory?.id"></span>
-                            </div>
-                            <h2 class="text-xl font-bold" x-text="selectedStory?.name"></h2>
-                        </div>
-                    </template>
-                    <template x-if="!selectedStory && selectedLadderItem">
-                        <div>
-                            <div class="text-xs text-gray-500 mb-1">VALUE LADDER</div>
-                            <h2 class="text-xl font-bold" x-text="selectedLadderItem?.name"></h2>
-                        </div>
-                    </template>
-                    <template x-if="!selectedStory && !selectedLadderItem">
-                        <h2 class="text-xl font-bold">Hub</h2>
-                    </template>
-                </div>
-
                 <template x-if="selectedStory">
-                    <span class="tag"
-                          :class="{
-                              'tag-done': selectedStory?.status === 'done',
-                              'tag-progress': selectedStory?.status === 'in_progress',
-                              'tag-pending': selectedStory?.status === 'pending'
-                          }"
-                          x-text="selectedStory?.status === 'done' ? 'CONCLUÍDO' :
-                                  selectedStory?.status === 'in_progress' ? 'EM PROGRESSO' : 'PENDENTE'">
-                    </span>
+                    <div>
+                        <div class="header-breadcrumb">
+                            <span x-text="selectedEpic?.emoji"></span>
+                            <span x-text="selectedEpic?.name"></span>
+                            <span>/</span>
+                            <span x-text="selectedStory?.id"></span>
+                        </div>
+                        <div class="header-title">
+                            <span x-text="selectedStory?.name"></span>
+                            <span class="status-badge"
+                                  :class="selectedStory?.status"
+                                  x-text="selectedStory?.status === 'done' ? 'Concluído' :
+                                          selectedStory?.status === 'in_progress' ? 'Em Progresso' : 'Pendente'"></span>
+                        </div>
+                    </div>
+                </template>
+                <template x-if="!selectedStory && selectedLadderItem">
+                    <div>
+                        <div class="header-breadcrumb">Value Ladder</div>
+                        <div class="header-title">
+                            <span x-text="selectedLadderItem?.name"></span>
+                            <span class="status-badge"
+                                  :class="{
+                                      'done': getUnlockStatus(selectedLadderItem) === 'active',
+                                      'in_progress': getUnlockStatus(selectedLadderItem) === 'next',
+                                      'pending': getUnlockStatus(selectedLadderItem) === 'locked'
+                                  }"
+                                  x-text="getUnlockStatus(selectedLadderItem) === 'active' ? 'Ativo' :
+                                          getUnlockStatus(selectedLadderItem) === 'next' ? 'Próximo' : 'Bloqueado'"></span>
+                        </div>
+                    </div>
+                </template>
+                <template x-if="!selectedStory && !selectedLadderItem">
+                    <div>
+                        <div class="header-breadcrumb">Dashboard</div>
+                        <div class="header-title">Content-to-App Hub</div>
+                    </div>
                 </template>
             </div>
 
-            <!-- Main Body -->
             <div class="main-body">
                 <!-- Story Content -->
                 <template x-if="selectedStory">
                     <div>
                         <!-- Minds -->
-                        <div x-show="selectedStory?.minds?.length > 0" class="content-section">
-                            <div class="section-title">Minds Consultadas</div>
-                            <div>
-                                <template x-for="mind in selectedStory?.minds" :key="mind">
-                                    <span class="mind-tag" x-text="mind"></span>
-                                </template>
+                        <template x-if="selectedStory?.minds?.length > 0">
+                            <div class="content-card">
+                                <div class="card-header">Minds Consultadas</div>
+                                <div class="card-body">
+                                    <div class="minds-list">
+                                        <template x-for="mind in selectedStory?.minds" :key="mind">
+                                            <span class="mind-tag" x-text="mind"></span>
+                                        </template>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </template>
 
                         <!-- Content -->
                         <template x-if="selectedStory?.content">
-                            <div class="content-section">
-                                <template x-for="(value, key) in selectedStory?.content" :key="key">
-                                    <div class="content-block">
-                                        <h4 x-text="formatKey(key)"></h4>
+                            <div class="content-card">
+                                <div class="card-header">Conteúdo</div>
+                                <div class="card-body">
+                                    <template x-for="(value, key) in selectedStory?.content" :key="key">
+                                        <div class="content-section">
+                                            <div class="section-title" x-text="formatKey(key)"></div>
 
-                                        <!-- String -->
-                                        <template x-if="typeof value === 'string'">
-                                            <p x-text="value"></p>
-                                        </template>
+                                            <!-- String -->
+                                            <template x-if="typeof value === 'string'">
+                                                <p class="content-text" x-text="value"></p>
+                                            </template>
 
-                                        <!-- Number -->
-                                        <template x-if="typeof value === 'number'">
-                                            <p class="mono text-lg" x-text="value"></p>
-                                        </template>
+                                            <!-- Number -->
+                                            <template x-if="typeof value === 'number'">
+                                                <p class="content-text" style="font-size: 24px; font-weight: 600;" x-text="value"></p>
+                                            </template>
 
-                                        <!-- Array of strings -->
-                                        <template x-if="Array.isArray(value) && value.length > 0 && typeof value[0] === 'string'">
-                                            <ul class="content-list">
-                                                <template x-for="(item, idx) in value" :key="idx">
-                                                    <li x-text="item"></li>
-                                                </template>
-                                            </ul>
-                                        </template>
+                                            <!-- Array of strings -->
+                                            <template x-if="Array.isArray(value) && value.length > 0 && typeof value[0] === 'string'">
+                                                <ul class="content-list">
+                                                    <template x-for="(item, idx) in value" :key="idx">
+                                                        <li x-text="item"></li>
+                                                    </template>
+                                                </ul>
+                                            </template>
 
-                                        <!-- Array of objects -->
-                                        <template x-if="Array.isArray(value) && value.length > 0 && typeof value[0] === 'object'">
-                                            <div>
-                                                <template x-for="(item, idx) in value" :key="idx">
-                                                    <div class="content-card">
-                                                        <template x-for="(v, k) in item" :key="k">
-                                                            <div class="content-card-row">
-                                                                <span class="label" x-text="formatKey(k) + ':'"></span>
-                                                                <span x-text="v"></span>
-                                                            </div>
-                                                        </template>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </template>
+                                            <!-- Array of objects -->
+                                            <template x-if="Array.isArray(value) && value.length > 0 && typeof value[0] === 'object'">
+                                                <div>
+                                                    <template x-for="(item, idx) in value" :key="idx">
+                                                        <div class="object-card">
+                                                            <template x-for="(v, k) in item" :key="k">
+                                                                <div class="object-row">
+                                                                    <span class="object-key" x-text="formatKey(k)"></span>
+                                                                    <span class="object-value" x-text="v"></span>
+                                                                </div>
+                                                            </template>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </template>
 
-                                        <!-- Object -->
-                                        <template x-if="typeof value === 'object' && !Array.isArray(value) && value !== null">
-                                            <div>
-                                                <template x-for="(v, k) in value" :key="k">
-                                                    <div>
-                                                        <!-- Nested Object -->
-                                                        <template x-if="typeof v === 'object' && !Array.isArray(v) && v !== null">
-                                                            <div class="content-card">
-                                                                <div class="text-xs text-[var(--accent)] font-bold mb-2" x-text="formatKey(k)"></div>
-                                                                <template x-for="(vv, kk) in v" :key="kk">
-                                                                    <div class="content-card-row">
-                                                                        <span class="label" x-text="formatKey(kk) + ':'"></span>
-                                                                        <span x-text="vv"></span>
-                                                                    </div>
-                                                                </template>
-                                                            </div>
-                                                        </template>
-                                                        <!-- Simple Value -->
-                                                        <template x-if="typeof v === 'string' || typeof v === 'number'">
-                                                            <div class="content-card-row" style="margin-bottom: 8px;">
-                                                                <span class="label" x-text="formatKey(k) + ':'"></span>
-                                                                <span x-text="v"></span>
-                                                            </div>
-                                                        </template>
-                                                        <!-- Array in Object -->
-                                                        <template x-if="Array.isArray(v)">
-                                                            <div class="mb-4">
-                                                                <div class="text-xs text-[var(--accent)] font-bold mb-2" x-text="formatKey(k)"></div>
-                                                                <ul class="content-list">
-                                                                    <template x-for="(item, idx) in v" :key="idx">
-                                                                        <li x-text="typeof item === 'object' ? JSON.stringify(item) : item"></li>
+                                            <!-- Object -->
+                                            <template x-if="typeof value === 'object' && !Array.isArray(value) && value !== null">
+                                                <div>
+                                                    <template x-for="(v, k) in value" :key="k">
+                                                        <div>
+                                                            <!-- Nested Object -->
+                                                            <template x-if="typeof v === 'object' && !Array.isArray(v) && v !== null">
+                                                                <div class="object-card">
+                                                                    <div class="object-title" x-text="formatKey(k)"></div>
+                                                                    <template x-for="(vv, kk) in v" :key="kk">
+                                                                        <div class="object-row">
+                                                                            <span class="object-key" x-text="formatKey(kk)"></span>
+                                                                            <span class="object-value" x-text="vv"></span>
+                                                                        </div>
                                                                     </template>
-                                                                </ul>
-                                                            </div>
-                                                        </template>
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </template>
-                                    </div>
-                                </template>
+                                                                </div>
+                                                            </template>
+                                                            <!-- Simple Value -->
+                                                            <template x-if="typeof v === 'string' || typeof v === 'number'">
+                                                                <div class="object-row">
+                                                                    <span class="object-key" x-text="formatKey(k)"></span>
+                                                                    <span class="object-value" x-text="v"></span>
+                                                                </div>
+                                                            </template>
+                                                            <!-- Array in Object -->
+                                                            <template x-if="Array.isArray(v)">
+                                                                <div class="object-card">
+                                                                    <div class="object-title" x-text="formatKey(k)"></div>
+                                                                    <ul class="content-list">
+                                                                        <template x-for="(item, idx) in v" :key="idx">
+                                                                            <li x-text="typeof item === 'object' ? JSON.stringify(item) : item"></li>
+                                                                        </template>
+                                                                    </ul>
+                                                                </div>
+                                                            </template>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </div>
                             </div>
                         </template>
 
                         <!-- No Content -->
                         <template x-if="!selectedStory?.content">
-                            <div class="empty-state" style="height: auto; padding: 80px 0;">
-                                <div class="empty-state-icon">○</div>
-                                <div>Story pendente</div>
+                            <div class="content-card">
+                                <div class="empty-state">
+                                    <div class="empty-icon">📝</div>
+                                    <div class="empty-title">Story Pendente</div>
+                                    <div class="empty-desc">Esta story ainda não foi desenvolvida.</div>
+                                </div>
                             </div>
                         </template>
                     </div>
@@ -737,66 +1119,67 @@
                 <!-- Ladder Item Detail -->
                 <template x-if="!selectedStory && selectedLadderItem">
                     <div>
-                        <div class="content-section">
-                            <div class="flex items-center gap-4 mb-6">
-                                <span class="tag"
-                                      :class="{
-                                          'tag-done': getUnlockStatus(selectedLadderItem) === 'active',
-                                          'tag-progress': getUnlockStatus(selectedLadderItem) === 'next',
-                                          'tag-pending': getUnlockStatus(selectedLadderItem) === 'locked'
-                                      }"
-                                      x-text="getUnlockStatus(selectedLadderItem) === 'active' ? 'ATIVO' :
-                                              getUnlockStatus(selectedLadderItem) === 'next' ? 'PRÓXIMO' : 'BLOQUEADO'">
-                                </span>
-                                <span class="text-2xl mono font-bold" x-text="selectedLadderItem?.priceDisplay"></span>
+                        <div class="content-card">
+                            <div class="card-body">
+                                <div style="font-size: 32px; font-weight: 700; margin-bottom: 8px;" x-text="selectedLadderItem?.priceDisplay"></div>
+                                <div style="color: var(--text-secondary);" x-text="selectedLadderItem?.tagline"></div>
                             </div>
-                            <p class="text-gray-400" x-text="selectedLadderItem?.tagline"></p>
                         </div>
 
                         <!-- Metrics (if active) -->
                         <template x-if="getUnlockStatus(selectedLadderItem) === 'active' && selectedLadderItem?.metrics">
-                            <div class="content-section">
-                                <div class="section-title">Métricas Atuais</div>
-                                <template x-for="(metric, key) in selectedLadderItem?.metrics" :key="key">
-                                    <div class="content-card-row" style="margin-bottom: 12px;">
-                                        <span class="label" x-text="formatMetricName(key) + ':'"></span>
-                                        <span class="mono font-bold" x-text="metric.current"></span>
+                            <div class="content-card">
+                                <div class="card-header">Métricas Atuais</div>
+                                <div class="card-body">
+                                    <div class="metrics-grid">
+                                        <template x-for="(metric, key) in selectedLadderItem?.metrics" :key="key">
+                                            <div class="metric-card">
+                                                <div class="metric-value" x-text="metric.current"></div>
+                                                <div class="metric-label" x-text="formatMetricName(key)"></div>
+                                            </div>
+                                        </template>
                                     </div>
-                                </template>
-                                <button @click="showMetricsModal = true" class="btn btn-accent mt-4">ATUALIZAR MÉTRICAS</button>
+                                    <button @click="showMetricsModal = true" class="btn btn-primary" style="margin-top: 24px;">
+                                        Atualizar Métricas
+                                    </button>
+                                </div>
                             </div>
                         </template>
 
                         <!-- Unlock Progress (if next) -->
                         <template x-if="getUnlockStatus(selectedLadderItem) === 'next'">
-                            <div class="content-section">
-                                <div class="section-title">Para Desbloquear</div>
-                                <template x-for="req in selectedLadderItem?.unlockRequirements" :key="req.metric">
-                                    <div class="mb-4">
-                                        <div class="flex justify-between text-sm mb-2">
-                                            <span x-text="formatMetricName(req.metric)"></span>
-                                            <span class="mono" x-text="getMetricValue(req.sourceLevel, req.metric) + ' / ' + req.value"></span>
+                            <div class="content-card">
+                                <div class="card-header">Para Desbloquear</div>
+                                <div class="card-body">
+                                    <template x-for="req in selectedLadderItem?.unlockRequirements" :key="req.metric">
+                                        <div class="unlock-item">
+                                            <div class="unlock-header">
+                                                <span class="unlock-label" x-text="formatMetricName(req.metric)"></span>
+                                                <span class="unlock-values" x-text="getMetricValue(req.sourceLevel, req.metric) + ' / ' + req.value"></span>
+                                            </div>
+                                            <div class="progress-bar" style="height: 8px;">
+                                                <div class="progress-fill"
+                                                     :style="'width: ' + Math.min(100, (getMetricValue(req.sourceLevel, req.metric) / req.value) * 100) + '%'"></div>
+                                            </div>
                                         </div>
-                                        <div class="progress-bar" style="height: 6px;">
-                                            <div class="progress-fill"
-                                                 :style="'width: ' + Math.min(100, (getMetricValue(req.sourceLevel, req.metric) / req.value) * 100) + '%'"></div>
-                                        </div>
-                                    </div>
-                                </template>
+                                    </template>
+                                </div>
                             </div>
                         </template>
 
                         <!-- Requirements (if locked) -->
                         <template x-if="getUnlockStatus(selectedLadderItem) === 'locked'">
-                            <div class="content-section">
-                                <div class="section-title">Requisitos</div>
-                                <template x-for="req in selectedLadderItem?.unlockRequirements" :key="req.metric">
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <span :class="isRequirementMet(req) ? 'text-[var(--accent)]' : 'text-gray-600'"
-                                              x-text="isRequirementMet(req) ? '✓' : '○'"></span>
-                                        <span x-text="formatMetricName(req.metric) + ' >= ' + req.value"></span>
-                                    </div>
-                                </template>
+                            <div class="content-card">
+                                <div class="card-header">Requisitos para Desbloquear</div>
+                                <div class="card-body">
+                                    <template x-for="req in selectedLadderItem?.unlockRequirements" :key="req.metric">
+                                        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border);">
+                                            <span :style="'color: ' + (isRequirementMet(req) ? 'var(--success)' : 'var(--text-muted)')"
+                                                  x-text="isRequirementMet(req) ? '✓' : '○'"></span>
+                                            <span x-text="formatMetricName(req.metric) + ' >= ' + req.value"></span>
+                                        </div>
+                                    </template>
+                                </div>
                             </div>
                         </template>
                     </div>
@@ -804,9 +1187,12 @@
 
                 <!-- Empty State -->
                 <template x-if="!selectedStory && !selectedLadderItem">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">←</div>
-                        <div>Selecione uma story ou item da Value Ladder</div>
+                    <div class="content-card">
+                        <div class="empty-state">
+                            <div class="empty-icon">👈</div>
+                            <div class="empty-title">Selecione um item</div>
+                            <div class="empty-desc">Escolha uma story ou um item da Value Ladder para ver os detalhes.</div>
+                        </div>
                     </div>
                 </template>
             </div>
@@ -815,16 +1201,16 @@
 
     <!-- Metrics Modal -->
     <div x-show="showMetricsModal" x-cloak class="modal-overlay" @click.self="showMetricsModal = false">
-        <div class="modal celebrate">
+        <div class="modal">
             <div class="modal-header">
-                <span class="font-bold">Atualizar Métricas</span>
-                <button @click="showMetricsModal = false" class="text-gray-500 hover:text-white text-lg">✕</button>
+                <span class="modal-title">Atualizar Métricas</span>
+                <button @click="showMetricsModal = false" class="modal-close">✕</button>
             </div>
 
             <div class="modal-body">
                 <template x-for="item in valueLadder.filter(i => getUnlockStatus(i) === 'active')" :key="item.level">
-                    <div class="mb-6">
-                        <div class="text-xs text-[var(--accent)] font-bold mb-4" x-text="item.name.toUpperCase()"></div>
+                    <div class="form-section">
+                        <div class="form-section-title" x-text="item.name"></div>
                         <template x-for="(metric, key) in item.metrics" :key="key">
                             <div class="form-group">
                                 <label class="form-label" x-text="formatMetricName(key)"></label>
@@ -839,28 +1225,30 @@
 
                 <!-- Unlock Preview -->
                 <div x-show="pendingUnlocks.length > 0" class="unlock-preview">
-                    <div class="text-xs font-bold mb-2">AO SALVAR, SERÁ DESBLOQUEADO:</div>
+                    <div class="unlock-preview-title">🎉 Ao salvar, será desbloqueado:</div>
                     <template x-for="unlock in pendingUnlocks" :key="unlock">
-                        <div class="font-bold text-lg" x-text="unlock"></div>
+                        <div class="unlock-preview-item" x-text="unlock"></div>
                     </template>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button @click="showMetricsModal = false" class="btn btn-outline flex-1">Cancelar</button>
-                <button @click="saveMetrics()" class="btn btn-accent flex-1">Salvar</button>
+                <button @click="showMetricsModal = false" class="btn btn-secondary">Cancelar</button>
+                <button @click="saveMetrics()" class="btn btn-primary">Salvar</button>
             </div>
         </div>
     </div>
 
     <!-- Unlock Celebration Modal -->
     <div x-show="showUnlockModal" x-cloak class="modal-overlay">
-        <div class="modal celebrate" style="text-align: center; padding: 48px;">
-            <div style="font-size: 64px; margin-bottom: 24px;">◆</div>
-            <div class="text-xs text-gray-500 mb-2">DESBLOQUEADO</div>
-            <div class="text-3xl font-bold mb-2" x-text="unlockedItem?.name"></div>
-            <div class="text-xl mono mb-8" x-text="unlockedItem?.priceDisplay"></div>
-            <button @click="showUnlockModal = false" class="btn btn-accent">CONTINUAR</button>
+        <div class="modal">
+            <div class="celebration">
+                <div class="celebration-icon">🎉</div>
+                <div class="celebration-title">Desbloqueado!</div>
+                <div class="celebration-name" x-text="unlockedItem?.name"></div>
+                <div class="celebration-price" x-text="unlockedItem?.priceDisplay"></div>
+                <button @click="showUnlockModal = false" class="btn btn-primary">Continuar</button>
+            </div>
         </div>
     </div>
 
@@ -874,7 +1262,6 @@
                 selectedStory: null,
                 selectedLadderItem: null,
                 expandedEpics: [],
-                sidebarOpen: false,
                 showMetricsModal: false,
                 showUnlockModal: false,
                 unlockedItem: null,
@@ -889,7 +1276,6 @@
                         this.epics = data.epics;
                         this.valueLadder = data.valueLadder;
 
-                        // Load saved metrics from localStorage
                         const saved = localStorage.getItem('hub-metrics');
                         if (saved) {
                             const savedMetrics = JSON.parse(saved);
@@ -900,7 +1286,6 @@
                             });
                         }
 
-                        // Expand first epic by default
                         if (this.epics.length > 0) {
                             this.expandedEpics.push(this.epics[0].id);
                         }
@@ -955,20 +1340,16 @@
                 },
 
                 isRequirementMet(req) {
-                    const value = this.getMetricValue(req.sourceLevel, req.metric);
-                    return value >= req.value;
+                    return this.getMetricValue(req.sourceLevel, req.metric) >= req.value;
                 },
 
                 getMetricValue(level, metric) {
                     const item = this.valueLadder.find(i => i.level === level);
-                    if (!item || !item.metrics || !item.metrics[metric]) return 0;
-                    return item.metrics[metric].current || 0;
+                    return item?.metrics?.[metric]?.current || 0;
                 },
 
                 updateMetric(level, metric, value) {
-                    if (!this.tempMetrics[level]) {
-                        this.tempMetrics[level] = {};
-                    }
+                    if (!this.tempMetrics[level]) this.tempMetrics[level] = {};
                     this.tempMetrics[level][metric] = parseInt(value) || 0;
                     this.checkPendingUnlocks();
                 },
@@ -992,22 +1373,17 @@
                     this.valueLadder.forEach(item => {
                         if (item.unlockRequirements && this.getUnlockStatus(item) === 'active') {
                             const wasActive = item.unlockRequirements.every(req => {
-                                const origItem = this.valueLadder.find(i => i.level === req.sourceLevel);
                                 const origValue = originalMetrics[req.sourceLevel]?.[req.metric]?.current ||
-                                                  origItem?.metrics?.[req.metric]?.current || 0;
+                                                  this.valueLadder.find(i => i.level === req.sourceLevel)?.metrics?.[req.metric]?.current || 0;
                                 return origValue >= req.value;
                             });
-                            if (!wasActive) {
-                                this.pendingUnlocks.push(item.name);
-                            }
+                            if (!wasActive) this.pendingUnlocks.push(item.name);
                         }
                     });
 
                     Object.keys(originalMetrics).forEach(level => {
                         const item = this.valueLadder.find(i => i.level === parseInt(level));
-                        if (item) {
-                            item.metrics = originalMetrics[level];
-                        }
+                        if (item) item.metrics = originalMetrics[level];
                     });
                 },
 
@@ -1026,15 +1402,12 @@
 
                     const metricsToSave = {};
                     this.valueLadder.forEach(item => {
-                        if (item.metrics) {
-                            metricsToSave[item.level] = item.metrics;
-                        }
+                        if (item.metrics) metricsToSave[item.level] = item.metrics;
                     });
                     localStorage.setItem('hub-metrics', JSON.stringify(metricsToSave));
 
                     if (this.pendingUnlocks.length > 0) {
-                        const unlockedName = this.pendingUnlocks[0];
-                        this.unlockedItem = this.valueLadder.find(i => i.name === unlockedName);
+                        this.unlockedItem = this.valueLadder.find(i => i.name === this.pendingUnlocks[0]);
                         this.showMetricsModal = false;
                         this.showUnlockModal = true;
                     } else {
@@ -1046,14 +1419,15 @@
                 },
 
                 formatKey(key) {
-                    return key.replace(/_/g, ' ').replace(/([A-Z])/g, ' $1').trim();
+                    return key.replace(/_/g, ' ').replace(/([A-Z])/g, ' $1').trim()
+                              .split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
                 },
 
                 formatMetricName(key) {
                     const names = {
                         subscribers: 'Subscribers',
                         emailsSent: 'Emails Enviados',
-                        openRate: 'Taxa Abertura (%)',
+                        openRate: 'Taxa de Abertura (%)',
                         sales: 'Vendas',
                         revenue: 'Receita (R$)',
                         students: 'Alunos',
