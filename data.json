@@ -297,9 +297,16 @@
           "status": "done",
           "content": {
             "creator": "Tay Dantas",
-            "fonte": "Vídeo YouTube sobre construção de marca para creators",
-            "app_criado": "Creator Brand OS",
-            "stack": "React + Tailwind CSS",
+            "fonte": {
+              "tipo": "YouTube",
+              "url": "https://www.youtube.com/watch?v=P6-8TYGWl68&t=504s",
+              "tema": "Construção de marca para creators"
+            },
+            "app_criado": {
+              "nome": "Creator Brand OS",
+              "link": "https://gemini.google.com/share/8b0db1943864",
+              "stack": "React + Tailwind CSS"
+            },
             "metodologia_extraída": {
               "nome": "Creator Brand OS",
               "subtítulo": "Transforme sua expertise em marca escalável em 5 etapas",
