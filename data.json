@@ -403,7 +403,17 @@
       "price": 0,
       "priceDisplay": "Grátis",
       "tagline": "1 Conteúdo → 1 App por Semana",
-      "status": "defined"
+      "status": "defined",
+      "metrics": {
+        "subscribers": { "current": 0, "updatedAt": null },
+        "emailsSent": { "current": 0, "updatedAt": null },
+        "openRate": { "current": 0, "updatedAt": null }
+      },
+      "unlockRequirements": null,
+      "unlocksNext": {
+        "level": 2,
+        "requirement": { "metric": "subscribers", "value": 500 }
+      }
     },
     {
       "level": 2,
@@ -411,7 +421,18 @@
       "price": 997,
       "priceDisplay": "R$ 997",
       "tagline": "De Conteúdo a Produto em 3 Passos",
-      "status": "defined"
+      "status": "defined",
+      "metrics": {
+        "sales": { "current": 0, "updatedAt": null },
+        "revenue": { "current": 0, "updatedAt": null }
+      },
+      "unlockRequirements": [
+        { "sourceLevel": 1, "metric": "subscribers", "operator": ">=", "value": 500 }
+      ],
+      "unlocksNext": {
+        "level": 3,
+        "requirement": { "metric": "sales", "value": 20 }
+      }
     },
     {
       "level": 3,
@@ -419,7 +440,19 @@
       "price": 4500,
       "priceDisplay": "R$ 4.500",
       "tagline": "Crie 3 Apps em 6 Semanas",
-      "status": "defined"
+      "status": "defined",
+      "metrics": {
+        "students": { "current": 0, "updatedAt": null },
+        "graduated": { "current": 0, "updatedAt": null }
+      },
+      "unlockRequirements": [
+        { "sourceLevel": 1, "metric": "subscribers", "operator": ">=", "value": 500 },
+        { "sourceLevel": 2, "metric": "sales", "operator": ">=", "value": 20 }
+      ],
+      "unlocksNext": {
+        "level": 4,
+        "requirement": { "metric": "graduated", "value": 5 }
+      }
     },
     {
       "level": 4,
@@ -427,7 +460,17 @@
       "price": 25000,
       "priceDisplay": "R$ 25k-80k",
       "tagline": "Eu Transformo Seu Conteúdo em Apps",
-      "status": "defined"
+      "status": "defined",
+      "metrics": {
+        "projects": { "current": 0, "updatedAt": null },
+        "revenue": { "current": 0, "updatedAt": null }
+      },
+      "unlockRequirements": [
+        { "sourceLevel": 1, "metric": "subscribers", "operator": ">=", "value": 500 },
+        { "sourceLevel": 2, "metric": "sales", "operator": ">=", "value": 20 },
+        { "sourceLevel": 3, "metric": "graduated", "operator": ">=", "value": 5 }
+      ],
+      "unlocksNext": null
     }
   ]
 }

@@ -3,264 +3,460 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content-to-App Hub</title>
+    <title>Content-to-App</title>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: '#0f0f0f',
-                        darker: '#080808',
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --accent: #cabe96;
+            --gray: #1a1a1a;
+            --gray-light: #2a2a2a;
+            --gray-mid: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+        }
+
+        .mono {
+            font-family: 'Space Mono', monospace;
+        }
+
         [x-cloak] { display: none !important; }
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+        /* Brutalista: sem border-radius, bordas fortes */
+        .brutal-border {
+            border: 2px solid var(--white);
         }
-        .scrollbar-thin::-webkit-scrollbar {
-            width: 6px;
+
+        .brutal-border-accent {
+            border: 2px solid var(--accent);
         }
-        .scrollbar-thin::-webkit-scrollbar-track {
-            background: #1a1a1a;
+
+        .btn {
+            background: var(--white);
+            color: var(--black);
+            padding: 12px 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.1s;
+            border: none;
         }
-        .scrollbar-thin::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 3px;
+
+        .btn:hover {
+            background: var(--accent);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        .btn-accent:hover {
+            background: var(--white);
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .tag-active {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        .tag-next {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .tag-locked {
+            background: var(--gray-light);
+            color: var(--gray-mid);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--gray-light);
+            width: 100%;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .input-brutal {
+            background: var(--black);
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: 12px 16px;
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .input-brutal:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal {
+            background: var(--black);
+            border: 2px solid var(--white);
+            width: 100%;
+            max-width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .divider {
+            height: 2px;
+            background: var(--gray-light);
+            width: 100%;
+        }
+
+        .unlock-line {
+            width: 60px;
+            height: 2px;
+            background: var(--gray-light);
+        }
+
+        .unlock-line.active {
+            background: var(--accent);
+        }
+
+        /* Celebration animation */
+        @keyframes celebrate {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .celebrate {
+            animation: celebrate 0.5s ease-out;
         }
     </style>
 </head>
-<body class="bg-dark text-white min-h-screen" x-data="hub()" x-init="init()">
+<body x-data="hub()" x-init="init()">
 
-    <div class="flex h-screen">
+    <!-- Header -->
+    <header class="border-b-2 border-white">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight">CONTENT—TO—APP</h1>
+                <p class="text-xs text-gray-500 mono mt-1" x-text="project.tagline"></p>
+            </div>
+            <div class="text-right">
+                <div class="text-3xl font-bold mono" x-text="progressPercent + '%'"></div>
+                <div class="text-xs text-gray-500" x-text="completedStories + '/' + totalStories + ' STORIES'"></div>
+            </div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" :style="'width: ' + progressPercent + '%'"></div>
+        </div>
+    </header>
 
-        <!-- Sidebar -->
-        <aside class="w-72 bg-darker border-r border-gray-800 flex flex-col">
-            <!-- Logo -->
-            <div class="p-4 border-b border-gray-800">
-                <h1 class="text-xl font-bold gradient-text">Content-to-App</h1>
-                <p class="text-gray-500 text-xs mt-1" x-text="project.tagline"></p>
+    <div class="max-w-7xl mx-auto px-6 py-12">
+
+        <!-- Value Ladder Section -->
+        <section class="mb-16">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-sm font-bold tracking-widest text-gray-500">VALUE LADDER</h2>
+                <button @click="showMetricsModal = true" class="btn text-xs">
+                    ATUALIZAR MÉTRICAS
+                </button>
             </div>
 
-            <!-- Progress -->
-            <div class="p-4 border-b border-gray-800">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-gray-400 text-sm">Progresso</span>
-                    <span class="text-white font-bold" x-text="progressPercent + '%'"></span>
-                </div>
-                <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
-                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500"
-                         :style="'width: ' + progressPercent + '%'"></div>
-                </div>
-                <div class="text-gray-500 text-xs mt-1" x-text="completedStories + ' de ' + totalStories + ' stories'"></div>
-            </div>
+            <!-- Ladder Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-0">
+                <template x-for="(item, index) in valueLadder" :key="item.level">
+                    <div class="relative">
+                        <!-- Connection Line -->
+                        <div x-show="index < valueLadder.length - 1"
+                             class="hidden md:block absolute top-1/2 -right-[31px] z-10">
+                            <div class="unlock-line" :class="getUnlockStatus(valueLadder[index + 1]) !== 'locked' ? 'active' : ''"></div>
+                        </div>
 
-            <!-- Epics Nav -->
-            <nav class="flex-1 overflow-y-auto scrollbar-thin p-2">
-                <template x-for="epic in epics" :key="epic.id">
-                    <div class="mb-2">
-                        <!-- Epic Header -->
-                        <button @click="toggleEpic(epic.id)"
-                                class="w-full flex items-center justify-between p-2 rounded-lg hover:bg-gray-800/50 transition-all"
-                                :class="expandedEpics.includes(epic.id) ? 'bg-gray-800/50' : ''">
-                            <div class="flex items-center gap-2">
-                                <span x-text="epic.emoji"></span>
-                                <span class="font-medium text-sm" x-text="epic.name"></span>
+                        <!-- Card -->
+                        <div class="brutal-border p-6 h-full"
+                             :class="getUnlockStatus(item) === 'active' ? 'border-[var(--accent)]' :
+                                     getUnlockStatus(item) === 'locked' ? 'border-[var(--gray-light)]' : ''">
+
+                            <!-- Status Tag -->
+                            <div class="mb-4">
+                                <span class="tag"
+                                      :class="getUnlockStatus(item) === 'active' ? 'tag-active' :
+                                              getUnlockStatus(item) === 'next' ? 'tag-next' : 'tag-locked'"
+                                      x-text="getUnlockStatus(item) === 'active' ? 'ATIVO' :
+                                              getUnlockStatus(item) === 'next' ? 'PRÓXIMO' : 'BLOQUEADO'">
+                                </span>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs px-1.5 py-0.5 rounded"
-                                      :class="getEpicProgress(epic) === 100 ? 'bg-green-500/20 text-green-400' :
-                                              getEpicProgress(epic) > 0 ? 'bg-yellow-500/20 text-yellow-400' :
-                                              'bg-gray-500/20 text-gray-400'"
-                                      x-text="getCompletedCount(epic) + '/' + epic.stories.length"></span>
-                                <svg class="w-4 h-4 text-gray-500 transition-transform"
-                                     :class="expandedEpics.includes(epic.id) ? 'rotate-90' : ''"
-                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                </svg>
+
+                            <!-- Level Info -->
+                            <div class="mb-6">
+                                <div class="text-4xl font-bold mb-2" x-text="item.priceDisplay"></div>
+                                <div class="text-lg font-bold" x-text="item.name"></div>
+                                <div class="text-xs text-gray-500 mt-1" x-text="item.tagline"></div>
+                            </div>
+
+                            <!-- Metrics (if active) -->
+                            <div x-show="getUnlockStatus(item) === 'active' && item.metrics" class="mb-6">
+                                <template x-for="(metric, key) in item.metrics" :key="key">
+                                    <div class="flex justify-between items-center py-2 border-b border-gray-800">
+                                        <span class="text-xs text-gray-500 uppercase" x-text="formatMetricName(key)"></span>
+                                        <span class="mono font-bold" x-text="metric.current"></span>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <!-- Unlock Progress (if next) -->
+                            <div x-show="getUnlockStatus(item) === 'next'" class="mb-6">
+                                <div class="text-xs text-gray-500 mb-2">PARA DESBLOQUEAR</div>
+                                <template x-for="req in item.unlockRequirements" :key="req.metric">
+                                    <div class="mb-3">
+                                        <div class="flex justify-between text-xs mb-1">
+                                            <span x-text="formatMetricName(req.metric)"></span>
+                                            <span class="mono" x-text="getMetricValue(req.sourceLevel, req.metric) + '/' + req.value"></span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill"
+                                                 :style="'width: ' + Math.min(100, (getMetricValue(req.sourceLevel, req.metric) / req.value) * 100) + '%'"></div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <!-- Requirements (if locked) -->
+                            <div x-show="getUnlockStatus(item) === 'locked'" class="mb-6">
+                                <div class="text-xs text-gray-500 mb-2">REQUISITOS</div>
+                                <template x-for="req in item.unlockRequirements" :key="req.metric">
+                                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-1">
+                                        <span x-text="isRequirementMet(req) ? '✓' : '○'"></span>
+                                        <span x-text="formatMetricName(req.metric) + ' ≥ ' + req.value"></span>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <!-- Action Button -->
+                            <button class="btn w-full text-xs"
+                                    :class="getUnlockStatus(item) === 'active' ? 'btn-accent' : 'btn-outline'"
+                                    :disabled="getUnlockStatus(item) === 'locked'"
+                                    @click="selectLadderItem(item)">
+                                <span x-text="getUnlockStatus(item) === 'active' ? 'GERENCIAR' :
+                                              getUnlockStatus(item) === 'next' ? 'VER DETALHES' : 'BLOQUEADO'"></span>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </section>
+
+        <!-- Epics Section -->
+        <section>
+            <h2 class="text-sm font-bold tracking-widest text-gray-500 mb-8">ÉPICAS</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Epics List -->
+                <div class="lg:col-span-1 space-y-2">
+                    <template x-for="epic in epics" :key="epic.id">
+                        <button @click="selectEpic(epic)"
+                                class="w-full text-left p-4 brutal-border transition-all"
+                                :class="selectedEpic?.id === epic.id ? 'border-[var(--accent)] bg-[var(--gray)]' : 'border-[var(--gray-light)] hover:border-white'">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xl" x-text="epic.emoji"></span>
+                                    <div>
+                                        <div class="font-bold text-sm" x-text="epic.name"></div>
+                                        <div class="text-xs text-gray-500" x-text="epic.description"></div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="mono text-sm" x-text="getCompletedCount(epic) + '/' + epic.stories.length"></div>
+                                    <div class="w-16 mt-1">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" :style="'width: ' + getEpicProgress(epic) + '%'"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </button>
+                    </template>
+                </div>
 
-                        <!-- Stories -->
-                        <div x-show="expandedEpics.includes(epic.id)" x-collapse>
-                            <template x-for="story in epic.stories" :key="story.id">
-                                <button @click="selectStory(story, epic)"
-                                        class="w-full flex items-center gap-2 p-2 pl-8 rounded-lg hover:bg-gray-800/30 transition-all text-left"
-                                        :class="selectedStory?.id === story.id ? 'bg-purple-500/20 border-l-2 border-purple-500' : ''">
-                                    <!-- Status Icon -->
-                                    <div class="w-4 h-4 rounded-full flex items-center justify-center"
-                                         :class="story.status === 'done' ? 'bg-green-500' :
-                                                 story.status === 'in_progress' ? 'bg-yellow-500' :
-                                                 'border border-gray-600'">
-                                        <svg x-show="story.status === 'done'" class="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                                        </svg>
+                <!-- Stories & Content -->
+                <div class="lg:col-span-2">
+                    <!-- Stories List -->
+                    <div x-show="selectedEpic && !selectedStory" class="brutal-border">
+                        <div class="p-4 border-b-2 border-white">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl" x-text="selectedEpic?.emoji"></span>
+                                <span class="font-bold" x-text="selectedEpic?.name"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <template x-for="story in selectedEpic?.stories" :key="story.id">
+                                <button @click="selectStory(story)"
+                                        class="w-full text-left p-4 border-b border-gray-800 hover:bg-[var(--gray)] transition-all flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-6 h-6 flex items-center justify-center"
+                                             :class="story.status === 'done' ? 'bg-[var(--accent)]' :
+                                                     story.status === 'in_progress' ? 'bg-white' : 'border-2 border-gray-600'">
+                                            <span x-show="story.status === 'done'" class="text-black text-xs">✓</span>
+                                            <span x-show="story.status === 'in_progress'" class="text-black text-xs">→</span>
+                                        </div>
+                                        <div>
+                                            <div class="mono text-xs text-gray-500" x-text="story.id"></div>
+                                            <div class="font-medium" x-text="story.name"></div>
+                                        </div>
                                     </div>
-                                    <span class="text-sm truncate"
-                                          :class="story.status === 'done' ? 'text-gray-400' : 'text-white'"
-                                          x-text="story.name"></span>
+                                    <span class="text-gray-500">→</span>
                                 </button>
                             </template>
                         </div>
                     </div>
-                </template>
-            </nav>
 
-            <!-- Value Ladder Quick View -->
-            <div class="p-4 border-t border-gray-800">
-                <div class="text-gray-400 text-xs mb-2">VALUE LADDER</div>
-                <div class="space-y-1">
-                    <template x-for="item in valueLadder" :key="item.level">
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="text-gray-500" x-text="item.name"></span>
-                            <span class="text-white font-mono" x-text="item.priceDisplay"></span>
+                    <!-- Story Content -->
+                    <div x-show="selectedStory" class="brutal-border">
+                        <div class="p-4 border-b-2 border-white flex items-center justify-between">
+                            <div>
+                                <button @click="selectedStory = null" class="text-gray-500 hover:text-white text-xs mb-1">
+                                    ← VOLTAR
+                                </button>
+                                <div class="font-bold" x-text="selectedStory?.name"></div>
+                            </div>
+                            <span class="tag"
+                                  :class="selectedStory?.status === 'done' ? 'tag-active' :
+                                          selectedStory?.status === 'in_progress' ? 'tag-next' : 'tag-locked'"
+                                  x-text="selectedStory?.status === 'done' ? 'CONCLUÍDO' :
+                                          selectedStory?.status === 'in_progress' ? 'EM PROGRESSO' : 'PENDENTE'">
+                            </span>
                         </div>
-                    </template>
-                </div>
-            </div>
-        </aside>
 
-        <!-- Main Content -->
-        <main class="flex-1 flex flex-col overflow-hidden">
+                        <div class="p-6 max-h-[60vh] overflow-y-auto">
+                            <!-- Minds -->
+                            <div x-show="selectedStory?.minds?.length > 0" class="mb-6">
+                                <div class="text-xs text-gray-500 mb-2">MINDS CONSULTADAS</div>
+                                <div class="flex gap-2 flex-wrap">
+                                    <template x-for="mind in selectedStory?.minds" :key="mind">
+                                        <span class="tag tag-active" x-text="mind"></span>
+                                    </template>
+                                </div>
+                            </div>
 
-            <!-- Header -->
-            <header class="bg-darker border-b border-gray-800 px-6 py-4 flex items-center justify-between">
-                <div x-show="selectedStory">
-                    <div class="flex items-center gap-2 text-gray-400 text-sm">
-                        <span x-text="selectedEpic?.emoji"></span>
-                        <span x-text="selectedEpic?.name"></span>
-                        <span>/</span>
-                    </div>
-                    <h2 class="text-xl font-bold" x-text="selectedStory?.name"></h2>
-                </div>
-                <div x-show="!selectedStory" class="text-gray-400">
-                    Selecione uma story para ver detalhes
-                </div>
+                            <!-- Content -->
+                            <div x-show="selectedStory?.content" class="space-y-6">
+                                <template x-for="(value, key) in selectedStory?.content" :key="key">
+                                    <div class="border-l-2 border-[var(--accent)] pl-4">
+                                        <h3 class="text-xs text-gray-500 uppercase mb-2" x-text="formatKey(key)"></h3>
 
-                <!-- Status Badge -->
-                <div x-show="selectedStory">
-                    <span class="px-3 py-1 rounded-full text-sm font-medium"
-                          :class="selectedStory?.status === 'done' ? 'bg-green-500/20 text-green-400' :
-                                  selectedStory?.status === 'in_progress' ? 'bg-yellow-500/20 text-yellow-400' :
-                                  'bg-gray-500/20 text-gray-400'"
-                          x-text="selectedStory?.status === 'done' ? 'Concluído' :
-                                  selectedStory?.status === 'in_progress' ? 'Em Progresso' : 'Pendente'"></span>
-                </div>
-            </header>
+                                        <!-- String -->
+                                        <template x-if="typeof value === 'string'">
+                                            <p class="text-sm" x-text="value"></p>
+                                        </template>
 
-            <!-- Content Area -->
-            <div class="flex-1 overflow-y-auto scrollbar-thin p-6">
-
-                <!-- No Selection State -->
-                <div x-show="!selectedStory" class="h-full flex items-center justify-center">
-                    <div class="text-center">
-                        <div class="text-6xl mb-4">📚</div>
-                        <h3 class="text-xl font-bold mb-2">Biblioteca Content-to-App</h3>
-                        <p class="text-gray-400">Clique em uma story na sidebar para ver o conteúdo completo</p>
-                    </div>
-                </div>
-
-                <!-- Story Content -->
-                <div x-show="selectedStory" x-cloak>
-
-                    <!-- Minds Used -->
-                    <div x-show="selectedStory?.minds?.length > 0" class="mb-6">
-                        <div class="text-gray-400 text-sm mb-2">MINDS CONSULTADAS</div>
-                        <div class="flex gap-2 flex-wrap">
-                            <template x-for="mind in selectedStory?.minds" :key="mind">
-                                <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm"
-                                      x-text="mind"></span>
-                            </template>
-                        </div>
-                    </div>
-
-                    <!-- Content Sections -->
-                    <div x-show="selectedStory?.content" class="space-y-6">
-                        <template x-for="(value, key) in selectedStory?.content" :key="key">
-                            <div class="bg-darker border border-gray-800 rounded-xl p-5">
-                                <h3 class="text-purple-400 font-semibold mb-3 uppercase text-sm"
-                                    x-text="formatKey(key)"></h3>
-
-                                <!-- String Value -->
-                                <template x-if="typeof value === 'string'">
-                                    <p class="text-white" x-text="value"></p>
-                                </template>
-
-                                <!-- Array Value -->
-                                <template x-if="Array.isArray(value)">
-                                    <div>
                                         <!-- Array of strings -->
-                                        <template x-if="typeof value[0] === 'string'">
+                                        <template x-if="Array.isArray(value) && typeof value[0] === 'string'">
                                             <ul class="space-y-1">
                                                 <template x-for="(item, idx) in value" :key="idx">
-                                                    <li class="flex items-start gap-2">
-                                                        <span class="text-purple-400 mt-1">•</span>
-                                                        <span class="text-gray-300" x-text="item"></span>
+                                                    <li class="text-sm flex gap-2">
+                                                        <span class="text-[var(--accent)]">—</span>
+                                                        <span x-text="item"></span>
                                                     </li>
                                                 </template>
                                             </ul>
                                         </template>
+
                                         <!-- Array of objects -->
-                                        <template x-if="typeof value[0] === 'object'">
-                                            <div class="space-y-3">
+                                        <template x-if="Array.isArray(value) && typeof value[0] === 'object'">
+                                            <div class="space-y-2">
                                                 <template x-for="(item, idx) in value" :key="idx">
-                                                    <div class="bg-gray-900/50 rounded-lg p-3">
+                                                    <div class="bg-[var(--gray)] p-3 text-sm">
                                                         <template x-for="(v, k) in item" :key="k">
-                                                            <div class="flex gap-2 text-sm">
-                                                                <span class="text-gray-500" x-text="formatKey(k) + ':'"></span>
-                                                                <span class="text-white" x-text="v"></span>
+                                                            <div class="flex gap-2">
+                                                                <span class="text-gray-500 mono text-xs" x-text="k + ':'"></span>
+                                                                <span x-text="v"></span>
                                                             </div>
                                                         </template>
                                                     </div>
                                                 </template>
                                             </div>
                                         </template>
-                                    </div>
-                                </template>
 
-                                <!-- Object Value -->
-                                <template x-if="typeof value === 'object' && !Array.isArray(value) && value !== null">
-                                    <div class="space-y-2">
-                                        <template x-for="(v, k) in value" :key="k">
-                                            <div>
-                                                <!-- Nested object -->
-                                                <template x-if="typeof v === 'object' && !Array.isArray(v)">
-                                                    <div class="bg-gray-900/50 rounded-lg p-3 mb-2">
-                                                        <div class="text-purple-300 font-medium mb-2" x-text="formatKey(k)"></div>
-                                                        <template x-for="(vv, kk) in v" :key="kk">
-                                                            <div class="flex gap-2 text-sm">
-                                                                <span class="text-gray-500" x-text="formatKey(kk) + ':'"></span>
-                                                                <span class="text-white" x-text="vv"></span>
+                                        <!-- Object -->
+                                        <template x-if="typeof value === 'object' && !Array.isArray(value) && value !== null">
+                                            <div class="space-y-2">
+                                                <template x-for="(v, k) in value" :key="k">
+                                                    <div>
+                                                        <template x-if="typeof v === 'object' && !Array.isArray(v)">
+                                                            <div class="bg-[var(--gray)] p-3 mb-2">
+                                                                <div class="text-xs text-[var(--accent)] mb-1" x-text="formatKey(k)"></div>
+                                                                <template x-for="(vv, kk) in v" :key="kk">
+                                                                    <div class="text-sm">
+                                                                        <span class="text-gray-500" x-text="formatKey(kk) + ': '"></span>
+                                                                        <span x-text="vv"></span>
+                                                                    </div>
+                                                                </template>
                                                             </div>
                                                         </template>
-                                                    </div>
-                                                </template>
-                                                <!-- Simple key-value -->
-                                                <template x-if="typeof v !== 'object'">
-                                                    <div class="flex gap-2">
-                                                        <span class="text-gray-500" x-text="formatKey(k) + ':'"></span>
-                                                        <span class="text-white" x-text="v"></span>
-                                                    </div>
-                                                </template>
-                                                <!-- Array in object -->
-                                                <template x-if="Array.isArray(v)">
-                                                    <div class="mb-2">
-                                                        <div class="text-gray-400 text-sm mb-1" x-text="formatKey(k)"></div>
-                                                        <ul class="pl-4 space-y-1">
-                                                            <template x-for="(item, idx) in v" :key="idx">
-                                                                <li class="text-gray-300 text-sm flex items-start gap-2">
-                                                                    <span class="text-purple-400">•</span>
-                                                                    <span x-text="typeof item === 'object' ? JSON.stringify(item) : item"></span>
-                                                                </li>
-                                                            </template>
-                                                        </ul>
+                                                        <template x-if="typeof v === 'string' || typeof v === 'number'">
+                                                            <div class="text-sm">
+                                                                <span class="text-gray-500" x-text="formatKey(k) + ': '"></span>
+                                                                <span x-text="v"></span>
+                                                            </div>
+                                                        </template>
                                                     </div>
                                                 </template>
                                             </div>
@@ -268,18 +464,75 @@
                                     </div>
                                 </template>
                             </div>
-                        </template>
+
+                            <!-- No content -->
+                            <div x-show="!selectedStory?.content" class="text-center py-12">
+                                <div class="text-4xl mb-4">◯</div>
+                                <div class="text-gray-500">PENDENTE</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- No Content Yet -->
-                    <div x-show="!selectedStory?.content" class="text-center py-12">
-                        <div class="text-4xl mb-4">🚧</div>
-                        <h3 class="text-lg font-bold mb-2">Story Pendente</h3>
-                        <p class="text-gray-400">Esta story ainda não foi executada</p>
+                    <!-- Empty State -->
+                    <div x-show="!selectedEpic" class="brutal-border p-12 text-center">
+                        <div class="text-6xl mb-4">←</div>
+                        <div class="text-gray-500">SELECIONE UMA ÉPICA</div>
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
+    </div>
+
+    <!-- Metrics Modal -->
+    <div x-show="showMetricsModal" x-cloak class="modal-overlay" @click.self="showMetricsModal = false">
+        <div class="modal celebrate">
+            <div class="p-4 border-b-2 border-white flex items-center justify-between">
+                <span class="font-bold">ATUALIZAR MÉTRICAS</span>
+                <button @click="showMetricsModal = false" class="text-gray-500 hover:text-white">✕</button>
+            </div>
+
+            <div class="p-6 space-y-6">
+                <template x-for="item in valueLadder.filter(i => getUnlockStatus(i) === 'active')" :key="item.level">
+                    <div>
+                        <div class="text-xs text-gray-500 mb-3" x-text="item.name.toUpperCase()"></div>
+                        <template x-for="(metric, key) in item.metrics" :key="key">
+                            <div class="mb-4">
+                                <label class="text-xs text-gray-500 uppercase block mb-2" x-text="formatMetricName(key)"></label>
+                                <input type="number"
+                                       class="input-brutal"
+                                       :value="metric.current"
+                                       @input="updateMetric(item.level, key, $event.target.value)">
+                            </div>
+                        </template>
+                        <div class="divider"></div>
+                    </div>
+                </template>
+
+                <!-- Unlock Preview -->
+                <div x-show="pendingUnlocks.length > 0" class="bg-[var(--accent)] text-black p-4">
+                    <div class="text-xs font-bold mb-2">AO SALVAR, SERÁ DESBLOQUEADO:</div>
+                    <template x-for="unlock in pendingUnlocks" :key="unlock">
+                        <div class="font-bold" x-text="unlock"></div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="p-4 border-t-2 border-white flex gap-4">
+                <button @click="showMetricsModal = false" class="btn btn-outline flex-1">CANCELAR</button>
+                <button @click="saveMetrics()" class="btn btn-accent flex-1">SALVAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unlock Celebration Modal -->
+    <div x-show="showUnlockModal" x-cloak class="modal-overlay">
+        <div class="modal celebrate text-center p-12">
+            <div class="text-6xl mb-6">◆</div>
+            <div class="text-xs text-gray-500 mb-2">DESBLOQUEADO</div>
+            <div class="text-3xl font-bold mb-2" x-text="unlockedItem?.name"></div>
+            <div class="text-xl mono mb-8" x-text="unlockedItem?.priceDisplay"></div>
+            <button @click="showUnlockModal = false" class="btn btn-accent">CONTINUAR</button>
+        </div>
     </div>
 
     <script>
@@ -288,9 +541,13 @@
                 project: {},
                 epics: [],
                 valueLadder: [],
-                selectedStory: null,
                 selectedEpic: null,
-                expandedEpics: [0, 1],
+                selectedStory: null,
+                showMetricsModal: false,
+                showUnlockModal: false,
+                unlockedItem: null,
+                pendingUnlocks: [],
+                tempMetrics: {},
 
                 async init() {
                     try {
@@ -300,14 +557,21 @@
                         this.epics = data.epics;
                         this.valueLadder = data.valueLadder;
 
-                        // Auto-expand epics with in_progress stories
-                        this.epics.forEach(epic => {
-                            if (epic.stories.some(s => s.status === 'in_progress')) {
-                                if (!this.expandedEpics.includes(epic.id)) {
-                                    this.expandedEpics.push(epic.id);
+                        // Load saved metrics from localStorage
+                        const saved = localStorage.getItem('hub-metrics');
+                        if (saved) {
+                            const savedMetrics = JSON.parse(saved);
+                            this.valueLadder.forEach(item => {
+                                if (savedMetrics[item.level]) {
+                                    item.metrics = savedMetrics[item.level];
                                 }
-                            }
-                        });
+                            });
+                        }
+
+                        // Auto-select first epic
+                        if (this.epics.length > 0) {
+                            this.selectedEpic = this.epics[0];
+                        }
                     } catch (e) {
                         console.error('Error loading data:', e);
                     }
@@ -327,18 +591,137 @@
                     return Math.round((this.completedStories / this.totalStories) * 100);
                 },
 
-                toggleEpic(epicId) {
-                    const idx = this.expandedEpics.indexOf(epicId);
-                    if (idx > -1) {
-                        this.expandedEpics.splice(idx, 1);
-                    } else {
-                        this.expandedEpics.push(epicId);
+                getUnlockStatus(item) {
+                    if (!item.unlockRequirements || item.unlockRequirements.length === 0) {
+                        return 'active';
                     }
+
+                    const allMet = item.unlockRequirements.every(req => this.isRequirementMet(req));
+                    if (allMet) return 'active';
+
+                    // Check if previous level is active
+                    const prevLevel = this.valueLadder.find(i => i.level === item.level - 1);
+                    if (prevLevel && this.getUnlockStatus(prevLevel) === 'active') {
+                        return 'next';
+                    }
+
+                    return 'locked';
                 },
 
-                selectStory(story, epic) {
-                    this.selectedStory = story;
+                isRequirementMet(req) {
+                    const value = this.getMetricValue(req.sourceLevel, req.metric);
+                    return value >= req.value;
+                },
+
+                getMetricValue(level, metric) {
+                    const item = this.valueLadder.find(i => i.level === level);
+                    if (!item || !item.metrics || !item.metrics[metric]) return 0;
+                    return item.metrics[metric].current || 0;
+                },
+
+                updateMetric(level, metric, value) {
+                    if (!this.tempMetrics[level]) {
+                        this.tempMetrics[level] = {};
+                    }
+                    this.tempMetrics[level][metric] = parseInt(value) || 0;
+                    this.checkPendingUnlocks();
+                },
+
+                checkPendingUnlocks() {
+                    this.pendingUnlocks = [];
+
+                    // Apply temp metrics temporarily
+                    const originalMetrics = {};
+                    Object.keys(this.tempMetrics).forEach(level => {
+                        const item = this.valueLadder.find(i => i.level === parseInt(level));
+                        if (item) {
+                            originalMetrics[level] = JSON.parse(JSON.stringify(item.metrics));
+                            Object.keys(this.tempMetrics[level]).forEach(metric => {
+                                if (item.metrics[metric]) {
+                                    item.metrics[metric].current = this.tempMetrics[level][metric];
+                                }
+                            });
+                        }
+                    });
+
+                    // Check what would be unlocked
+                    this.valueLadder.forEach(item => {
+                        if (item.unlockRequirements && this.getUnlockStatus(item) === 'active') {
+                            // Check if it was previously not active
+                            const wasActive = item.unlockRequirements.every(req => {
+                                const origItem = this.valueLadder.find(i => i.level === req.sourceLevel);
+                                const origValue = originalMetrics[req.sourceLevel]?.[req.metric]?.current ||
+                                                  origItem?.metrics?.[req.metric]?.current || 0;
+                                return origValue >= req.value;
+                            });
+                            if (!wasActive) {
+                                this.pendingUnlocks.push(item.name);
+                            }
+                        }
+                    });
+
+                    // Restore original metrics
+                    Object.keys(originalMetrics).forEach(level => {
+                        const item = this.valueLadder.find(i => i.level === parseInt(level));
+                        if (item) {
+                            item.metrics = originalMetrics[level];
+                        }
+                    });
+                },
+
+                saveMetrics() {
+                    // Apply temp metrics
+                    Object.keys(this.tempMetrics).forEach(level => {
+                        const item = this.valueLadder.find(i => i.level === parseInt(level));
+                        if (item) {
+                            Object.keys(this.tempMetrics[level]).forEach(metric => {
+                                if (item.metrics[metric]) {
+                                    item.metrics[metric].current = this.tempMetrics[level][metric];
+                                    item.metrics[metric].updatedAt = new Date().toISOString().split('T')[0];
+                                }
+                            });
+                        }
+                    });
+
+                    // Save to localStorage
+                    const metricsToSave = {};
+                    this.valueLadder.forEach(item => {
+                        if (item.metrics) {
+                            metricsToSave[item.level] = item.metrics;
+                        }
+                    });
+                    localStorage.setItem('hub-metrics', JSON.stringify(metricsToSave));
+
+                    // Show unlock celebration if any
+                    if (this.pendingUnlocks.length > 0) {
+                        const unlockedName = this.pendingUnlocks[0];
+                        this.unlockedItem = this.valueLadder.find(i => i.name === unlockedName);
+                        this.showMetricsModal = false;
+                        this.showUnlockModal = true;
+                    } else {
+                        this.showMetricsModal = false;
+                    }
+
+                    this.tempMetrics = {};
+                    this.pendingUnlocks = [];
+                },
+
+                selectEpic(epic) {
                     this.selectedEpic = epic;
+                    this.selectedStory = null;
+                },
+
+                selectStory(story) {
+                    this.selectedStory = story;
+                },
+
+                selectLadderItem(item) {
+                    // Find the corresponding epic
+                    const epicIndex = item.level; // Assuming level 1 = epic 1 (Arquitetura)
+                    if (this.epics[epicIndex]) {
+                        this.selectedEpic = this.epics[epicIndex];
+                        this.selectedStory = null;
+                    }
                 },
 
                 getEpicProgress(epic) {
@@ -351,13 +734,21 @@
                 },
 
                 formatKey(key) {
-                    return key
-                        .replace(/_/g, ' ')
-                        .replace(/([A-Z])/g, ' $1')
-                        .trim()
-                        .split(' ')
-                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(' ');
+                    return key.replace(/_/g, ' ').replace(/([A-Z])/g, ' $1').trim();
+                },
+
+                formatMetricName(key) {
+                    const names = {
+                        subscribers: 'Subscribers',
+                        emailsSent: 'Emails Enviados',
+                        openRate: 'Taxa Abertura',
+                        sales: 'Vendas',
+                        revenue: 'Receita',
+                        students: 'Alunos',
+                        graduated: 'Formados',
+                        projects: 'Projetos'
+                    };
+                    return names[key] || key;
                 }
             }
         }
