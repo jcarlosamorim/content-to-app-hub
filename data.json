@@ -385,9 +385,75 @@
         },
         {
           "id": "2.2",
-          "name": "Case Creator 2",
-          "status": "pending",
-          "content": null
+          "name": "Case Eduardo Walneide",
+          "status": "done",
+          "content": {
+            "creator": "Eduardo Walneide",
+            "fonte": {
+              "tipo": "Instagram Reels",
+              "url": "https://www.instagram.com/reel/DR3GIweiNSD/",
+              "duração": "2:40",
+              "tema": "Como é o trabalho de um CEO - visão hierárquica"
+            },
+            "app_criado": {
+              "nome": "Gerador de Organograma Hierárquico",
+              "link": "https://gemini.google.com/share/6e428a284de9",
+              "stack": "React + Tailwind CSS + Lucide Icons"
+            },
+            "metodologia_extraída": {
+              "nome": "CEO Flow Framework",
+              "conceito_central": "Empresa = 3 Braços que fluem da Visão do CEO até o Lucro",
+              "estrutura": {
+                "nível_1": "CEO & Visão (topo da hierarquia)",
+                "nível_2": {
+                  "braço_comercial": ["Marketing", "Vendas", "SDR/BDR", "Customer Success", "Parcerias"],
+                  "braço_operacional": ["Produto", "Operações", "TI/Dev", "Logística", "Qualidade"],
+                  "braço_financeiro": ["Finanças", "Contabilidade", "RH/People", "Jurídico", "Admin"]
+                },
+                "nível_3": "Setores específicos abaixo de cada braço",
+                "saída": "Lucro Real (resultado do fluxo)"
+              },
+              "conceito_inovador": {
+                "medidores_de_atrito": "Cada conexão tem um gauge de atrito/eficiência (0-100%)",
+                "fluxo_visual": "Input → Braço → Setor → Output (como um pipeline)"
+              }
+            },
+            "features_do_app": [
+              "Input: Visão do CEO + Lista de setores",
+              "Auto-categorização inteligente de setores por keywords",
+              "Visualização hierárquica vertical (CEO → Braços → Setores)",
+              "Medidores de atrito entre conexões (gauge semicircular)",
+              "Dashboard do CEO com 7 KPIs em gauges",
+              "Chat com IA Consultor Estratégico",
+              "Animações de fluxo nos conectores"
+            ],
+            "lógica_de_categorização": {
+              "comercial": ["vendas", "marketing", "growth", "sdr", "leads", "customer success"],
+              "financeiro": ["financeiro", "contabilidade", "rh", "people", "jurídico", "admin"],
+              "operacional": ["operação", "logística", "ti", "produto", "engenharia", "suporte"]
+            },
+            "kpis_do_dashboard": [
+              {"nome": "Venda", "fonte": "comercial", "inverso": false},
+              {"nome": "Receita", "fonte": "financeiro", "inverso": false},
+              {"nome": "Custo", "fonte": "financeiro", "inverso": true},
+              {"nome": "Caixa", "fonte": "financeiro", "inverso": false},
+              {"nome": "Inadimplência", "fonte": "financeiro", "inverso": true},
+              {"nome": "Churn", "fonte": "operacional", "inverso": true},
+              {"nome": "NPS", "fonte": "operacional", "inverso": false}
+            ],
+            "insights_do_processo": {
+              "tempo_extração": "~1 hora",
+              "dificuldade": "Média-Alta (conceito abstrato → visualização complexa)",
+              "adaptações": "Adicionado medidores de atrito, dashboard com gauges, chat IA",
+              "aprendizado": "Conteúdo curto (2:40) pode gerar app robusto se o framework for claro"
+            },
+            "métricas_potenciais": {
+              "público_alvo": "CEOs, gestores, consultores organizacionais",
+              "problema_resolvido": "Falta de visibilidade do fluxo organizacional",
+              "tempo_usuário": "~5 minutos para gerar organograma",
+              "valor_percebido": "Alto (visualização + análise de eficiência)"
+            }
+          }
         },
         {
           "id": "2.3",
