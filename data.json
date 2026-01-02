@@ -464,21 +464,364 @@
         },
         {
           "id": "2.3",
-          "name": "Case Creator 3",
-          "status": "pending",
-          "content": null
+          "name": "Case NEXORAMA",
+          "status": "done",
+          "content": {
+            "creator": "Desconhecido (Conteúdo Viral)",
+            "fonte": {
+              "tipo": "Instagram Reels / Newsletter",
+              "formato": "Texto curto (70 palavras)",
+              "tema": "Problemas mentais têm soluções práticas",
+              "transcricao": "Você ainda não percebeu? Todos os seus problemas têm soluções. Você pensa demais, porque não escreve. Fica ansioso, porque não age. Você procrastina, porque não tem um plano. Fica estressado, porque não treina. E não tem clareza, porque não tem um cronograma. O que você precisa entender é: Quando você coloca ordem no seu mundo, a sua mente se alinha para alcançar o extraordinário."
+            },
+            "app_criado": {
+              "nome": "NEXORAMA - Sistema Operacional Humano",
+              "stack": "React + Tailwind CSS + Gemini AI",
+              "tipo": "App diagnóstico com IA generativa"
+            },
+            "metodologia_extraída": {
+              "nome": "Entropy-to-Order Framework",
+              "conceito_central": "Sintomas mentais são sinais de entropia. Cada um tem uma solução prática específica.",
+              "filosofia": "Quando você coloca ordem no seu mundo, a sua mente se alinha para alcançar o extraordinário.",
+              "mapeamento_sintoma_solução": [
+                {
+                  "sintoma": "Overthinking (Cabeça cheia)",
+                  "diagnóstico": "Sobrecarga de RAM",
+                  "causa_raiz": "Você pensa demais porque não escreve",
+                  "hack": "ESCREVER"
+                },
+                {
+                  "sintoma": "Ansiedade",
+                  "diagnóstico": "Amígdala em Alerta",
+                  "causa_raiz": "Você fica ansioso porque não age",
+                  "hack": "AGIR"
+                },
+                {
+                  "sintoma": "Procrastinação",
+                  "diagnóstico": "Falha Executiva",
+                  "causa_raiz": "Você procrastina porque não tem plano",
+                  "hack": "PLANEJAR"
+                },
+                {
+                  "sintoma": "Estresse",
+                  "diagnóstico": "Cortisol Alto",
+                  "causa_raiz": "Você estressa porque não treina",
+                  "hack": "TREINAR"
+                },
+                {
+                  "sintoma": "Névoa Mental",
+                  "diagnóstico": "Cegueira Temporal",
+                  "causa_raiz": "Sem clareza porque sem cronograma",
+                  "hack": "CRONOGRAMA"
+                }
+              ]
+            },
+            "features_do_app": [
+              "Tela de boas-vindas com branding 'Sistema Operacional Humano'",
+              "Seleção de sintoma com cards visuais e cores únicas",
+              "Mirror Screen mostrando causa-raiz do conteúdo original",
+              "Input contextualizado (usuário descreve seu bloqueio)",
+              "Integração Gemini AI com prompt 'Done For You'",
+              "Protocolo gerado com: título, step1 (material pronto), step2 (ação imediata), insight biológico",
+              "Design mobile-first, dark theme, iOS-style"
+            ],
+            "inovação_do_app": {
+              "conceito": "Done For You AI",
+              "descrição": "A IA não dá conselhos. Ela ENTREGA o trabalho pronto: o email escrito, a lista feita, o comando exato.",
+              "prompt_engenheirado": "NEXO AI atua como 'Córtex Pré-Frontal Auxiliar'. Remove atrito entregando trabalho inicial JÁ FEITO."
+            },
+            "design_system": {
+              "cores_por_sintoma": {
+                "overthinking": "Indigo",
+                "ansiedade": "Emerald",
+                "procrastinação": "Orange",
+                "estresse": "Rose",
+                "névoa_mental": "Sky"
+              },
+              "estilo": "Dark theme, gradientes sutis, blur effects, animações suaves"
+            },
+            "insights_do_processo": {
+              "tempo_extração": "~30 minutos",
+              "dificuldade": "Baixa (framework explícito no texto)",
+              "fonte_curtíssima": "70 palavras geraram app completo com IA",
+              "adaptações": "Adicionado sistema de cores, integração IA, UI mobile-first",
+              "aprendizado_chave": "Conteúdo curto com framework claro = extração trivial. A IA amplifica o valor exponencialmente."
+            },
+            "métricas_potenciais": {
+              "público_alvo": "Pessoas com bloqueios mentais, produtividade, autodesenvolvimento",
+              "problema_resolvido": "Paralisia por análise, não saber por onde começar",
+              "tempo_usuário": "~2 minutos para diagnóstico + protocolo",
+              "valor_percebido": "Muito Alto (sai com ação concreta pronta para executar)"
+            },
+            "diferenciais_deste_case": [
+              "Fonte mais curta dos 3 cases (70 palavras vs 2:40 min vs vídeo longo)",
+              "Primeiro case com IA generativa integrada",
+              "Conceito 'Done For You' vs apenas diagnóstico",
+              "Prova que tamanho do conteúdo ≠ valor do app"
+            ]
+          }
         },
         {
           "id": "2.4",
           "name": "Documentação do Método",
-          "status": "pending",
-          "content": null
+          "status": "done",
+          "content": {
+            "nome_do_método": "NEXORAMA",
+            "subtítulo": "O Método de Transformação de Conteúdo em Experiência",
+            "tagline": "Como pegar CAOS (fala, texto, vídeo) e transformar em SISTEMA EXECUTÁVEL",
+            "hierarquia_de_conceitos": {
+              "nexialismo": "A Filosofia (base conceitual)",
+              "nexorama": "O Processo (método de transformação)",
+              "nexo_app": "O Produto (experiência interativa final)",
+              "decomposição_aoc": "A Ferramenta (análise estruturada)",
+              "sistema_captação": "Os 4 Padrões de UI"
+            },
+            "os_3_problemas_resolvidos": [
+              {
+                "problema": "Dados Escuros",
+                "técnico": "Código legado, reuniões não documentadas",
+                "humano": "Conhecimento na cabeça do especialista nunca extraído"
+              },
+              {
+                "problema": "Ambiguidade",
+                "técnico": "'Processe os dados' (quais dados?)",
+                "humano": "'Seja mais produtivo' (como exatamente?)"
+              },
+              {
+                "problema": "Gap Intenção → Execução",
+                "técnico": "Cliente quer X, código faz Y",
+                "humano": "Pessoa quer mudar, não sabe os passos"
+              }
+            ],
+            "insight_central": "Em vez de dar PDF com framework para preencher, criar EXPERIÊNCIA INTERATIVA que EXTRAI o que preciso do usuário enquanto ele usa.",
+            "decomposição_aoc": {
+              "definição": "Qualquer instrução funcional pode ser decomposta em: AÇÃO + OBJETO + CONDIÇÃO",
+              "estrutura": {
+                "condição": "Quando/Se? (gatilho)",
+                "ação": "Faça o quê? (verbo)",
+                "objeto": "Como/O quê especificamente? (detalhamento)",
+                "resultado": "Para quê? (benefício)"
+              },
+              "exemplo": {
+                "frase_original": "Você precisa priorizar as tarefas mais importantes logo de manhã quando sua energia está alta",
+                "decomposição": {
+                  "condição": "Manhã / Energia alta",
+                  "ação": "Priorizar",
+                  "objeto": "Tarefas mais importantes",
+                  "resultado": "Maior produtividade"
+                }
+              }
+            },
+            "as_4_fases": [
+              {
+                "fase": 1,
+                "nome": "INGESTÃO",
+                "descrição": "Consumir e processar o conteúdo bruto",
+                "input": "Reels, vídeo YouTube, livro, podcast, framework",
+                "processo": ["Transcrever (se áudio/vídeo)", "Identificar o SISTEMA LATENTE — a lógica operacional escondida"],
+                "pergunta_chave": "Qual é o FLUXO DE FUNCIONAMENTO que o autor está descrevendo, mesmo que não esteja explícito?"
+              },
+              {
+                "fase": 2,
+                "nome": "DECOMPOSIÇÃO AOC",
+                "descrição": "Quebrar o conteúdo em peças operacionais",
+                "processo": ["Identificar todas as AÇÕES recomendadas", "Decompor cada ação em AOC", "Mapear DEPENDÊNCIAS", "Identificar VARIÁVEIS do usuário"],
+                "output": "Lista estruturada de instruções decompostas"
+              },
+              {
+                "fase": 3,
+                "nome": "ARQUITETURA DO NEXO APP",
+                "descrição": "Projetar o fluxo de decisão e as telas",
+                "perguntas": ["Quais PERGUNTAS preciso fazer ao usuário?", "Em que ORDEM?", "Quais são os CAMINHOS possíveis?", "Onde estão os PONTOS DE PERSONALIZAÇÃO?"],
+                "output": "Grafo de decisão"
+              },
+              {
+                "fase": 4,
+                "nome": "CONSTRUÇÃO DO NEXO APP",
+                "descrição": "Criar a experiência interativa final",
+                "princípios_design": ["Cada tela = 1 decisão/informação", "Mostrar VALOR a cada passo", "Usar visuais quando possível", "IA para CLARIFICAR, não ADIVINHAR", "Loop de refinamento: mostrar → validar → ajustar"],
+                "output": "Nexo App funcional com protocolo personalizado"
+              }
+            ],
+            "sistema_de_captação": {
+              "definição": "Padrões de interface que extraem contexto do usuário enquanto entregam valor",
+              "captadores": [
+                {
+                  "nome": "CAPTADOR AFUNILANTE",
+                  "função": "Cada resposta estreita as opções seguintes",
+                  "quando_usar": "Quando há muitos caminhos possíveis",
+                  "exemplo": "Tela 1: Maior desafio? → Tela 2: Quando atrapalha? → Tela 3: Protocolo personalizado"
+                },
+                {
+                  "nome": "CAPTADOR SOCRÁTICO",
+                  "função": "Perguntas que revelam o que o usuário não sabia que sabia",
+                  "quando_usar": "Quando precisa clarificar ambiguidade",
+                  "exemplo": "'Produtivo' significa: Fazer MAIS? Fazer CERTO? Ter ENERGIA? Ter TEMPO?"
+                },
+                {
+                  "nome": "CAPTADOR TEMPORAL",
+                  "função": "Mapeia a realidade do usuário no tempo",
+                  "quando_usar": "Quando o contexto depende de rotina/sequência",
+                  "exemplo": "Timeline interativa: arraste eventos + marque energia alta/baixa"
+                },
+                {
+                  "nome": "CAPTADOR ESPELHO",
+                  "função": "Mostra um padrão, usuário identifica diferenças",
+                  "quando_usar": "Quando o usuário não sabe descrever do zero",
+                  "exemplo": "Fluxo típico mostrado → usuário marca qual passo NÃO funciona"
+                }
+              ]
+            },
+            "prompt_de_extração": "# PROMPT NEXORAMA\n\nAnalise este conteúdo e extraia:\n\n## 1. SISTEMA CENTRAL\nQual é a lógica operacional principal?\n\n## 2. DECOMPOSIÇÃO AOC\nListe todas as ações no formato:\n- CONDIÇÃO: (quando/se)\n- AÇÃO: (faça)\n- OBJETO: (o quê/como)\n- RESULTADO: (para quê)\n\n## 3. VARIÁVEIS DO USUÁRIO\nO que muda de pessoa para pessoa?\n\n## 4. GRAFO DE DECISÃO\nEm que ordem perguntar para personalizar?\n\n## 5. SISTEMA DE CAPTAÇÃO\nQue tipo de Captador funcionaria melhor?\n- Afunilante / Socrático / Temporal / Espelho\n\n[COLE O CONTEÚDO AQUI]",
+            "pitch": {
+              "curto": "Faço Nexorama: transformo qualquer livro, vídeo ou framework em um Nexo App — uma experiência que personaliza conhecimento ao seu contexto.",
+              "expandido": "Em vez de entregar um PDF com framework para você preencher sozinho, eu crio um Nexo App: uma experiência interativa que faz as perguntas certas, entende seu contexto único, e gera um protocolo personalizado que funciona pra VOCÊ — não pra pessoa genérica."
+            },
+            "glossário": [
+              {"termo": "Nexorama", "definição": "O processo completo de transformar conteúdo em Nexo App"},
+              {"termo": "Nexo App", "definição": "O produto final — experiência interativa que personaliza conhecimento"},
+              {"termo": "Decomposição AOC", "definição": "Análise fundamental: Ação + Objeto + Condição"},
+              {"termo": "Sistema de Captação", "definição": "Os 4 padrões de UI para extrair contexto"},
+              {"termo": "Captador Afunilante", "definição": "Padrão que estreita opções progressivamente"},
+              {"termo": "Captador Socrático", "definição": "Padrão que revela o que o usuário não sabia"},
+              {"termo": "Captador Temporal", "definição": "Padrão que mapeia no tempo"},
+              {"termo": "Captador Espelho", "definição": "Padrão que compara com modelo"}
+            ],
+            "autor": "José Carlos Amorim | Academia Lendária",
+            "versão": "1.0",
+            "data": "Janeiro 2026"
+          }
         },
         {
           "id": "2.5",
           "name": "Portfolio de Cases",
-          "status": "pending",
-          "content": null
+          "status": "done",
+          "content": {
+            "título": "Portfolio NEXORAMA",
+            "subtítulo": "3 Provas de que Qualquer Conteúdo Vira App",
+            "resumo_executivo": {
+              "total_cases": 3,
+              "tipos_de_fonte": ["YouTube (30min)", "Reels (2:40)", "Texto (70 palavras)"],
+              "tempo_médio_extração": "~1 hora",
+              "prova_central": "Tamanho do conteúdo ≠ Valor do app"
+            },
+            "cases": [
+              {
+                "número": 1,
+                "nome": "Creator Brand OS",
+                "criador": "Tay Dantas",
+                "fonte": {
+                  "tipo": "YouTube",
+                  "duração": "~30 minutos",
+                  "tema": "Branding para Creators"
+                },
+                "app": {
+                  "nome": "Creator Brand OS",
+                  "tipo": "Wizard Step-by-Step",
+                  "output": "Brand Book completo"
+                },
+                "metodologia": "5 fases: Fundação → Ingrediente Secreto → Oceano Azul → Jornada do Herói → Motor de Comunidade",
+                "captadores_usados": ["Afunilante", "Socrático"],
+                "métricas": {
+                  "tempo_extração": "~2 horas",
+                  "tempo_usuário": "~20 minutos",
+                  "valor_entregue": "Brand Book pronto para usar"
+                },
+                "aprendizado": "Frameworks de branding se traduzem bem em wizards"
+              },
+              {
+                "número": 2,
+                "nome": "Gerador de Organograma",
+                "criador": "Eduardo Walneide",
+                "fonte": {
+                  "tipo": "Instagram Reels",
+                  "duração": "2:40",
+                  "tema": "Visão do CEO"
+                },
+                "app": {
+                  "nome": "Gerador de Organograma Hierárquico",
+                  "tipo": "Visualização Interativa + Dashboard",
+                  "output": "Organograma com KPIs"
+                },
+                "metodologia": "CEO Flow: Visão → 3 Braços (Comercial, Operacional, Financeiro) → Setores → Lucro",
+                "captadores_usados": ["Temporal", "Espelho"],
+                "métricas": {
+                  "tempo_extração": "~1 hora",
+                  "tempo_usuário": "~5 minutos",
+                  "valor_entregue": "Organograma + análise de eficiência"
+                },
+                "aprendizado": "Conteúdo curto pode gerar app robusto se framework for claro"
+              },
+              {
+                "número": 3,
+                "nome": "NEXORAMA App",
+                "criador": "Desconhecido (Viral)",
+                "fonte": {
+                  "tipo": "Texto/Newsletter",
+                  "duração": "70 palavras",
+                  "tema": "Produtividade Mental"
+                },
+                "app": {
+                  "nome": "NEXORAMA - Sistema Operacional Humano",
+                  "tipo": "Diagnóstico + IA Generativa",
+                  "output": "Protocolo 'Done For You'"
+                },
+                "metodologia": "5 sintomas → 5 hacks: Overthinking→Escrever, Ansiedade→Agir, Procrastinação→Planejar, Estresse→Treinar, Névoa→Cronograma",
+                "captadores_usados": ["Afunilante", "Socrático"],
+                "métricas": {
+                  "tempo_extração": "~30 minutos",
+                  "tempo_usuário": "~2 minutos",
+                  "valor_entregue": "Ação concreta pronta para executar"
+                },
+                "aprendizado": "IA amplifica valor exponencialmente"
+              }
+            ],
+            "comparativo": {
+              "headers": ["Métrica", "Case 1", "Case 2", "Case 3"],
+              "rows": [
+                ["Fonte", "YouTube 30min", "Reels 2:40", "Texto 70 palavras"],
+                ["Extração", "2 horas", "1 hora", "30 minutos"],
+                ["Uso", "20 minutos", "5 minutos", "2 minutos"],
+                ["Tipo App", "Wizard", "Visualização", "IA Generativa"],
+                ["Complexidade", "Média", "Média-Alta", "Baixa"],
+                ["Valor Output", "Alto", "Alto", "Muito Alto"]
+              ]
+            },
+            "padrões_identificados": [
+              {
+                "padrão": "Framework Explícito = Extração Rápida",
+                "evidência": "Cases com estrutura clara (5 fases, 3 braços, 5 sintomas) foram mais rápidos de extrair"
+              },
+              {
+                "padrão": "Tamanho ≠ Valor",
+                "evidência": "Case 3 (70 palavras) gerou app com IA mais sofisticado que Case 1 (30 min)"
+              },
+              {
+                "padrão": "IA como Multiplicador",
+                "evidência": "Integração com Gemini no Case 3 transformou diagnóstico simples em 'Done For You'"
+              },
+              {
+                "padrão": "Captadores Definem UX",
+                "evidência": "Escolha do captador (Afunilante vs Temporal vs Espelho) determina experiência do usuário"
+              }
+            ],
+            "call_to_action": {
+              "headline": "Qual conteúdo VOCÊ tem que pode virar Nexo App?",
+              "opções": [
+                "Vídeos de treinamento interno",
+                "Frameworks que você ensina",
+                "Conteúdo dos seus cursos",
+                "Metodologias proprietárias"
+              ],
+              "próximo_passo": "Agende uma sessão de Discovery"
+            },
+            "uso_no_produto": {
+              "newsletter": "1 case por semana como prova social",
+              "framework_R$997": "3 cases como material de estudo",
+              "mentoria_R$4500": "Aluno escolhe qual case replicar primeiro",
+              "agência_R$25k+": "Portfolio como credencial de venda"
+            }
+          }
         }
       ]
     },
@@ -492,26 +835,242 @@
         {
           "id": "3.1",
           "name": "Headline Principal",
-          "status": "pending",
-          "content": null
+          "status": "done",
+          "minds": ["@Eugene Schwartz"],
+          "content": {
+            "headline_principal": "Enquanto você grava mais aulas, mais vídeos, mais textos, seu conteúdo antigo poderia estar trabalhando pra você como um sistema de IA.",
+            "análise_schwartz": {
+              "nível_consciência": "Solution-Aware (Nível 3)",
+              "sofisticação_mercado": "Nível 4 - Novo Mecanismo necessário",
+              "desejo_dominante": "Escalar conhecimento sem mais horas de trabalho"
+            },
+            "por_que_funciona": [
+              "Repetição 'mais aulas, mais vídeos, mais textos' amplifica a dor da esteira infinita",
+              "Contraste entre CRIAR MAIS vs USAR O QUE JÁ TEM",
+              "'Sistema de IA' tem mais peso/valor percebido que 'App'",
+              "'Trabalhando pra você' = automação, liberdade"
+            ],
+            "variações_testadas": [
+              {
+                "headline": "70 palavras de um Reels viraram um App com IA que resolve problemas sozinho.",
+                "ângulo": "Prova específica"
+              },
+              {
+                "headline": "Seu curso de 40 horas pode virar um App de 5 minutos.",
+                "ângulo": "Transformação + Tempo"
+              },
+              {
+                "headline": "Pare de vender PDFs. Comece a vender Apps de IA que entregam o trabalho PRONTO.",
+                "ângulo": "Contraste + Comando"
+              }
+            ],
+            "uso": {
+              "página_vendas": "H1 principal",
+              "newsletter": "Subject line adaptado",
+              "social": "Hook de abertura"
+            }
+          }
         },
         {
           "id": "3.2",
           "name": "Voice Guide",
-          "status": "pending",
-          "content": null
+          "status": "done",
+          "minds": ["@Eugene Schwartz"],
+          "content": {
+            "tom": "Demonstrador Técnico-Acessível",
+            "pilares": [
+              {
+                "nome": "Anti-guru",
+                "descrição": "Sem promessas vagas, sem 'método revolucionário'"
+              },
+              {
+                "nome": "Show > Tell",
+                "descrição": "Sempre mostrar o case funcionando"
+              },
+              {
+                "nome": "Específico",
+                "descrição": "Números reais: 70 palavras, 2:40 de Reels, 30 min"
+              },
+              {
+                "nome": "Técnico-acessível",
+                "descrição": "Explica o mecanismo sem ser acadêmico"
+              }
+            ],
+            "fazer": [
+              "Eu transformei X em Y",
+              "Veja este case: [link]",
+              "O mecanismo é...",
+              "70 palavras viraram...",
+              "Sistema de IA"
+            ],
+            "não_fazer": [
+              "Você vai aprender a...",
+              "Imagine se você pudesse...",
+              "O segredo é...",
+              "Método revolucionário",
+              "App (muito banal)"
+            ],
+            "frases_assinatura": [
+              "Não crio conteúdo novo. Transformo o que já existe.",
+              "PDF para preencher? Não. Sistema que preenche POR você.",
+              "Seu conhecimento já existe. Falta o SISTEMA.",
+              "NEXORAMA: de conteúdo a sistema em 4 fases."
+            ],
+            "vocabulário_preferido": {
+              "usar": ["Sistema de IA", "Nexo App", "NEXORAMA", "Transformar", "Extrair", "Personalizar"],
+              "evitar": ["App", "Revolucionário", "Segredo", "Fácil", "Rápido", "Garantido"]
+            }
+          }
         },
         {
           "id": "3.3",
           "name": "Hook System",
-          "status": "pending",
-          "content": null
+          "status": "done",
+          "minds": ["@Eugene Schwartz"],
+          "content": {
+            "hooks_reels_tiktok": [
+              {
+                "hook": "70 palavras. Foi isso que eu precisei pra criar um sistema de IA completo.",
+                "tipo": "Prova específica"
+              },
+              {
+                "hook": "Você está criando conteúdo novo enquanto o antigo apodrece no drive.",
+                "tipo": "Dor direta"
+              },
+              {
+                "hook": "Isso aqui era um Reels de 2 minutos. Agora é um sistema que gera organogramas.",
+                "tipo": "Transformação"
+              },
+              {
+                "hook": "Seu curso de 40 horas pode virar 5 minutos de interação personalizada.",
+                "tipo": "Contraste"
+              },
+              {
+                "hook": "Enquanto você grava, seu conteúdo antigo poderia estar trabalhando.",
+                "tipo": "Headline adaptada"
+              }
+            ],
+            "hooks_newsletter_subjects": [
+              {
+                "subject": "O que eu fiz com 70 palavras de um Reels",
+                "ângulo": "Curiosidade"
+              },
+              {
+                "subject": "Seu conteúdo antigo está trabalhando pra você?",
+                "ângulo": "Pergunta provocativa"
+              },
+              {
+                "subject": "YouTube → Sistema de IA (case real)",
+                "ângulo": "Transformação + Prova"
+              },
+              {
+                "subject": "PDF para preencher? Nunca mais.",
+                "ângulo": "Contraste"
+              },
+              {
+                "subject": "NEXORAMA: o que aconteceu essa semana",
+                "ângulo": "Newsletter recorrente"
+              }
+            ],
+            "hooks_linkedin_twitter": [
+              {
+                "hook": "Transformei um texto de 70 palavras em um sistema de IA. Thread 🧵",
+                "formato": "Thread opener"
+              },
+              {
+                "hook": "3 coisas que aprendi transformando conteúdo em sistemas:",
+                "formato": "Lista"
+              },
+              {
+                "hook": "O problema não é criar mais conteúdo. É usar o que já existe.",
+                "formato": "Insight"
+              },
+              {
+                "hook": "Case: Eduardo Walneide → 2:40 de Reels → Sistema completo",
+                "formato": "Case study"
+              }
+            ]
+          }
         },
         {
           "id": "3.4",
           "name": "Página de Vendas",
-          "status": "pending",
-          "content": null
+          "status": "done",
+          "minds": ["@Eugene Schwartz", "@Russel Brunson"],
+          "content": {
+            "produto": "Framework R$997",
+            "estrutura": [
+              {
+                "seção": "HERO",
+                "h1": "Enquanto você grava mais aulas, mais vídeos, mais textos, seu conteúdo antigo poderia estar trabalhando pra você como um sistema de IA.",
+                "sub": "NEXORAMA - O método de transformação de conteúdo",
+                "cta": "Ver como funciona"
+              },
+              {
+                "seção": "PROVA",
+                "título": "3 Cases Reais",
+                "cases": [
+                  "70 palavras → Sistema de IA",
+                  "Reels 2:40 → Gerador de Organograma",
+                  "YouTube 30min → Creator Brand OS"
+                ],
+                "elemento": "Links para demos funcionais"
+              },
+              {
+                "seção": "PROBLEMA",
+                "título": "Seu conteúdo está preso em formatos mortos",
+                "bullets": [
+                  "PDFs que ninguém preenche",
+                  "Vídeos que assistem uma vez",
+                  "Cursos que viram estoque parado"
+                ]
+              },
+              {
+                "seção": "MECANISMO",
+                "título": "NEXORAMA: O método em 4 fases",
+                "fases": [
+                  "INGESTÃO - Transcrever e identificar sistema",
+                  "DECOMPOSIÇÃO AOC - Ação + Objeto + Condição",
+                  "ARQUITETURA - Grafo de decisão",
+                  "CONSTRUÇÃO - Nexo App final"
+                ]
+              },
+              {
+                "seção": "OFERTA",
+                "nome": "Framework Content-to-App",
+                "subtítulo": "De Conteúdo a Produto em 3 Passos",
+                "preço": "R$ 997",
+                "valor_original": "R$ 2.991",
+                "inclui": [
+                  "Módulo 1: Extração de Metodologias (1h30)",
+                  "Módulo 2: Arquitetura de Meta-Prompts (2h)",
+                  "Módulo 3: Refinamento e Deploy (1h30)",
+                  "3 cases completos documentados",
+                  "Biblioteca de 20+ prompts",
+                  "Comunidade 90 dias"
+                ],
+                "garantia": "14 dias ou 100% de volta",
+                "cta": "QUERO TRANSFORMAR MEU CONTEÚDO"
+              },
+              {
+                "seção": "FAQ",
+                "perguntas": [
+                  {
+                    "pergunta": "Preciso saber programar?",
+                    "resposta": "Não. O método usa IA generativa (Gemini, Claude) que escreve o código por você."
+                  },
+                  {
+                    "pergunta": "Funciona com qualquer tipo de conteúdo?",
+                    "resposta": "Sim. Vídeos, podcasts, livros, cursos, frameworks - qualquer conteúdo com metodologia extraível."
+                  },
+                  {
+                    "pergunta": "Quanto tempo leva pra criar um sistema?",
+                    "resposta": "Depende da complexidade. O case mais rápido levou 30 minutos (70 palavras → sistema completo)."
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     },
@@ -551,6 +1110,948 @@
           "name": "Primeiro Lançamento",
           "status": "pending",
           "content": null
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Brand Identity",
+      "emoji": "🎨",
+      "description": "Creator Brand OS - Identidade completa da marca NEXORAMA",
+      "color": "pink",
+      "methodology": "Tay Dantas - Creator Brand OS",
+      "stories": [
+        {
+          "id": "5.1",
+          "name": "A Fundação",
+          "status": "done",
+          "minds": ["@Seth Godin", "@Alex Hormozi", "@Peter Thiel", "@Dan Koe"],
+          "content": {
+            "fase": 1,
+            "nome": "A Fundação",
+            "descrição": "Base estratégica da marca - Quem servimos, o que prometemos, qual dor resolvemos",
+            "elementos": {
+              "público_psicográfico": {
+                "definição": "Mentalidade, não demografia. Quem eles são por dentro.",
+                "perfil_nexorama": {
+                  "nome_interno": "O Creator Exausto",
+                  "mentalidade": [
+                    "Criou muito conteúdo, mas sente que está numa esteira infinita",
+                    "Sabe que tem valor no que já fez, mas não sabe como reativar",
+                    "Cansado de 'criar mais' quando o antigo apodrece no drive",
+                    "Quer SISTEMA, não mais trabalho manual",
+                    "Busca escala sem perder autenticidade"
+                  ],
+                  "crenças": [
+                    "Acredita que conhecimento tem valor, mas falta o FORMATO certo",
+                    "Entende que IA pode ajudar, mas não sabe como usar direito",
+                    "Quer automatizar, não terceirizar sua voz",
+                    "Prefere 'mostrar funcionando' a 'vender promessa'"
+                  ],
+                  "frustrações": [
+                    "PDFs que ninguém preenche",
+                    "Cursos gravados que viram estoque parado",
+                    "Conteúdo que é consumido uma vez e esquecido",
+                    "Ter que explicar a mesma coisa 100x"
+                  ],
+                  "aspirações": [
+                    "Ter seu conhecimento trabalhando 24/7",
+                    "Clientes chegando já entendendo sua metodologia",
+                    "Escalar sem virar refém de mais gravações",
+                    "Ser reconhecido pela inovação no formato"
+                  ]
+                },
+                "insights_minds": {
+                  "seth_godin": "Não é sobre TODOS os creators. É sobre os creators que acreditam que seu conhecimento merece um formato que SERVE, não só informa. Essa é a menor audiência viável que vale servir.",
+                  "alex_hormozi": "Creator Exausto tem LTV alto porque já provou que cria. O problema é o GAP entre criar e monetizar. NEXORAMA fecha esse gap.",
+                  "dan_koe": "É o creator que descobriu que 'produzir mais conteúdo' é a armadilha. Ele quer alavanca. Quer specific knowledge transformado em sistema."
+                }
+              },
+              "promessa_única": {
+                "definição": "O final feliz em uma frase. O que muda na vida deles.",
+                "promessa_nexorama": "Seu conteúdo antigo trabalhando pra você como um sistema de IA.",
+                "variações": [
+                  "De criador de conteúdo para dono de sistemas",
+                  "Transforme o que já criou em experiências que personalizam sozinhas",
+                  "Pare de criar mais. Comece a ATIVAR o que existe."
+                ],
+                "prova_da_promessa": [
+                  "Case 1: 70 palavras → Sistema de IA completo",
+                  "Case 2: Reels 2:40 → Gerador de Organograma",
+                  "Case 3: YouTube 30min → Creator Brand OS"
+                ],
+                "insights_minds": {
+                  "peter_thiel": "A promessa é ZERO TO ONE: ninguém mais promete 'transformar conteúdo existente em sistema de IA'. É monopólio de categoria.",
+                  "alex_hormozi": "Value equation: Resultado (sistema funcionando) / Esforço (usar o que já tem) = Valor MUITO alto. Não precisa criar mais, só transformar.",
+                  "eugene_schwartz": "Promessa atende ao desejo dominante: 'escalar sem mais trabalho'. Nível de consciência: Solution-Aware (sabe que IA ajuda, não sabe COMO)."
+                }
+              },
+              "problema_funcional": {
+                "definição": "A dor prática, tangível, que impede o final feliz.",
+                "problema_nexorama": {
+                  "headline": "Seu conteúdo está preso em formatos mortos",
+                  "manifestações": [
+                    {
+                      "sintoma": "PDFs que ninguém preenche",
+                      "causa": "Formato passivo exige esforço do usuário",
+                      "solução_nexo": "Sistema que PERGUNTA e ENTREGA personalizado"
+                    },
+                    {
+                      "sintoma": "Cursos que viram estoque parado",
+                      "causa": "Conteúdo linear não se adapta ao contexto",
+                      "solução_nexo": "Nexo App que personaliza a jornada"
+                    },
+                    {
+                      "sintoma": "Vídeos assistidos uma vez e esquecidos",
+                      "causa": "Consumo passivo não gera ação",
+                      "solução_nexo": "Sistema 'Done For You' que entrega trabalho pronto"
+                    },
+                    {
+                      "sintoma": "Repetir as mesmas explicações para cada cliente",
+                      "causa": "Conhecimento não está sistematizado",
+                      "solução_nexo": "IA treinada com sua metodologia responde por você"
+                    }
+                  ]
+                },
+                "custo_do_problema": {
+                  "tempo": "Horas/semana repetindo o que já foi explicado",
+                  "dinheiro": "Conteúdo parado = investimento sem retorno",
+                  "energia": "Esteira de criação constante = burnout",
+                  "oportunidade": "Clientes que desistem porque PDF é chato demais"
+                },
+                "insights_minds": {
+                  "seth_godin": "O problema não é FALTA de conteúdo. É conteúdo em formato que não SERVE. Purple Cow é o formato, não o conteúdo em si.",
+                  "alex_hormozi": "Problema claramente articulado = venda mais fácil. 'Formatos mortos' é headline que todo creator entende imediatamente.",
+                  "dan_koe": "A dor é SISTÊMICA: criar mais resolve temporariamente, mas agrava o problema. NEXORAMA quebra o ciclo."
+                }
+              }
+            },
+            "síntese_fundação": {
+              "público": "O Creator Exausto - que criou muito, mas está preso na esteira",
+              "promessa": "Seu conteúdo antigo trabalhando pra você como sistema de IA",
+              "problema": "Conteúdo preso em formatos mortos (PDFs, cursos, vídeos passivos)",
+              "one_liner": "NEXORAMA transforma o conteúdo que você já criou em sistemas de IA que trabalham 24/7."
+            }
+          }
+        },
+        {
+          "id": "5.2",
+          "name": "Ingrediente Secreto",
+          "status": "done",
+          "minds": ["@Steve Jobs", "@Dan Koe", "@Walt Disney", "@Naval Ravikant"],
+          "content": {
+            "fase": 2,
+            "nome": "O Ingrediente Secreto",
+            "descrição": "O que torna NEXORAMA impossível de copiar - a alma do fundador",
+            "elementos": {
+              "o_fundador": {
+                "definição": "Obsessões, peculiaridades, crenças que só VOCÊ tem",
+                "perfil_josé_carlos": {
+                  "obsessões": [
+                    "Ver SISTEMAS onde outros veem conteúdo solto",
+                    "Transformar caos em ordem operacional",
+                    "Fazer IA SERVIR (não só responder)",
+                    "Provar conceitos com CASES funcionais, não teoria",
+                    "Decomposição AOC - toda instrução é Ação + Objeto + Condição"
+                  ],
+                  "peculiaridades": [
+                    "TDAH que virou superpoder: vê conexões não-óbvias entre coisas",
+                    "Fica obcecado até o sistema funcionar, depois perde interesse",
+                    "Anti-guru: prefere MOSTRAR funcionando a PROMETER resultado",
+                    "Cria para si primeiro - se funciona pra ele, funciona pra outros",
+                    "Documenta TUDO em sistemas visuais (Hub, JSON, dashboards)"
+                  ],
+                  "crenças_fortes": [
+                    "Conteúdo tem VALOR LATENTE que a maioria ignora",
+                    "IA não é mágica - é ferramenta que precisa de ARQUITETURA",
+                    "PDF para preencher é formato morto. Sistema interativo é o futuro.",
+                    "Tamanho do conteúdo ≠ valor do app (70 palavras provou isso)",
+                    "Quem entende o MECANISMO pode replicar infinitamente"
+                  ],
+                  "antipatias": [
+                    "Promessas vagas ('transforme sua vida')",
+                    "Métodos sem prova de funcionamento",
+                    "Cursos que ensinam teoria sem ferramenta",
+                    "Gurus que vendem esperança, não sistema"
+                  ]
+                },
+                "specific_knowledge": {
+                  "naval_ravikant": "José tem specific knowledge único: VER o sistema operacional latente em qualquer conteúdo. Isso não se ensina - se desenvolve por obsessão. É o moat.",
+                  "dan_koe": "A peculiaridade do TDAH + obsessão por sistemas = personal monopoly. Ninguém mais combina 'caos criativo' com 'obsessão por ordem operacional' dessa forma."
+                }
+              },
+              "arquétipo_da_marca": {
+                "definição": "Qual energia arquetípica NEXORAMA carrega",
+                "arquétipo_principal": "O MAGO (The Magician)",
+                "descrição": "Transforma o ordinário em extraordinário. Torna o impossível, possível.",
+                "manifestações": [
+                  "70 palavras → Sistema de IA completo (transformação visível)",
+                  "Conteúdo morto → Sistema vivo (alquimia)",
+                  "PDF passivo → Experiência interativa (mágica prática)",
+                  "Conhecimento estático → App que personaliza (animação)"
+                ],
+                "arquétipo_secundário": "O CRIADOR (The Creator)",
+                "descrição_secundário": "Obsessão com construir algo que não existia antes. Cada Nexo App é uma criação única.",
+                "tom_arquetípico": {
+                  "fala_como": "Demonstrador técnico que mostra a mágica acontecendo",
+                  "evita": "Promessas místicas, linguagem esotérica, hype vazio",
+                  "promete": "Transformação VISÍVEL e REPLICÁVEL"
+                },
+                "insights_minds": {
+                  "walt_disney": "O Mago precisa de 'show, don't tell'. Cada demo é um show de mágica onde a transformação acontece na frente do público.",
+                  "steve_jobs": "Mágica + Minimalismo. A transformação mais impressionante é a que parece SIMPLES depois de feita."
+                }
+              },
+              "momento_de_origem": {
+                "definição": "A epifania ou 'chega!' que criou NEXORAMA",
+                "história_real": {
+                  "data": "05/12/2025",
+                  "contexto": "Completei 1 ano como professor da Academia Lendária. Criava cursos bons, lançava, havia muito consumo, mas os MELHORES tinham mini apps que guiavam o usuário.",
+                  "curso_referência": "Fundamentos de n8n - onde ensinei a instalar n8n selfhosted. Nesse curso criei vários mini apps-guia com checklist, apoio de IA, transformava passo-a-passo falado em passo-a-passo guiado por artifacts e mini apps feitos no Bolt.new.",
+                  "estalo": "Tive que preencher uma Roda da Vida. EU ODEIO PREENCHER porque é extremamente subjetivo e manual. Então criei um artifact com API pública do Claude - apenas clicável. Em vez de perguntas abertas e subjetivas, múltiplas escolhas comuns e IA identificando fluxos conforme condicionais de resposta. Ficou FÁCIL e DIVERTIDO.",
+                  "primeiro_sistema": {
+                    "conteúdo": "Tabela Excel de análise DISC do Alan Nicolas",
+                    "problema_original": "Era muito boa, mas dependia do usuário preencher corretamente",
+                    "solução": "Peguei a lógica da tabela e criei artifact para identificar DISC",
+                    "tempo": "30 minutos todo o processo",
+                    "contexto_técnico": "Artifact do Claude tinha limite de 500 linhas - precisava ser assertivo",
+                    "evolução": "Depois fiz Eneagrama, MBTI, fui transformando testes de personalidade em sistemas de IA"
+                  },
+                  "maior_fracasso": {
+                    "projeto": "App de IA para Personal Trainer",
+                    "problema": "Fiz versão enxuta, pensada em UI/UX, facilitando pro usuário. Ele não gostou - queria exatamente como ele fazia: forms gigantesco com 30+ perguntas",
+                    "resultado": "54 versões até aprovar. Quase 1 mês. Zero dinheiro - apenas indicação que depois gerou monetização",
+                    "aprendizado": "Pessoas não tem noção que formulário exaustivo é ineficaz. Querem replicar o processo manual no digital."
+                  },
+                  "primeira_reação_usuário": {
+                    "frase_exata": "Fantástico, parece que tá na minha mente. Você transforma algo complexo em algo simples, fica muito mais fácil de entender.",
+                    "padrão": "Várias mensagens semelhantes a esta",
+                    "insight": "Sempre vi como ferramenta simples para ajudar nas aulas. Hoje vejo que é um MÉTODO, um SISTEMA que pode facilitar a Educação 2.0 - hiperpersonalizada com IA."
+                  }
+                },
+                "narrativa_condensada": "05 de dezembro de 2025. Completei 1 ano como professor na Academia Lendária. Meus cursos eram bons, mas os MELHORES tinham mini apps que guiavam o usuário. Um dia precisei preencher uma Roda da Vida - eu ODEIO preencher essas coisas. Subjetivo, manual, chato. Então criei um artifact clicável. Múltiplas escolhas. IA identificando padrões. O que era sofrido virou fácil e divertido. Ali entendi: não é sobre ENSINAR mais. É sobre TRANSFORMAR conhecimento em experiência guiada. Nasceu o NEXORAMA.",
+                "tensão_dramática": {
+                  "antes": "Professor criando cursos bons que eram consumidos uma vez",
+                  "gatilho": "Ter que preencher Roda da Vida manual e odiar o processo",
+                  "virada": "Criar artifact clicável que transformou sofrimento em diversão",
+                  "depois": "Cada conteúdo pode virar experiência guiada por IA",
+                  "visão_maior": "Educação 2.0 - hiperpersonalizada com IA"
+                }
+              }
+            },
+            "síntese_ingrediente_secreto": {
+              "fundador": "José Carlos - TDAH obsessivo por sistemas, anti-guru, prova antes de prometer",
+              "arquétipo": "O Mago que transforma conteúdo morto em sistemas vivos",
+              "origem": "Epifania: parar de criar mais e começar a TRANSFORMAR o existente",
+              "moat": "Specific knowledge de VER sistemas latentes em qualquer conteúdo"
+            }
+          }
+        },
+        {
+          "id": "5.3",
+          "name": "Oceano Azul",
+          "status": "done",
+          "minds": ["@Peter Thiel", "@Seth Godin", "@Alex Hormozi"],
+          "content": {
+            "fase": 3,
+            "nome": "Oceano Azul",
+            "descrição": "Posicionamento único no mercado - onde competimos e por que ganhamos",
+            "elementos": {
+              "mapa_2x2": {
+                "definição": "Eixos: Tradicional↔Inovador × Arriscado↔Confiável",
+                "eixo_x": {
+                  "nome": "Formato de Entrega",
+                  "esquerda": "TRADICIONAL (PDFs, Cursos Gravados, Mentorias Live)",
+                  "direita": "INOVADOR (Sistemas de IA, Apps Interativos, Automação)"
+                },
+                "eixo_y": {
+                  "nome": "Nível de Risco Percebido",
+                  "baixo": "CONFIÁVEL (Método provado, Cases reais, Garantia)",
+                  "alto": "ARRISCADO (Experimental, Sem provas, Promessas vagas)"
+                },
+                "quadrantes": {
+                  "inferior_esquerdo": {
+                    "nome": "Commodity",
+                    "players": ["Cursos genéricos", "Mentorias tradicionais", "eBooks"],
+                    "problema": "Todo mundo faz igual. Guerra de preço."
+                  },
+                  "superior_esquerdo": {
+                    "nome": "Promessas Vazias",
+                    "players": ["Gurus de transformação", "Coaches de mindset", "Vendedores de esperança"],
+                    "problema": "Prometem muito, entregam pouco. Alta desconfiança."
+                  },
+                  "superior_direito": {
+                    "nome": "Hype Tecnológico",
+                    "players": ["Promessas de IA sem prova", "Automações complexas", "No-code genérico"],
+                    "problema": "Parece legal mas não funciona na prática. Frustra."
+                  },
+                  "inferior_direito": {
+                    "nome": "SWEET SPOT - NEXORAMA",
+                    "posição": "INOVADOR + CONFIÁVEL",
+                    "por_que": "Formato revolucionário (IA) + Prova concreta (3 cases funcionais)"
+                  }
+                }
+              },
+              "sweet_spot_nexorama": {
+                "posição": "Quadrante Inferior Direito: Inovador + Confiável",
+                "diferenciação": [
+                  "INOVADOR: Transforma conteúdo em sistemas de IA (ninguém mais faz)",
+                  "CONFIÁVEL: 3 cases funcionais que qualquer um pode testar",
+                  "ESPECÍFICO: Método documentado em 4 fases replicáveis",
+                  "TANGÍVEL: Sai com sistema funcionando, não teoria"
+                ],
+                "por_que_ganha": {
+                  "vs_cursos_tradicionais": "Curso ensina, NEXORAMA ENTREGA sistema funcionando",
+                  "vs_gurus": "Não promete transformação mística. Mostra o case rodando.",
+                  "vs_hype_ia": "Não é 'aprenda IA'. É 'transforme SEU conteúdo em sistema de IA'.",
+                  "vs_agências": "Não depende de terceiros. Você aprende o método e replica."
+                }
+              },
+              "concorrência": {
+                "concorrentes_diretos": {
+                  "existem": false,
+                  "nota": "Não existe ninguém vendendo 'transformar conteúdo existente em sistema de IA personalizado'"
+                },
+                "concorrentes_indiretos": [
+                  {
+                    "categoria": "Cursos de IA / Prompt Engineering",
+                    "exemplos": ["Cursos de ChatGPT", "Prompt Engineering", "AI para negócios"],
+                    "diferença_nexorama": "Ensinam a USAR IA. NEXORAMA ensina a CRIAR sistemas com seu conteúdo."
+                  },
+                  {
+                    "categoria": "Plataformas No-Code",
+                    "exemplos": ["Bubble", "Softr", "Glide"],
+                    "diferença_nexorama": "Criam apps genéricos. NEXORAMA cria sistemas que PERSONALIZAM conhecimento."
+                  },
+                  {
+                    "categoria": "Agências de IA",
+                    "exemplos": ["Consultorias de automação", "Agências de chatbot"],
+                    "diferença_nexorama": "Fazem POR você (caro, dependente). NEXORAMA ensina a fazer VOCÊ MESMO."
+                  },
+                  {
+                    "categoria": "Infoprodutores Tradicionais",
+                    "exemplos": ["Cursos online", "Mentorias", "Comunidades"],
+                    "diferença_nexorama": "Vendem CONTEÚDO. NEXORAMA vende TRANSFORMAÇÃO de conteúdo em sistema."
+                  }
+                ],
+                "monopoly_test_thiel": {
+                  "pergunta": "Se NEXORAMA não existisse, clientes iriam para onde?",
+                  "resposta": "Não há substituto direto. Teriam que: (1) aprender programação, (2) contratar agência cara, (3) continuar com PDFs/cursos",
+                  "conclusão": "NEXORAMA é categoria única = monopólio de nicho"
+                }
+              },
+              "insights_minds": {
+                "peter_thiel": "NEXORAMA passa no teste Zero to One: não é 'melhor curso de IA', é NOVA CATEGORIA. 'Transformação de conteúdo em sistema de IA' não existia antes.",
+                "seth_godin": "O Purple Cow não é a IA. É o RESULTADO VISÍVEL: 70 palavras virando sistema completo. Isso é remarkável. Isso se espalha.",
+                "alex_hormozi": "Posição 'Inovador + Confiável' é a mais lucrativa. Cobra premium (inovação) sem resistência (prova funciona)."
+              }
+            },
+            "síntese_oceano_azul": {
+              "posição": "Inovador + Confiável (Sweet Spot)",
+              "categoria": "Transformação de Conteúdo em Sistemas de IA",
+              "monopólio": "Sem concorrente direto - categoria criada por NEXORAMA",
+              "prova": "3 cases funcionais que qualquer um pode testar agora"
+            }
+          }
+        },
+        {
+          "id": "5.4",
+          "name": "A Narrativa",
+          "status": "done",
+          "minds": ["@Walt Disney", "@Eugene Schwartz", "@Dan Kennedy"],
+          "content": {
+            "fase": 4,
+            "nome": "A Narrativa",
+            "descrição": "A história que vendemos - Herói, Vilão, Guia e o Manifesto da marca",
+            "elementos": {
+              "herói": {
+                "definição": "O cliente é SEMPRE o herói. Não a marca.",
+                "quem_é": "O Creator Exausto",
+                "perfil_narrativo": {
+                  "situação_inicial": "Tem conhecimento valioso, criou conteúdo, mas está preso na esteira",
+                  "desejo": "Quer que seu conhecimento trabalhe por ele enquanto dorme",
+                  "medo": "Continuar criando infinitamente sem escalar de verdade",
+                  "obstáculo_interno": "Acha que precisa de programação, dinheiro ou mais tempo",
+                  "obstáculo_externo": "Os formatos tradicionais (PDF, curso) não servem mais"
+                },
+                "jornada_desejada": {
+                  "ponto_a": "Creator com conteúdo parado, criando mais para sobreviver",
+                  "ponto_b": "Dono de sistemas de IA que trabalham 24/7 com SEU conhecimento"
+                }
+              },
+              "vilão": {
+                "definição": "O que impede o herói de chegar ao final feliz",
+                "vilão_principal": "Os Formatos Mortos",
+                "manifestações": [
+                  {
+                    "nome": "O PDF Inerte",
+                    "crime": "Exige esforço do usuário, não se adapta, vira estoque parado"
+                  },
+                  {
+                    "nome": "O Curso Descartável",
+                    "crime": "Consumido uma vez, esquecido pra sempre, não gera recorrência"
+                  },
+                  {
+                    "nome": "A Esteira Infinita",
+                    "crime": "Obriga a criar mais, mais, mais - sem nunca parar"
+                  },
+                  {
+                    "nome": "O Guru Prometedor",
+                    "crime": "Vende esperança sem sistema. Frustra com promessas vazias"
+                  }
+                ],
+                "vilão_interno": {
+                  "nome": "A Síndrome do 'Preciso Criar Mais'",
+                  "mentira": "Se eu criar mais conteúdo, vou finalmente escalar",
+                  "verdade": "Criar mais SEM SISTEMA só aumenta o problema"
+                }
+              },
+              "guia": {
+                "definição": "A marca como mentor que ajuda o herói a vencer",
+                "guia_nexorama": {
+                  "papel": "O Mago que ensina a transformação",
+                  "não_é": "O herói da história. Não rouba holofote.",
+                  "é": "Yoda, não Luke. Mostra o caminho, herói executa."
+                },
+                "credenciais": {
+                  "empatia": "Eu também estava na esteira. Eu também criava mais.",
+                  "autoridade": "3 cases funcionais. 70 palavras → Sistema. Método documentado."
+                },
+                "como_ajuda": [
+                  "Dá o MÉTODO (4 fases NEXORAMA)",
+                  "Mostra a PROVA (cases funcionando)",
+                  "Entrega as FERRAMENTAS (prompts, templates, processo)",
+                  "Remove o ATRITO (não precisa programar)"
+                ],
+                "promessa_do_guia": "Eu vou te mostrar como transformar o conteúdo que você já criou em sistemas de IA. Você não precisa criar mais. Você precisa TRANSFORMAR o que existe."
+              },
+              "manifesto": {
+                "definição": "A declaração de crenças da marca",
+                "manifesto_nexorama": {
+                  "título": "MANIFESTO NEXORAMA",
+                  "subtítulo": "A Era dos Formatos Mortos Acabou",
+                  "declarações": [
+                    "Acreditamos que seu CONTEÚDO tem valor latente que está sendo desperdiçado.",
+                    "Acreditamos que PDFs para preencher são formatos MORTOS.",
+                    "Acreditamos que você NÃO precisa criar mais. Precisa TRANSFORMAR.",
+                    "Acreditamos que IA não é mágica - é FERRAMENTA que precisa de arquitetura.",
+                    "Acreditamos em MOSTRAR funcionando, não PROMETER resultado.",
+                    "Acreditamos que 70 palavras podem virar um sistema completo.",
+                    "Acreditamos que o futuro é SISTEMAS que personalizam, não conteúdo passivo.",
+                    "Acreditamos que quem entende o MECANISMO pode replicar infinitamente."
+                  ],
+                  "chamado_à_ação": "Se você também acredita nisso, bem-vindo ao NEXORAMA.",
+                  "contra_quem": "Contra os gurus de promessa vazia. Contra a esteira infinita. Contra os formatos que não servem.",
+                  "a_favor_de": "A favor dos creators que querem SISTEMAS, não mais trabalho. A favor da transformação tangível, não da esperança vazia."
+                }
+              },
+              "insights_minds": {
+                "walt_disney": "A narrativa precisa de CONFLITO claro. Formatos Mortos vs Sistemas Vivos. A jornada do herói é VISUAL: conteúdo parado → sistema funcionando.",
+                "eugene_schwartz": "O vilão (formatos mortos) é CONHECIDO pelo público. Não precisa educar sobre o problema. Precisa agitar a ferida e oferecer cura.",
+                "dan_kennedy": "Manifesto cria TRIBO. Quem concorda se identifica imediatamente. Quem discorda não é cliente. Polarização intencional."
+              }
+            },
+            "síntese_narrativa": {
+              "herói": "O Creator Exausto que quer escalar sem criar mais",
+              "vilão": "Os Formatos Mortos (PDFs, cursos descartáveis, esteira infinita)",
+              "guia": "NEXORAMA - O Mago que ensina a transformação",
+              "manifesto": "A Era dos Formatos Mortos Acabou. Transforme, não crie mais."
+            }
+          }
+        },
+        {
+          "id": "5.5",
+          "name": "Motor de Comunidade",
+          "status": "done",
+          "minds": ["@Seth Godin", "@Russel Brunson", "@Gary Vee"],
+          "content": {
+            "fase": 5,
+            "nome": "Motor de Comunidade",
+            "descrição": "O flywheel que gera crescimento orgânico e vendas sustentáveis",
+            "elementos": {
+              "modelo_antigo_vs_novo": {
+                "modelo_antigo": {
+                  "fluxo": "Alcance → Venda → Comunidade",
+                  "problema": "Precisa de tráfego caro para vender. Comunidade é consequência, não motor.",
+                  "resultado": "Dependência de ads. Escala cara. Comunidade fraca."
+                },
+                "modelo_novo_flywheel": {
+                  "fluxo": "Comunidade → Venda → Alcance",
+                  "vantagem": "Comunidade gera vendas que gera alcance que alimenta comunidade.",
+                  "resultado": "Crescimento orgânico. Custo baixo. Comunidade forte."
+                }
+              },
+              "flywheel_nexorama": {
+                "ciclo": [
+                  {
+                    "etapa": 1,
+                    "nome": "CONTEÚDO GRATUITO",
+                    "ação": "Newsletter semanal: 1 Conteúdo → 1 Sistema",
+                    "resultado": "Atrai creators exaustos. Prova o conceito funcionando."
+                  },
+                  {
+                    "etapa": 2,
+                    "nome": "COMUNIDADE",
+                    "ação": "Grupo dos 'Transformadores de Conteúdo'",
+                    "resultado": "Cria pertencimento. Members ajudam members."
+                  },
+                  {
+                    "etapa": 3,
+                    "nome": "CASES DA COMUNIDADE",
+                    "ação": "Membros criam seus próprios sistemas e compartilham",
+                    "resultado": "Prova social infinita. Cada case atrai mais gente."
+                  },
+                  {
+                    "etapa": 4,
+                    "nome": "VENDA NATURAL",
+                    "ação": "Quem quer ir mais rápido compra Framework/Mentoria",
+                    "resultado": "Venda sem fricção porque já viram funcionando"
+                  },
+                  {
+                    "etapa": 5,
+                    "nome": "ALCANCE ORGÂNICO",
+                    "ação": "Cases e transformações geram conteúdo compartilhável",
+                    "resultado": "Cada aluno traz mais gente. Flywheel acelera."
+                  }
+                ],
+                "acelerador": "Cada novo sistema criado é um novo case que atrai mais gente"
+              },
+              "identidade_tribal": {
+                "nome_tribo": "NEXIALISTAS",
+                "definição": "Pessoas que praticam o Nexialismo - a arte de ver conexões e transformar conteúdo em sistemas",
+                "pitch_do_membro": "Eu transformo qualquer conteúdo estático e chato em um sistema interativo com IA",
+                "grito_de_guerra": "Tudo que já foi criado pode ser recriado ainda melhor",
+                "valores_tribais": [
+                  "Transformar > Criar do zero",
+                  "Sistema > Conteúdo passivo",
+                  "Mostrar funcionando > Prometer resultado",
+                  "5 minutos de ação > 5 horas de planejamento"
+                ],
+                "como_se_reconhecem": "Quando alguém vê um PDF e pensa 'isso poderia ser um sistema com IA'"
+              },
+              "isca_de_comunidade": {
+                "definição": "Como atrair as primeiras 100 pessoas",
+                "isca_nexorama": {
+                  "nome": "Desafio 7 Dias: Seu Primeiro Sistema de IA",
+                  "formato": "Email diário + grupo de suporte",
+                  "promessa": "Em 7 dias, transforme um conteúdo seu em sistema de IA funcionando",
+                  "estrutura": [
+                    "Dia 1: Escolha o conteúdo (critérios de seleção)",
+                    "Dia 2: Ingestão e transcrição",
+                    "Dia 3: Decomposição AOC",
+                    "Dia 4: Arquitetura do grafo",
+                    "Dia 5: Construção do sistema",
+                    "Dia 6: Refinamento com IA",
+                    "Dia 7: Deploy e showcase"
+                  ],
+                  "custo": "Grátis (paga com atenção e engajamento)",
+                  "conversão_esperada": "20-30% para Newsletter. 5-10% para Framework."
+                },
+                "alternativas_isca": [
+                  {
+                    "nome": "Template NEXORAMA",
+                    "descrição": "Prompt master para transformação de conteúdo",
+                    "entrega": "Download imediato"
+                  },
+                  {
+                    "nome": "Webinar: 70 Palavras → Sistema",
+                    "descrição": "Demo ao vivo da transformação",
+                    "entrega": "Live semanal"
+                  },
+                  {
+                    "nome": "Mini-Curso: Decomposição AOC",
+                    "descrição": "Aprenda a técnica central em 30 minutos",
+                    "entrega": "Vídeo + checklist"
+                  }
+                ]
+              },
+              "produto_de_entrada": {
+                "definição": "Produto que financia o crescimento da comunidade",
+                "produto_nexorama": {
+                  "nome": "Framework Content-to-App",
+                  "preço": "R$ 997",
+                  "papel_no_flywheel": [
+                    "Separa curiosos de comprometidos",
+                    "Financia criação de mais conteúdo gratuito",
+                    "Gera cases mais robustos (investiram)",
+                    "Cria base para upsell (mentoria R$4.500)"
+                  ],
+                  "meta": {
+                    "primeiros_90_dias": "50 vendas = R$ 49.850",
+                    "reinvestir": "70% em conteúdo e comunidade",
+                    "margem": "95% (produto digital)"
+                  }
+                }
+              },
+              "métricas_do_flywheel": {
+                "entrada": {
+                  "newsletter_subscribers": { "meta_90d": 1000, "conversão": "2-3% para produto" },
+                  "grupo_comunidade": { "meta_90d": 300, "engajamento": "30% ativos" }
+                },
+                "meio": {
+                  "cases_criados": { "meta_90d": 50, "compartilhados": "20%" },
+                  "depoimentos": { "meta_90d": 30, "formato": "vídeo/texto" }
+                },
+                "saída": {
+                  "framework_vendido": { "meta_90d": 50, "ticket": "R$ 997" },
+                  "mentoria_vendida": { "meta_90d": 8, "ticket": "R$ 4.500" }
+                }
+              },
+              "insights_minds": {
+                "seth_godin": "Comunidade primeiro, venda depois. As primeiras 100 pessoas são a tribo fundadora. Eles vão evangelizar se acreditarem no manifesto.",
+                "russel_brunson": "Value Ladder começa aqui. Isca → Newsletter → Framework → Mentoria → Agência. Cada degrau aumenta confiança E ticket.",
+                "gary_vee": "O melhor marketing é o case do cliente. Cada sistema criado pela comunidade é conteúdo para atrair mais gente. Document, don't create."
+              }
+            },
+            "síntese_motor_comunidade": {
+              "flywheel": "Comunidade → Cases → Venda → Alcance → Mais Comunidade",
+              "isca": "Desafio 7 Dias: Seu Primeiro Sistema de IA",
+              "produto_entrada": "Framework R$997 (financia crescimento)",
+              "meta_90d": "1000 subscribers, 50 vendas, 50 cases"
+            }
+          }
+        },
+        {
+          "id": "5.6",
+          "name": "Avaliação das Minds",
+          "status": "done",
+          "content": {
+            "título": "Painel de Avaliação - Brand Identity NEXORAMA",
+            "data": "2026-01-02",
+            "avaliadores": ["@Eugene Schwartz", "@Peter Thiel", "@Seth Godin", "@Alex Hormozi", "@Dan Kennedy"],
+            "notas_por_elemento": {
+              "5.1_fundação": {
+                "nota_geral": 8.5,
+                "avaliações": {
+                  "eugene_schwartz": {
+                    "nota": 9,
+                    "análise": "Público bem definido psicograficamente. 'Creator Exausto' é DESEJO EXISTENTE, não criado. Promessa clara e específica. Passa no teste de canalização de desejo.",
+                    "ponto_forte": "Problema articulado em manifestações tangíveis (PDFs, cursos, esteira)",
+                    "lacuna": "Falta PROVA QUANTIFICADA do problema. Quanto tempo/dinheiro o creator perde? Números específicos aumentam crença."
+                  },
+                  "alex_hormozi": {
+                    "nota": 8,
+                    "análise": "Value equation está clara. Resultado alto + esforço baixo = valor percebido alto. Mas...",
+                    "ponto_forte": "Problema funcional bem mapeado com custos (tempo, dinheiro, energia)",
+                    "lacuna": "Falta GARANTIA específica na promessa. 'Se não funcionar, X'. Risk reversal aumenta conversão 2-3x."
+                  },
+                  "seth_godin": {
+                    "nota": 8.5,
+                    "análise": "Minimum viable audience bem definida. Não tenta ser para todos.",
+                    "ponto_forte": "Perfil psicográfico profundo (crenças, frustrações, aspirações)",
+                    "lacuna": "Falta LINGUAGEM TRIBAL. Como os 'Creators Exaustos' se identificam entre si? Precisa de código."
+                  }
+                }
+              },
+              "5.2_ingrediente_secreto": {
+                "nota_geral": 7.5,
+                "avaliações": {
+                  "dan_kennedy": {
+                    "nota": 7,
+                    "análise": "Arquétipo do Mago é forte. Origem narrativa funciona. Mas...",
+                    "ponto_forte": "Specific knowledge bem articulado (ver sistemas latentes)",
+                    "lacuna": "HISTÓRIA DO FUNDADOR muito genérica. Precisa de MOMENTOS ESPECÍFICOS, datas, números. 'Eu estava gravando mais um curso' - QUAL curso? QUANDO?"
+                  },
+                  "peter_thiel": {
+                    "nota": 8,
+                    "análise": "O moat (ver sistemas latentes) é defensível. Difícil de copiar.",
+                    "ponto_forte": "Peculiaridades do fundador (TDAH + obsessão por sistemas) são únicas",
+                    "lacuna": "Falta PROVA do specific knowledge. Mostrar os ERROS que outros cometem e José não comete. O que ele VÊ que outros não veem?"
+                  }
+                }
+              },
+              "5.3_oceano_azul": {
+                "nota_geral": 9,
+                "avaliações": {
+                  "peter_thiel": {
+                    "nota": 9.5,
+                    "análise": "Passa no teste Zero to One. Categoria genuinamente nova.",
+                    "ponto_forte": "Monopoly test convincente - não há substituto direto",
+                    "lacuna": "Precisa DEFENDER a categoria. Como impedir que outros copiem o posicionamento?"
+                  },
+                  "seth_godin": {
+                    "nota": 9,
+                    "análise": "Sweet spot bem identificado. Inovador + Confiável é posição premium.",
+                    "ponto_forte": "Mapa 2x2 claro com concorrentes bem mapeados",
+                    "lacuna": "Falta NOME PARA A CATEGORIA. 'Transformação de Conteúdo em IA' é descritivo, não memorável."
+                  },
+                  "alex_hormozi": {
+                    "nota": 8.5,
+                    "análise": "Diferenciação vs concorrentes está clara.",
+                    "ponto_forte": "Cada 'vs' (cursos, gurus, hype IA, agências) é específico",
+                    "lacuna": "Falta PREÇO COMPARATIVO. Quanto custa a alternativa? Agência = R$50k. Framework = R$997. Mostre o delta."
+                  }
+                }
+              },
+              "5.4_narrativa": {
+                "nota_geral": 8,
+                "avaliações": {
+                  "eugene_schwartz": {
+                    "nota": 8,
+                    "análise": "Vilão bem definido. Formatos Mortos é inimigo claro.",
+                    "ponto_forte": "Manifesto polarizador - cria tribo",
+                    "lacuna": "Herói precisa de JORNADA MAIS DETALHADA. Quais são os 3-5 passos da transformação? Onde ele está AGORA vs onde ESTARÁ?"
+                  },
+                  "dan_kennedy": {
+                    "nota": 8,
+                    "análise": "Guia (Yoda, não Luke) é posicionamento correto.",
+                    "ponto_forte": "Credenciais balanceadas (empatia + autoridade)",
+                    "lacuna": "Manifesto precisa de INIMIGO MAIS ESPECÍFICO. 'Gurus de promessa vazia' - QUAIS? Pode nomear sem difamar?"
+                  }
+                }
+              },
+              "5.5_motor_comunidade": {
+                "nota_geral": 7,
+                "avaliações": {
+                  "seth_godin": {
+                    "nota": 7,
+                    "análise": "Flywheel conceitual está correto. Mas...",
+                    "ponto_forte": "Isca (Desafio 7 Dias) é tangível e actionable",
+                    "lacuna": "Falta NOME DA TRIBO. Como membros se chamam? 'Transformadores'? 'Nexonautas'? Precisa de identidade."
+                  },
+                  "alex_hormozi": {
+                    "nota": 7,
+                    "análise": "Metas são razoáveis mas...",
+                    "ponto_forte": "Produto de entrada bem posicionado no flywheel",
+                    "lacuna": "Falta SEQUÊNCIA DE ATIVAÇÃO. O que acontece nos primeiros 7 dias após entrar na newsletter? Cada email, cada CTA."
+                  },
+                  "russel_brunson": {
+                    "nota": 7,
+                    "análise": "Value ladder conectada mas...",
+                    "ponto_forte": "Desafio 7 Dias é tripwire natural para Framework",
+                    "lacuna": "Falta SOAP OPERA SEQUENCE. Qual a sequência de emails que converte subscriber em comprador? 5-7 emails com história."
+                  }
+                }
+              }
+            },
+            "nota_geral_consolidada": {
+              "média": 8.0,
+              "classificação": "BOM - Estrutura sólida, precisa de refinamentos específicos"
+            },
+            "lacunas_preenchidas": {
+              "lacuna_1_história": {
+                "status": "PREENCHIDA",
+                "nota_anterior": 7.5,
+                "nota_atual": 9.0,
+                "dados_coletados": "História completa com data, contexto, primeiro sistema, fracasso, reação"
+              },
+              "lacuna_2_tribo": {
+                "status": "PREENCHIDA",
+                "dados_coletados": {
+                  "nome_tribo": "NEXIALISTAS",
+                  "pitch_membro": "Eu transformo qualquer conteúdo estático e chato em um sistema interativo com IA",
+                  "grito_guerra": "Tudo que já foi criado pode ser recriado ainda melhor",
+                  "filosofia": "Nexialismo - a arte de ver conexões e transformar"
+                }
+              },
+              "lacuna_3_números": {
+                "status": "PREENCHIDA",
+                "dados_coletados": {
+                  "cursos_criados": "10+ cursos na Academia Lendária",
+                  "sistemas_criados": "100+ sistemas (aulas, frameworks, vídeos, métodos)",
+                  "evolução_tempo": {
+                    "antes": "Dias para mapear framework/metodologia",
+                    "hoje": "Máximo 1 dia para sistemas complexos",
+                    "speed_run": "5 minutos: Reels no Instagram → Sistema com IA"
+                  },
+                  "stack_atual": "Ecossistema Google: Gemini + Build AI Studio",
+                  "headline_matador": "Scrollando Instagram, vi um Reels, baixei, transcrevi e transformei em sistema de IA em 5 minutos"
+                }
+              },
+              "lacuna_4_categoria": {
+                "status": "PREENCHIDA",
+                "dados_coletados": {
+                  "para_mãe": "Eu crio IAs para as pessoas aprenderem mais rápido e melhor",
+                  "em_3_palavras": "Mutação de formato de conteúdo",
+                  "verbo_principal": "TRANSFORMAR",
+                  "conceitos_candidatos": [
+                    "Mutação de Conteúdo",
+                    "Content Mutation",
+                    "Transformação Nexialista"
+                  ]
+                }
+              },
+              "lacuna_5_sequência": {
+                "status": "PREENCHIDA",
+                "soap_opera_sequence": {
+                  "framework": "@Russel Brunson - DotCom Secrets",
+                  "objetivo": "Converter subscriber em comprador do Framework R$997 em 7 dias",
+                  "emails": [
+                    {
+                      "dia": 1,
+                      "tipo": "SET THE STAGE",
+                      "subject": "Eu odiava preencher Roda da Vida (e isso mudou tudo)",
+                      "preview": "5 de dezembro de 2025...",
+                      "estrutura": {
+                        "abertura": "Bem-vindo, Nexialista.",
+                        "gancho": "Vou te contar como um formulário chato me fez descobrir algo que mudou minha forma de ensinar.",
+                        "história": "05/12/2025. Completei 1 ano como professor na Academia Lendária. Tinha criado 10+ cursos. Bons cursos. Mas algo me incomodava...",
+                        "cliffhanger": "Naquele dia, precisei preencher uma Roda da Vida. E eu ODEIO preencher essas coisas. O que aconteceu depois mudou tudo. Amanhã te conto.",
+                        "ps": "P.S. Enquanto isso, veja esse sistema que criei em 5 minutos a partir de um Reels: [LINK DEMO]"
+                      }
+                    },
+                    {
+                      "dia": 2,
+                      "tipo": "HIGH DRAMA + BACKSTORY",
+                      "subject": "54 versões. 1 mês. Zero reais.",
+                      "preview": "O fracasso que me ensinou a verdade sobre as pessoas...",
+                      "estrutura": {
+                        "abertura": "Ontem te contei sobre a Roda da Vida. Mas antes disso, preciso te contar sobre meu maior fracasso.",
+                        "história": "Peguei o método de um personal trainer. Transformei em app com IA. Fiz bonito - UI limpa, UX pensada, fácil pro usuário. Mostrei pra ele. Ele ODIOU.",
+                        "conflito": "Ele queria exatamente como fazia no papel: formulário gigante, 30+ perguntas. Eu argumentei. Ele insistiu. Resultado: 54 versões. Quase 1 mês. Zero reais.",
+                        "lição": "Ali aprendi: pessoas querem replicar o processo manual no digital. Mas isso é um ERRO. O digital permite algo que o papel nunca permitiu...",
+                        "cliffhanger": "Amanhã te conto o que descobri quando voltei pra aquela maldita Roda da Vida.",
+                        "ps": "P.S. Aquele personal trainer? As indicações dele me renderam mais que o projeto. Às vezes o fracasso paga depois."
+                      }
+                    },
+                    {
+                      "dia": 3,
+                      "tipo": "EPIPHANY (A Virada)",
+                      "subject": "De 'eu odeio preencher' para 'isso é divertido' em 30 minutos",
+                      "preview": "A descoberta que virou método...",
+                      "estrutura": {
+                        "abertura": "Lembra da Roda da Vida que eu odiava?",
+                        "setup": "Perguntas abertas. Subjetivas. Manuais. Eu ficava travado pensando 'o que significa satisfação profissional de 1 a 10?'",
+                        "virada": "Aí pensei: e se em vez de perguntas abertas... fossem múltiplas escolhas? E se a IA identificasse padrões conforme eu respondesse?",
+                        "ação": "30 minutos depois, tinha um artifact clicável. Nada de escrever. Só clicar. A IA fazendo as conexões.",
+                        "resultado": "O que era sofrido virou FÁCIL. O que era chato virou DIVERTIDO.",
+                        "epifania": "Ali entendi: não é sobre ENSINAR mais. É sobre TRANSFORMAR conhecimento em experiência guiada. Nasceu o que hoje chamo de NEXORAMA.",
+                        "cliffhanger": "Mas a verdadeira prova veio quando fiz isso com o conteúdo de OUTRA pessoa. Em 30 minutos. Sem conhecer o método dela. Amanhã te mostro.",
+                        "ps": "P.S. Já criei 100+ sistemas assim. Alguns em 5 minutos. Sério."
+                      }
+                    },
+                    {
+                      "dia": 4,
+                      "tipo": "HIDDEN BENEFITS",
+                      "subject": "O que ninguém te conta sobre transformar conteúdo em IA",
+                      "preview": "3 benefícios que descobri sem querer...",
+                      "estrutura": {
+                        "abertura": "Quando comecei a transformar conteúdo em sistemas de IA, esperava uma coisa: facilitar o aprendizado. Consegui isso. Mas descobri 3 coisas que não esperava:",
+                        "benefício_1": {
+                          "título": "1. Seu conteúdo antigo RESSUSCITA",
+                          "texto": "Aquele curso de 2023 que ninguém mais acessa? Vira um sistema que as pessoas QUEREM usar. Não é consumir passivamente. É INTERAGIR."
+                        },
+                        "benefício_2": {
+                          "título": "2. Você para de repetir as mesmas explicações",
+                          "texto": "Sabe aquela pergunta que você responde 100x? O sistema responde por você. Com SUA voz. SUA metodologia. 24/7."
+                        },
+                        "benefício_3": {
+                          "título": "3. Você descobre o que REALMENTE funciona no seu método",
+                          "texto": "Quando você precisa transformar em sistema, é obrigado a CLARIFICAR. O que era 'feeling' vira processo. O que era intuição vira passo-a-passo."
+                        },
+                        "transição": "Esses benefícios mudaram minha forma de criar. Hoje não penso 'vou fazer um curso'. Penso 'vou criar um sistema'.",
+                        "cliffhanger": "Amanhã vou te mostrar EXATAMENTE como faço isso. O processo de 4 fases que uso para transformar qualquer conteúdo.",
+                        "ps": "P.S. Um aluno me disse: 'Fantástico, parece que tá na minha mente. Você transforma algo complexo em algo simples.' Isso resume tudo."
+                      }
+                    },
+                    {
+                      "dia": 5,
+                      "tipo": "THE METHOD (Valor Puro)",
+                      "subject": "NEXORAMA: As 4 fases que uso para transformar conteúdo",
+                      "preview": "O método completo (de graça)...",
+                      "estrutura": {
+                        "abertura": "Hoje vou te entregar o método. Sem enrolação.",
+                        "método": {
+                          "fase_1": {
+                            "nome": "INGESTÃO",
+                            "tempo": "5-30 min",
+                            "ação": "Consumir o conteúdo e identificar o SISTEMA LATENTE - a lógica operacional escondida"
+                          },
+                          "fase_2": {
+                            "nome": "DECOMPOSIÇÃO AOC",
+                            "tempo": "15-60 min",
+                            "ação": "Quebrar em Ação + Objeto + Condição. Toda instrução funcional tem esses 3 elementos."
+                          },
+                          "fase_3": {
+                            "nome": "ARQUITETURA",
+                            "tempo": "10-30 min",
+                            "ação": "Desenhar o grafo de decisão. Quais perguntas? Em que ordem? Quais caminhos?"
+                          },
+                          "fase_4": {
+                            "nome": "CONSTRUÇÃO",
+                            "tempo": "5-60 min",
+                            "ação": "Usar IA (Gemini, Claude) para gerar o sistema. Cada tela = 1 decisão."
+                          }
+                        },
+                        "prova": "Com esse método, já criei 100+ sistemas. Alguns em 5 minutos (quando o conteúdo é claro). Outros em 1 dia (quando precisa mais pesquisa).",
+                        "cta_soft": "Quer ver funcionando? Responde esse email com 'DEMO' que te mando 3 sistemas que criei para você testar.",
+                        "cliffhanger": "Amanhã vou te contar sobre a visão maior. Por que isso não é só sobre 'criar apps'. É sobre o futuro da educação.",
+                        "ps": "P.S. Sim, você pode usar esse método HOJE. Pega um conteúdo seu, aplica as 4 fases, e me manda o resultado. Quero ver."
+                      }
+                    },
+                    {
+                      "dia": 6,
+                      "tipo": "BIGGER VISION",
+                      "subject": "Educação 2.0: Por que isso é maior do que parece",
+                      "preview": "A visão que me move...",
+                      "estrutura": {
+                        "abertura": "Vou ser honesto contigo.",
+                        "confissão": "No começo, eu via isso como ferramenta. 'Legal, dá pra fazer mini apps pros alunos.' Útil, mas nada revolucionário.",
+                        "virada": "Mas depois de 100+ sistemas, percebi algo maior:",
+                        "visão": "Estamos entrando na era da EDUCAÇÃO HIPERPERSONALIZADA. Não é sobre 'curso pra todo mundo'. É sobre 'sistema que se adapta a VOCÊ'.",
+                        "problema_atual": "Hoje, educação online é: vídeo gravado → PDF pra preencher → grupo de dúvidas. Todo mundo recebe o mesmo conteúdo. Quem se adapta é o ALUNO.",
+                        "futuro": "Com sistemas de IA, quem se adapta é o CONTEÚDO. O sistema pergunta, entende seu contexto, e entrega personalizado. Não é consumir. É INTERAGIR.",
+                        "chamado": "Os NEXIALISTAS são os primeiros a entender isso. Não somos 'criadores de conteúdo'. Somos TRANSFORMADORES. Pegamos conhecimento estático e damos VIDA.",
+                        "manifesto_curto": "Tudo que já foi criado pode ser recriado ainda melhor.",
+                        "transição": "Amanhã, último email da série. Vou te fazer uma proposta. Se fizer sentido pra você, ótimo. Se não, tudo bem - o método já é seu.",
+                        "ps": "P.S. Você já faz parte dos Nexialistas. A questão é: quer ir mais rápido?"
+                      }
+                    },
+                    {
+                      "dia": 7,
+                      "tipo": "THE OFFER",
+                      "subject": "Framework NEXORAMA: Sua vez de transformar",
+                      "preview": "A proposta (e por que criei isso)...",
+                      "estrutura": {
+                        "abertura": "7 dias atrás você entrou nessa lista. Te contei minha história. Te dei o método. Te mostrei a visão.",
+                        "recapitulação": {
+                          "historia": "Comecei odiando preencher Roda da Vida. Hoje tenho 100+ sistemas de IA.",
+                          "metodo": "4 fases: Ingestão → Decomposição AOC → Arquitetura → Construção",
+                          "visao": "Educação 2.0 - hiperpersonalizada com IA"
+                        },
+                        "transição": "Se você chegou até aqui, é porque algo ressoou. Talvez você também esteja cansado de criar conteúdo que é consumido uma vez e esquecido.",
+                        "oferta": {
+                          "nome": "Framework NEXORAMA",
+                          "subtítulo": "De Conteúdo a Sistema de IA em 3 Módulos",
+                          "preço": "R$ 997",
+                          "inclui": [
+                            "Módulo 1: Extração de Metodologias (1h30) - Como encontrar o sistema latente",
+                            "Módulo 2: Arquitetura de Meta-Prompts (2h) - Como construir o prompt que gera o sistema",
+                            "Módulo 3: Refinamento e Deploy (1h30) - Como testar, ajustar e publicar",
+                            "BÔNUS: 3 cases completos documentados (Tay Dantas, Eduardo Walneide, NEXORAMA)",
+                            "BÔNUS: Biblioteca de 20+ prompts prontos",
+                            "BÔNUS: Comunidade Nexialistas por 90 dias"
+                          ],
+                          "garantia": "14 dias. Se não criar pelo menos 1 sistema funcionando, devolvo 100%.",
+                          "cta": "QUERO SER NEXIALISTA"
+                        },
+                        "escassez_real": "Não vou inventar urgência falsa. O preço é esse. Vai continuar sendo esse. A diferença é: quanto antes você começar, antes seu conteúdo para de apodrecer no drive.",
+                        "alternativa": "Se não for o momento, tudo bem. O método das 4 fases é seu. Usa. Me manda os resultados. Fico feliz de ver Nexialistas em ação.",
+                        "fechamento": "Tudo que já foi criado pode ser recriado ainda melhor. Inclusive o seu conteúdo.",
+                        "assinatura": "José Carlos\nAcademia Lendária\nNexialista #001",
+                        "ps": "P.S. Lembra do personal trainer das 54 versões? Ele me indicou pra 3 clientes depois. Às vezes o caminho mais longo é o mais lucrativo. Mas com o Framework, você pega o atalho."
+                      }
+                    }
+                  ],
+                  "métricas_esperadas": {
+                    "open_rate": "40-50% (subject lines com história)",
+                    "click_rate": "5-10% nos links de demo",
+                    "reply_rate": "3-5% (especialmente email 5 com CTA 'DEMO')",
+                    "conversão_framework": "2-5% da lista"
+                  }
+                }
+              }
+            },
+            "notas_atualizadas": {
+              "5.1_fundação": { "antes": 8.5, "depois": 8.5 },
+              "5.2_ingrediente_secreto": { "antes": 7.5, "depois": 9.0 },
+              "5.3_oceano_azul": { "antes": 9.0, "depois": 9.0 },
+              "5.4_narrativa": { "antes": 8.0, "depois": 8.5 },
+              "5.5_motor_comunidade": { "antes": 7.0, "depois": 9.0 },
+              "média_geral": { "antes": 8.0, "depois": 8.8 },
+              "status_final": "TODAS AS LACUNAS PREENCHIDAS"
+            }
+          }
         }
       ]
     }
