@@ -25,182 +25,262 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body class="bg-dark text-white min-h-screen" x-data="hub()" x-init="init()">
 
-    <!-- Header -->
-    <header class="border-b border-gray-800 px-6 py-4">
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
-            <div>
-                <h1 class="text-2xl font-bold gradient-text">Content-to-App</h1>
-                <p class="text-gray-500 text-sm" x-text="project.tagline"></p>
+    <div class="flex h-screen">
+
+        <!-- Sidebar -->
+        <aside class="w-72 bg-darker border-r border-gray-800 flex flex-col">
+            <!-- Logo -->
+            <div class="p-4 border-b border-gray-800">
+                <h1 class="text-xl font-bold gradient-text">Content-to-App</h1>
+                <p class="text-gray-500 text-xs mt-1" x-text="project.tagline"></p>
             </div>
-            <div class="text-right">
-                <div class="text-3xl font-bold" x-text="progressPercent + '%'"></div>
-                <div class="text-gray-500 text-sm" x-text="completedStories + '/' + totalStories + ' stories'"></div>
+
+            <!-- Progress -->
+            <div class="p-4 border-b border-gray-800">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-400 text-sm">Progresso</span>
+                    <span class="text-white font-bold" x-text="progressPercent + '%'"></span>
+                </div>
+                <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500"
+                         :style="'width: ' + progressPercent + '%'"></div>
+                </div>
+                <div class="text-gray-500 text-xs mt-1" x-text="completedStories + ' de ' + totalStories + ' stories'"></div>
             </div>
-        </div>
-    </header>
 
-    <!-- Progress Bar -->
-    <div class="h-1 bg-gray-800">
-        <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500"
-             :style="'width: ' + progressPercent + '%'"></div>
-    </div>
-
-    <main class="max-w-6xl mx-auto px-6 py-8">
-
-        <!-- Epics Grid -->
-        <section class="mb-12">
-            <h2 class="text-lg font-semibold text-gray-400 mb-4">ÉPICAS</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Epics Nav -->
+            <nav class="flex-1 overflow-y-auto scrollbar-thin p-2">
                 <template x-for="epic in epics" :key="epic.id">
-                    <div class="bg-darker border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition-all cursor-pointer"
-                         :class="selectedEpic?.id === epic.id ? 'border-purple-500 ring-1 ring-purple-500' : ''"
-                         @click="selectEpic(epic)">
-
-                        <div class="flex items-center justify-between mb-3">
+                    <div class="mb-2">
+                        <!-- Epic Header -->
+                        <button @click="toggleEpic(epic.id)"
+                                class="w-full flex items-center justify-between p-2 rounded-lg hover:bg-gray-800/50 transition-all"
+                                :class="expandedEpics.includes(epic.id) ? 'bg-gray-800/50' : ''">
                             <div class="flex items-center gap-2">
-                                <span class="text-2xl" x-text="epic.emoji"></span>
-                                <span class="font-semibold" x-text="'Epic ' + epic.id"></span>
+                                <span x-text="epic.emoji"></span>
+                                <span class="font-medium text-sm" x-text="epic.name"></span>
                             </div>
-                            <span class="text-sm px-2 py-1 rounded-full"
-                                  :class="getEpicStatusClass(epic)"
-                                  x-text="getEpicStatusText(epic)"></span>
-                        </div>
-
-                        <h3 class="font-bold text-lg mb-1" x-text="epic.name"></h3>
-                        <p class="text-gray-500 text-sm mb-4" x-text="epic.description"></p>
-
-                        <!-- Progress -->
-                        <div class="flex items-center gap-3">
-                            <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all"
-                                     :style="'width: ' + getEpicProgress(epic) + '%'"></div>
-                            </div>
-                            <span class="text-sm text-gray-400"
-                                  x-text="getCompletedCount(epic) + '/' + epic.stories.length"></span>
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </section>
-
-        <!-- Selected Epic Stories -->
-        <section x-show="selectedEpic" x-cloak class="mb-12">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-lg font-semibold text-gray-400">
-                    <span x-text="selectedEpic?.emoji"></span>
-                    STORIES - <span x-text="selectedEpic?.name"></span>
-                </h2>
-                <button @click="selectedEpic = null" class="text-gray-500 hover:text-white">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="space-y-2">
-                <template x-for="story in selectedEpic?.stories" :key="story.id">
-                    <div class="bg-darker border border-gray-800 rounded-lg p-4 flex items-center gap-4 hover:border-gray-700 transition-all">
-
-                        <!-- Checkbox -->
-                        <button @click="toggleStory(story)"
-                                class="w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all"
-                                :class="story.status === 'done' ? 'bg-green-500 border-green-500' :
-                                        story.status === 'in_progress' ? 'bg-yellow-500 border-yellow-500' :
-                                        'border-gray-600 hover:border-gray-400'">
-                            <svg x-show="story.status === 'done'" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            <div x-show="story.status === 'in_progress'" class="w-2 h-2 bg-white rounded-full"></div>
-                        </button>
-
-                        <!-- Story Info -->
-                        <div class="flex-1">
                             <div class="flex items-center gap-2">
-                                <span class="text-gray-500 text-sm" x-text="story.id"></span>
-                                <span class="font-medium"
-                                      :class="story.status === 'done' ? 'text-gray-500 line-through' : 'text-white'"
-                                      x-text="story.name"></span>
-                            </div>
-                        </div>
-
-                        <!-- Status Badge -->
-                        <span class="text-xs px-2 py-1 rounded-full"
-                              :class="story.status === 'done' ? 'bg-green-500/20 text-green-400' :
-                                      story.status === 'in_progress' ? 'bg-yellow-500/20 text-yellow-400' :
-                                      'bg-gray-500/20 text-gray-400'"
-                              x-text="story.status === 'done' ? 'Feito' :
-                                      story.status === 'in_progress' ? 'Em progresso' : 'Pendente'"></span>
-                    </div>
-                </template>
-            </div>
-        </section>
-
-        <!-- Value Ladder -->
-        <section class="mb-12">
-            <h2 class="text-lg font-semibold text-gray-400 mb-4">VALUE LADDER</h2>
-            <div class="bg-darker border border-gray-800 rounded-xl p-6">
-                <div class="flex flex-col md:flex-row items-stretch gap-4">
-                    <template x-for="(item, index) in valueLadder" :key="item.level">
-                        <div class="flex-1 relative">
-                            <div class="bg-gray-900 border border-gray-800 rounded-lg p-4 h-full"
-                                 :class="item.status === 'done' ? 'border-green-500' : ''">
-                                <div class="text-center">
-                                    <div class="text-2xl font-bold mb-1" x-text="item.priceDisplay"></div>
-                                    <div class="font-semibold text-purple-400" x-text="item.name"></div>
-                                    <div class="text-gray-500 text-sm mt-2" x-text="item.tagline"></div>
-                                </div>
-                            </div>
-                            <!-- Arrow -->
-                            <div x-show="index < valueLadder.length - 1"
-                                 class="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                                <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span class="text-xs px-1.5 py-0.5 rounded"
+                                      :class="getEpicProgress(epic) === 100 ? 'bg-green-500/20 text-green-400' :
+                                              getEpicProgress(epic) > 0 ? 'bg-yellow-500/20 text-yellow-400' :
+                                              'bg-gray-500/20 text-gray-400'"
+                                      x-text="getCompletedCount(epic) + '/' + epic.stories.length"></span>
+                                <svg class="w-4 h-4 text-gray-500 transition-transform"
+                                     :class="expandedEpics.includes(epic.id) ? 'rotate-90' : ''"
+                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                 </svg>
                             </div>
+                        </button>
+
+                        <!-- Stories -->
+                        <div x-show="expandedEpics.includes(epic.id)" x-collapse>
+                            <template x-for="story in epic.stories" :key="story.id">
+                                <button @click="selectStory(story, epic)"
+                                        class="w-full flex items-center gap-2 p-2 pl-8 rounded-lg hover:bg-gray-800/30 transition-all text-left"
+                                        :class="selectedStory?.id === story.id ? 'bg-purple-500/20 border-l-2 border-purple-500' : ''">
+                                    <!-- Status Icon -->
+                                    <div class="w-4 h-4 rounded-full flex items-center justify-center"
+                                         :class="story.status === 'done' ? 'bg-green-500' :
+                                                 story.status === 'in_progress' ? 'bg-yellow-500' :
+                                                 'border border-gray-600'">
+                                        <svg x-show="story.status === 'done'" class="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm truncate"
+                                          :class="story.status === 'done' ? 'text-gray-400' : 'text-white'"
+                                          x-text="story.name"></span>
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </nav>
+
+            <!-- Value Ladder Quick View -->
+            <div class="p-4 border-t border-gray-800">
+                <div class="text-gray-400 text-xs mb-2">VALUE LADDER</div>
+                <div class="space-y-1">
+                    <template x-for="item in valueLadder" :key="item.level">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-gray-500" x-text="item.name"></span>
+                            <span class="text-white font-mono" x-text="item.priceDisplay"></span>
                         </div>
                     </template>
                 </div>
             </div>
-        </section>
+        </aside>
 
-        <!-- Quick Actions -->
-        <section>
-            <h2 class="text-lg font-semibold text-gray-400 mb-4">PRÓXIMA AÇÃO</h2>
-            <div class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-xl p-6">
-                <template x-if="nextStory">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-purple-400 font-mono" x-text="nextStory.id"></span>
-                            <span class="text-xl font-bold" x-text="nextStory.name"></span>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- Header -->
+            <header class="bg-darker border-b border-gray-800 px-6 py-4 flex items-center justify-between">
+                <div x-show="selectedStory">
+                    <div class="flex items-center gap-2 text-gray-400 text-sm">
+                        <span x-text="selectedEpic?.emoji"></span>
+                        <span x-text="selectedEpic?.name"></span>
+                        <span>/</span>
+                    </div>
+                    <h2 class="text-xl font-bold" x-text="selectedStory?.name"></h2>
+                </div>
+                <div x-show="!selectedStory" class="text-gray-400">
+                    Selecione uma story para ver detalhes
+                </div>
+
+                <!-- Status Badge -->
+                <div x-show="selectedStory">
+                    <span class="px-3 py-1 rounded-full text-sm font-medium"
+                          :class="selectedStory?.status === 'done' ? 'bg-green-500/20 text-green-400' :
+                                  selectedStory?.status === 'in_progress' ? 'bg-yellow-500/20 text-yellow-400' :
+                                  'bg-gray-500/20 text-gray-400'"
+                          x-text="selectedStory?.status === 'done' ? 'Concluído' :
+                                  selectedStory?.status === 'in_progress' ? 'Em Progresso' : 'Pendente'"></span>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="flex-1 overflow-y-auto scrollbar-thin p-6">
+
+                <!-- No Selection State -->
+                <div x-show="!selectedStory" class="h-full flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">📚</div>
+                        <h3 class="text-xl font-bold mb-2">Biblioteca Content-to-App</h3>
+                        <p class="text-gray-400">Clique em uma story na sidebar para ver o conteúdo completo</p>
+                    </div>
+                </div>
+
+                <!-- Story Content -->
+                <div x-show="selectedStory" x-cloak>
+
+                    <!-- Minds Used -->
+                    <div x-show="selectedStory?.minds?.length > 0" class="mb-6">
+                        <div class="text-gray-400 text-sm mb-2">MINDS CONSULTADAS</div>
+                        <div class="flex gap-2 flex-wrap">
+                            <template x-for="mind in selectedStory?.minds" :key="mind">
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm"
+                                      x-text="mind"></span>
+                            </template>
                         </div>
-                        <p class="text-gray-400 mb-4" x-text="'Epic: ' + getEpicByStoryId(nextStory.id)?.name"></p>
-                        <button @click="startStory(nextStory)"
-                                class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold transition-all">
-                            Iniciar Agora
-                        </button>
                     </div>
-                </template>
-                <template x-if="!nextStory">
-                    <div class="text-center py-4">
-                        <div class="text-4xl mb-2">🎉</div>
-                        <div class="text-xl font-bold">Projeto Completo!</div>
+
+                    <!-- Content Sections -->
+                    <div x-show="selectedStory?.content" class="space-y-6">
+                        <template x-for="(value, key) in selectedStory?.content" :key="key">
+                            <div class="bg-darker border border-gray-800 rounded-xl p-5">
+                                <h3 class="text-purple-400 font-semibold mb-3 uppercase text-sm"
+                                    x-text="formatKey(key)"></h3>
+
+                                <!-- String Value -->
+                                <template x-if="typeof value === 'string'">
+                                    <p class="text-white" x-text="value"></p>
+                                </template>
+
+                                <!-- Array Value -->
+                                <template x-if="Array.isArray(value)">
+                                    <div>
+                                        <!-- Array of strings -->
+                                        <template x-if="typeof value[0] === 'string'">
+                                            <ul class="space-y-1">
+                                                <template x-for="(item, idx) in value" :key="idx">
+                                                    <li class="flex items-start gap-2">
+                                                        <span class="text-purple-400 mt-1">•</span>
+                                                        <span class="text-gray-300" x-text="item"></span>
+                                                    </li>
+                                                </template>
+                                            </ul>
+                                        </template>
+                                        <!-- Array of objects -->
+                                        <template x-if="typeof value[0] === 'object'">
+                                            <div class="space-y-3">
+                                                <template x-for="(item, idx) in value" :key="idx">
+                                                    <div class="bg-gray-900/50 rounded-lg p-3">
+                                                        <template x-for="(v, k) in item" :key="k">
+                                                            <div class="flex gap-2 text-sm">
+                                                                <span class="text-gray-500" x-text="formatKey(k) + ':'"></span>
+                                                                <span class="text-white" x-text="v"></span>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+
+                                <!-- Object Value -->
+                                <template x-if="typeof value === 'object' && !Array.isArray(value) && value !== null">
+                                    <div class="space-y-2">
+                                        <template x-for="(v, k) in value" :key="k">
+                                            <div>
+                                                <!-- Nested object -->
+                                                <template x-if="typeof v === 'object' && !Array.isArray(v)">
+                                                    <div class="bg-gray-900/50 rounded-lg p-3 mb-2">
+                                                        <div class="text-purple-300 font-medium mb-2" x-text="formatKey(k)"></div>
+                                                        <template x-for="(vv, kk) in v" :key="kk">
+                                                            <div class="flex gap-2 text-sm">
+                                                                <span class="text-gray-500" x-text="formatKey(kk) + ':'"></span>
+                                                                <span class="text-white" x-text="vv"></span>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                                <!-- Simple key-value -->
+                                                <template x-if="typeof v !== 'object'">
+                                                    <div class="flex gap-2">
+                                                        <span class="text-gray-500" x-text="formatKey(k) + ':'"></span>
+                                                        <span class="text-white" x-text="v"></span>
+                                                    </div>
+                                                </template>
+                                                <!-- Array in object -->
+                                                <template x-if="Array.isArray(v)">
+                                                    <div class="mb-2">
+                                                        <div class="text-gray-400 text-sm mb-1" x-text="formatKey(k)"></div>
+                                                        <ul class="pl-4 space-y-1">
+                                                            <template x-for="(item, idx) in v" :key="idx">
+                                                                <li class="text-gray-300 text-sm flex items-start gap-2">
+                                                                    <span class="text-purple-400">•</span>
+                                                                    <span x-text="typeof item === 'object' ? JSON.stringify(item) : item"></span>
+                                                                </li>
+                                                            </template>
+                                                        </ul>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
                     </div>
-                </template>
+
+                    <!-- No Content Yet -->
+                    <div x-show="!selectedStory?.content" class="text-center py-12">
+                        <div class="text-4xl mb-4">🚧</div>
+                        <h3 class="text-lg font-bold mb-2">Story Pendente</h3>
+                        <p class="text-gray-400">Esta story ainda não foi executada</p>
+                    </div>
+                </div>
             </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-gray-800 px-6 py-4 mt-12">
-        <div class="max-w-6xl mx-auto text-center text-gray-500 text-sm">
-            <p>Content-to-App Hub v2.0 | Última atualização: <span x-text="project.lastUpdated"></span></p>
-        </div>
-    </footer>
+        </main>
+    </div>
 
     <script>
         function hub() {
@@ -208,15 +288,26 @@
                 project: {},
                 epics: [],
                 valueLadder: [],
+                selectedStory: null,
                 selectedEpic: null,
+                expandedEpics: [0, 1],
 
                 async init() {
                     try {
-                        const response = await fetch('data.json');
+                        const response = await fetch('data.json?t=' + Date.now());
                         const data = await response.json();
                         this.project = data.project;
                         this.epics = data.epics;
                         this.valueLadder = data.valueLadder;
+
+                        // Auto-expand epics with in_progress stories
+                        this.epics.forEach(epic => {
+                            if (epic.stories.some(s => s.status === 'in_progress')) {
+                                if (!this.expandedEpics.includes(epic.id)) {
+                                    this.expandedEpics.push(epic.id);
+                                }
+                            }
+                        });
                     } catch (e) {
                         console.error('Error loading data:', e);
                     }
@@ -236,20 +327,18 @@
                     return Math.round((this.completedStories / this.totalStories) * 100);
                 },
 
-                get nextStory() {
-                    for (const epic of this.epics) {
-                        const inProgress = epic.stories.find(s => s.status === 'in_progress');
-                        if (inProgress) return inProgress;
+                toggleEpic(epicId) {
+                    const idx = this.expandedEpics.indexOf(epicId);
+                    if (idx > -1) {
+                        this.expandedEpics.splice(idx, 1);
+                    } else {
+                        this.expandedEpics.push(epicId);
                     }
-                    for (const epic of this.epics) {
-                        const pending = epic.stories.find(s => s.status === 'pending');
-                        if (pending) return pending;
-                    }
-                    return null;
                 },
 
-                selectEpic(epic) {
-                    this.selectedEpic = this.selectedEpic?.id === epic.id ? null : epic;
+                selectStory(story, epic) {
+                    this.selectedStory = story;
+                    this.selectedEpic = epic;
                 },
 
                 getEpicProgress(epic) {
@@ -261,47 +350,14 @@
                     return epic.stories.filter(s => s.status === 'done').length;
                 },
 
-                getEpicStatusClass(epic) {
-                    const progress = this.getEpicProgress(epic);
-                    if (progress === 100) return 'bg-green-500/20 text-green-400';
-                    if (progress > 0) return 'bg-yellow-500/20 text-yellow-400';
-                    return 'bg-gray-500/20 text-gray-400';
-                },
-
-                getEpicStatusText(epic) {
-                    const progress = this.getEpicProgress(epic);
-                    if (progress === 100) return 'Completo';
-                    if (progress > 0) return 'Em progresso';
-                    return 'Pendente';
-                },
-
-                getEpicByStoryId(storyId) {
-                    return this.epics.find(e => e.stories.some(s => s.id === storyId));
-                },
-
-                toggleStory(story) {
-                    const states = ['pending', 'in_progress', 'done'];
-                    const currentIndex = states.indexOf(story.status);
-                    story.status = states[(currentIndex + 1) % states.length];
-                    this.saveData();
-                },
-
-                startStory(story) {
-                    story.status = 'in_progress';
-                    const epic = this.getEpicByStoryId(story.id);
-                    if (epic) this.selectedEpic = epic;
-                    this.saveData();
-                },
-
-                saveData() {
-                    // In a real app, this would save to a server
-                    // For now, log the action
-                    console.log('Data updated:', { epics: this.epics });
-                    // You could implement localStorage here:
-                    localStorage.setItem('hub-data', JSON.stringify({
-                        epics: this.epics,
-                        valueLadder: this.valueLadder
-                    }));
+                formatKey(key) {
+                    return key
+                        .replace(/_/g, ' ')
+                        .replace(/([A-Z])/g, ' $1')
+                        .trim()
+                        .split(' ')
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' ');
                 }
             }
         }
