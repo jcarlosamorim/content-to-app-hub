@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* === BACKGROUNDS === */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+
+    /* === CARDS & SURFACES === */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+
+    /* === PRIMARY - Purple NEXORAMA === */
+    --primary: 263 70% 58%;
+    --primary-light: 263 70% 75%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 186 77% 43%;
+    --accent-foreground: 0 0% 100%;
+    --ring: 263 70% 58%;
+
+    /* === SECONDARY === */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+
+    /* === MUTED === */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    /* === SEMANTIC COLORS === */
+    --destructive: 4 100% 59%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 153 80% 34%;
+    --success-foreground: 0 0% 100%;
+    --warning: 35 100% 50%;
+    --warning-foreground: 30 20% 11%;
+    --info: 211 100% 50%;
+    --info-foreground: 0 0% 100%;
+
+    /* === UTILITIES === */
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+
+    /* === RADIUS === */
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* === BACKGROUNDS === */
+    --background: 240 10% 4%;
+    --foreground: 210 40% 98%;
+
+    /* === CARDS & SURFACES === */
+    --card: 240 6% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 240 6% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    /* === PRIMARY - Purple NEXORAMA === */
+    --primary: 263 70% 58%;
+    --primary-light: 263 70% 75%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 186 77% 43%;
+    --accent-foreground: 0 0% 100%;
+    --ring: 263 70% 58%;
+
+    /* === SECONDARY === */
+    --secondary: 240 4% 15%;
+    --secondary-foreground: 210 40% 98%;
+
+    /* === MUTED === */
+    --muted: 240 4% 15%;
+    --muted-foreground: 210 40% 60%;
+
+    /* === SEMANTIC COLORS (Dark variants) === */
+    --destructive: 4 100% 62%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 160 60% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 37 100% 52%;
+    --warning-foreground: 30 20% 11%;
+    --info: 211 100% 52%;
+    --info-foreground: 0 0% 100%;
+
+    /* === UTILITIES === */
+    --border: 240 4% 18%;
+    --input: 240 4% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* Selection Color */
+::selection {
+  background: hsl(var(--primary) / 0.3);
+  color: inherit;
+}
+
+/* Gradient Text */
+.text-gradient-brand {
+  background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
