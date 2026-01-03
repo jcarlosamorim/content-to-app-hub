@@ -5,7 +5,19 @@ import { useHubData, getTotalProgress } from "@/hooks/useHubData"
 import { useTheme } from "@/hooks/useTheme"
 import { Progress } from "@/components/ui/progress"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Loader2, Layers, TrendingUp, Target, Zap } from "lucide-react"
+import { Icon } from "@/components/ui/icon"
+import { Symbol } from "@/components/ui/symbol"
+
+function getEpicIcon(epicId: number): string {
+  const icons: Record<number, string> = {
+    0: "bullseye",
+    1: "building",
+    2: "megaphone",
+    3: "rocket",
+    4: "chart-line-up",
+  }
+  return icons[epicId] || "folder"
+}
 
 function App() {
   const { data, loading, error } = useHubData()
@@ -16,8 +28,8 @@ function App() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
         <div className="text-center space-y-4">
-          <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto" />
-          <p className="text-muted-foreground">Carregando Hub...</p>
+          <Icon name="spinner" size="size-10" className="animate-spin text-primary mx-auto" />
+          <p className="text-muted-foreground font-serif">Carregando Hub...</p>
         </div>
       </div>
     )
@@ -27,8 +39,9 @@ function App() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
         <div className="text-center space-y-4 text-destructive">
+          <Icon name="exclamation" size="size-10" className="mx-auto" />
           <p>Erro ao carregar dados</p>
-          <p className="text-sm text-muted-foreground">{error?.message}</p>
+          <p className="text-sm text-muted-foreground font-serif">{error?.message}</p>
         </div>
       </div>
     )
@@ -56,23 +69,25 @@ function App() {
         {currentEpic ? (
           <EpicDetail epic={currentEpic} />
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-8 animate-fade-in">
             {/* Welcome Header */}
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold">
-                Bem-vindo ao{" "}
-                <span className="text-gradient-brand">{data.project.name}</span>
-              </h1>
-              <p className="text-lg text-muted-foreground">
+              <div className="flex items-center gap-3">
+                <Symbol name="infinity" className="text-primary text-2xl" />
+                <h1 className="text-3xl font-bold">
+                  {data.project.name}
+                </h1>
+              </div>
+              <p className="text-lg text-muted-foreground font-serif">
                 {data.project.tagline}
               </p>
             </div>
 
             {/* Progress Overview */}
-            <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
+            <Card className="border-primary/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Target className="h-5 w-5 text-primary" />
+                  <Icon name="bullseye" size="size-5" className="text-primary" />
                   Progresso Geral
                 </CardTitle>
               </CardHeader>
@@ -81,7 +96,7 @@ function App() {
                   <span className="text-5xl font-bold text-primary">
                     {totalProgress}%
                   </span>
-                  <span className="text-muted-foreground mb-2">
+                  <span className="text-muted-foreground mb-2 font-serif">
                     {completedStories} de {totalStories} stories concluídas
                   </span>
                 </div>
@@ -94,7 +109,7 @@ function App() {
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                    <Layers className="h-4 w-4" />
+                    <Icon name="layers" size="size-4" />
                     Total de Epics
                   </CardTitle>
                 </CardHeader>
@@ -106,7 +121,7 @@ function App() {
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                    <TrendingUp className="h-4 w-4" />
+                    <Icon name="check" size="size-4" />
                     Stories Concluídas
                   </CardTitle>
                 </CardHeader>
@@ -120,13 +135,13 @@ function App() {
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                    <Zap className="h-4 w-4" />
+                    <Icon name="info" size="size-4" />
                     Versão
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl font-bold">{data.project.version}</p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground font-serif">
                     Atualizado: {data.project.lastUpdated}
                   </p>
                 </CardContent>
@@ -137,37 +152,44 @@ function App() {
             <div className="space-y-4">
               <h2 className="text-xl font-semibold">Acesso Rápido</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {data.epics.map((epic) => (
-                  <Card
-                    key={epic.id}
-                    className="cursor-pointer hover:border-primary/50 transition-colors"
-                    onClick={() => setSelectedEpic(epic.id)}
-                  >
-                    <CardHeader className="pb-2">
-                      <CardTitle className="flex items-center gap-3">
-                        <span className="text-2xl">{epic.emoji}</span>
-                        <span className="text-base">{epic.name}</span>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {epic.description}
-                      </p>
-                      <div className="flex items-center justify-between text-xs">
-                        <span>{epic.stories.length} stories</span>
-                        <span className="font-medium text-primary">
-                          {Math.round(
-                            (epic.stories.filter((s) => s.status === "done")
-                              .length /
-                              epic.stories.length) *
-                              100
-                          )}
-                          %
-                        </span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                {data.epics.map((epic) => {
+                  const epicProgress = Math.round(
+                    (epic.stories.filter((s) => s.status === "done").length /
+                      epic.stories.length) *
+                      100
+                  )
+                  return (
+                    <Card
+                      key={epic.id}
+                      className="cursor-pointer hover:border-primary/50 transition-colors"
+                      onClick={() => setSelectedEpic(epic.id)}
+                    >
+                      <CardHeader className="pb-2">
+                        <CardTitle className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+                            <Icon
+                              name={getEpicIcon(epic.id)}
+                              size="size-5"
+                              className="text-muted-foreground"
+                            />
+                          </div>
+                          <span className="text-base">{epic.name}</span>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-muted-foreground mb-2 font-serif">
+                          {epic.description}
+                        </p>
+                        <div className="flex items-center justify-between text-xs">
+                          <span>{epic.stories.length} stories</span>
+                          <span className="font-medium text-primary">
+                            {epicProgress}%
+                          </span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
               </div>
             </div>
           </div>

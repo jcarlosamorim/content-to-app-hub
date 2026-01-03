@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { cn } from "@/lib/utils"
-import { ChevronDown } from "lucide-react"
+import { Icon } from "@/components/ui/icon"
 
 interface AccordionProps {
   type?: "single" | "multiple"
@@ -88,9 +88,11 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, className
       )}
     >
       {children}
-      <ChevronDown
+      <Icon
+        name="angle-small-down"
+        size="size-4"
         className={cn(
-          "h-4 w-4 shrink-0 transition-transform duration-200",
+          "shrink-0 transition-transform duration-200",
           isOpen && "rotate-180"
         )}
       />

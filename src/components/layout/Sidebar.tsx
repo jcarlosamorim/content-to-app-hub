@@ -1,8 +1,9 @@
-import { Sun, Moon, Layers } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
+import { Icon } from "@/components/ui/icon"
+import { Symbol } from "@/components/ui/symbol"
 import { cn } from "@/lib/utils"
 import type { Epic } from "@/types/hub"
 import { getEpicProgress } from "@/hooks/useHubData"
@@ -27,12 +28,12 @@ export function Sidebar({
       {/* Header */}
       <div className="p-6 border-b border-border">
         <div className="flex items-center gap-2 mb-1">
-          <Layers className="h-5 w-5 text-primary" />
-          <h1 className="text-lg font-bold text-gradient-brand">
+          <Symbol name="infinity" className="text-primary text-lg" />
+          <h1 className="text-lg font-bold">
             Content-to-App
           </h1>
         </div>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-muted-foreground font-serif">
           Hub de Desenvolvimento NEXORAMA
         </p>
       </div>
@@ -53,14 +54,23 @@ export function Sidebar({
                 onClick={() => onSelectEpic(epic.id)}
                 className={cn(
                   "w-full p-3 rounded-lg text-left transition-all",
-                  "hover:bg-accent/10",
+                  "hover:bg-muted",
                   isSelected
                     ? "bg-primary/10 border border-primary/30"
                     : "border border-transparent"
                 )}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-xl">{epic.emoji}</span>
+                  <div className={cn(
+                    "w-8 h-8 rounded-full flex items-center justify-center",
+                    isSelected ? "bg-primary/20" : "bg-muted"
+                  )}>
+                    <Icon
+                      name={getEpicIcon(epic.id)}
+                      size="size-4"
+                      className={isSelected ? "text-primary" : "text-muted-foreground"}
+                    />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <p className={cn(
                       "text-sm font-medium truncate",
@@ -96,7 +106,7 @@ export function Sidebar({
             className="flex-1"
             onClick={() => theme !== "light" && onToggleTheme()}
           >
-            <Sun className="h-4 w-4 mr-2" />
+            <Icon name="sun" size="size-4" className="mr-2" />
             Light
           </Button>
           <Button
@@ -105,11 +115,22 @@ export function Sidebar({
             className="flex-1"
             onClick={() => theme !== "dark" && onToggleTheme()}
           >
-            <Moon className="h-4 w-4 mr-2" />
+            <Icon name="moon" size="size-4" className="mr-2" />
             Dark
           </Button>
         </div>
       </div>
     </aside>
   )
+}
+
+function getEpicIcon(epicId: number): string {
+  const icons: Record<number, string> = {
+    0: "bullseye",      // Hub Visual
+    1: "building",      // Arquitetura
+    2: "megaphone",     // Marketing
+    3: "rocket",        // Lançamento
+    4: "chart-line-up", // Growth
+  }
+  return icons[epicId] || "folder"
 }
